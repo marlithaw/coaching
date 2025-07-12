@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Framework for Effective Teacher Interventions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Chosen Palette: Calm & Focused -->
+    <!-- Application Structure Plan: A tab-based SPA for intuitive navigation. The structure is designed around user tasks rather than the report's linear chapters: 1) 'Foundations' for the theory, 2) 'Proactive Strategies' for lesson planning, 3) 'Responsive Interventions' for in-the-moment behavior management, and 4) an interactive 'Coach's Toolkit' that operationalizes the report's matrix for practical use. This non-linear structure allows educators to quickly access the specific information they need. -->
+    <!-- Visualization & Content Choices: Data is presented via Chart.js for quantitative comparisons (e.g., Cognitive Load, Wait Time) and styled HTML/CSS for qualitative frameworks (e.g., Scaffolding Flowchart, Learning Zone Matrix). This creates an engaging mix of interactive charts and clear, static diagrams. The Coach's Toolkit uses JS to create an interactive filter, turning a static table into a dynamic, user-driven tool. All choices prioritize clarity and user engagement. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Roboto', sans-serif;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.active {
+            border-bottom-color: #007bff;
+            color: #007bff;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .toolkit-btn.active {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="bg-white shadow-md">
+        <header class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <h1 class="text-2xl font-bold text-gray-800">Observation to Action</h1>
+                <nav id="main-nav" class="hidden md:flex items-center space-x-6">
+                    <a href="#foundations" data-tab="foundations" class="nav-link font-semibold text-gray-600 hover:text-blue-600 active">Foundations</a>
+                    <a href="#proactive" data-tab="proactive" class="nav-link font-semibold text-gray-600 hover:text-blue-600">Proactive Strategies</a>
+                    <a href="#responsive" data-tab="responsive" class="nav-link font-semibold text-gray-600 hover:text-blue-600">Responsive Interventions</a>
+                    <a href="#toolkit" data-tab="toolkit" class="nav-link font-semibold text-gray-600 hover:text-blue-600">Coach's Toolkit</a>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="foundations-content" class="content-section active">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-2">The Science of a Thriving Classroom</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Effective teaching isn't magic; it's a science. This application explores the core frameworks that empower educators to move from simply observing to implementing high-leverage, research-backed interventions.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4">Cognitive Load Theory</h3>
+                    <p class="mb-4">Working memory is limited. Great instruction manages this 'cognitive budget' by reducing unproductive mental effort (extraneous load) to maximize the resources available for deep learning (germane load).</p>
+                    <div class="chart-container h-[300px] md:h-[350px]">
+                        <canvas id="cltChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4">Psychological Safety</h3>
+                    <p class="mb-4">Learning is a risk. Optimal performance happens in the 'Learning Zone,' where students feel safe enough to make mistakes (High Safety) and are challenged to grow (High Accountability).</p>
+                     <div class="h-[300px] md:h-[350px] flex flex-col justify-center">
+                         <div class="grid grid-cols-2 grid-rows-2 gap-2 text-center text-white h-full">
+                            <div class="bg-red-500 rounded-tl-lg flex items-center justify-center p-3">Anxiety Zone</div>
+                            <div class="bg-green-500 rounded-tr-lg flex items-center justify-center p-3">LEARNING ZONE</div>
+                            <div class="bg-gray-400 rounded-bl-lg flex items-center justify-center p-3">Apathy Zone</div>
+                            <div class="bg-blue-400 rounded-br-lg flex items-center justify-center p-3">Comfort Zone</div>
+                        </div>
+                     </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4">Universal Design (UDL)</h3>
+                    <p class="mb-4">Good design is inclusive design. UDL provides a blueprint for creating flexible learning environments that accommodate learner variability from the start, focusing on multiple means of Engagement, Representation, and Action & Expression.</p>
+                    <div class="chart-container h-[300px] md:h-[350px]">
+                        <canvas id="udlChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4">Trauma-Informed Pedagogy</h3>
+                    <p class="mb-4">Behavior communicates an unmet need. This approach reframes challenging behavior not as defiance, but as a potential survival response, prioritizing connection and co-regulation over punishment to help students feel safe and ready to learn.</p>
+                    <div class="h-[300px] md:h-[350px] flex items-center justify-center">
+                        <div class="text-center font-bold text-2xl p-4 rounded-lg bg-blue-100 text-blue-800">
+                            Connect Before You Redirect
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="proactive-content" class="content-section">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-2">Designing for Success</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore proactive strategies that embed the core frameworks into the DNA of your lessons, creating a classroom that is clear, engaging, and accessible for all learners.</p>
+            </div>
+            <div class="space-y-12">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4">Scaffolding: The Gradual Release of Responsibility</h3>
+                    <p class="mb-6">Effective scaffolding builds student confidence and mastery by systematically transferring responsibility from teacher to learner.</p>
+                    <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 text-center">
+                        <div class="p-4 rounded-lg bg-blue-50 w-full md:w-1/4">
+                            <div class="text-4xl mb-2">🙋‍♂️</div>
+                            <h4 class="font-bold text-lg">I Do</h4><p>Teacher models explicitly.</p>
+                        </div>
+                        <div class="text-3xl text-blue-400 font-light">➡️</div>
+                        <div class="p-4 rounded-lg bg-blue-100 w-full md:w-1/4">
+                            <div class="text-4xl mb-2">🤝</div>
+                            <h4 class="font-bold text-lg">We Do</h4><p>Guided practice together.</p>
+                        </div>
+                        <div class="text-3xl text-blue-400 font-light">➡️</div>
+                        <div class="p-4 rounded-lg bg-blue-200 w-full md:w-1/4">
+                             <div class="text-4xl mb-2">🏃‍♀️</div>
+                            <h4 class="font-bold text-lg">You Do</h4><p>Independent application.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4">The Power of Questioning & Wait Time</h3>
+                    <p class="mb-6">Increasing wait time after asking a question is one of the most powerful, low-effort strategies to improve the quality of student thought and participation.</p>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="waitTimeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="responsive-content" class="content-section">
+             <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-2">Responding with Skill & Compassion</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">This section focuses on non-punitive, research-backed responses to challenging behavior, shifting the goal from compliance to connection and skill-building.</p>
+            </div>
+             <div class="space-y-12">
+                 <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4">The Pathway to Self-Regulation</h3>
+                    <p class="mb-6">Self-regulation is a skill that must be taught. When a student is dysregulated, they first need co-regulation from a calm adult to help their nervous system reset. The goal is connection, then redirection.</p>
+                     <div class="flex flex-col md:flex-row items-center justify-around space-y-4 md:space-y-0 text-center">
+                        <div class="p-4 rounded-lg bg-blue-50 w-full md:w-1/4">
+                            <h4 class="font-bold text-lg">1. Teacher Self-Regulates</h4>
+                            <p class="text-sm">Pause, breathe. Be the calm.</p>
+                        </div>
+                         <div class="text-2xl text-blue-400">➡️</div>
+                        <div class="p-4 rounded-lg bg-blue-100 w-full md:w-1/4">
+                            <h4 class="font-bold text-lg">2. Co-Regulate</h4>
+                            <p class="text-sm">Validate the feeling. Offer help.</p>
+                        </div>
+                         <div class="text-2xl text-blue-400">➡️</div>
+                        <div class="p-4 rounded-lg bg-blue-200 w-full md:w-1/4">
+                            <h4 class="font-bold text-lg">3. Teach & Build Skills</h4>
+                            <p class="text-sm">Proactively teach coping skills when calm.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                     <h3 class="text-2xl font-bold text-blue-700 mb-4">Sensory Support for Regulation</h3>
+                    <p class="mb-6">Fidgeting and other behaviors are often the body's attempt to self-regulate. Providing appropriate sensory tools is a supportive, non-punitive intervention.</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                        <div><div class="text-4xl">🏋️</div><h4 class="font-semibold">Proprioceptive</h4><p class="text-sm">Weighted lap pads, deep pressure</p></div>
+                        <div><div class="text-4xl">🖐️</div><h4 class="font-semibold">Tactile</h4><p class="text-sm">Fidget tools, putty, textures</p></div>
+                        <div><div class="text-4xl">🤸</div><h4 class="font-semibold">Vestibular</h4><p class="text-sm">Wobble cushions, bouncy bands</p></div>
+                        <div><div class="text-4xl">🎧</div><h4 class="font-semibold">Auditory/Visual</h4><p class="text-sm">Headphones, desk screens</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="toolkit-content" class="content-section">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-2">The Coach's Toolkit</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">An interactive tool to connect classroom observations with research-backed interventions. Select a focus area to see actionable strategies.</p>
+            </div>
+            <div class="flex flex-col md:flex-row gap-8">
+                <div id="toolkit-nav" class="flex md:flex-col flex-wrap justify-center md:justify-start gap-2 md:w-1/4">
+                </div>
+                <div id="toolkit-details" class="md:w-3/4 bg-white p-6 rounded-lg shadow-lg min-h-[300px]">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mainNav = document.getElementById('main-nav');
+            const sections = document.querySelectorAll('.content-section');
+
+            function switchTab(tabName) {
+                mainNav.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.toggle('active', link.dataset.tab === tabName);
+                });
+                sections.forEach(section => {
+                    section.classList.toggle('active', section.id === `${tabName}-content`);
+                });
+            }
+
+            mainNav.addEventListener('click', (e) => {
+                if (e.target.matches('.nav-link')) {
+                    e.preventDefault();
+                    const tabName = e.target.dataset.tab;
+                    switchTab(tabName);
+                    window.history.pushState(null, '', `#${tabName}`);
+                }
+            });
+
+            const initialTab = window.location.hash.substring(1) || 'foundations';
+            switchTab(initialTab);
+
+            // Chart.js global tooltip configuration
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                }
+                return label;
+            };
+
+            Chart.defaults.plugins.tooltip.callbacks.title = tooltipTitleCallback;
+            Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            Chart.defaults.plugins.tooltip.titleFont = { size: 14 };
+            Chart.defaults.plugins.tooltip.bodyFont = { size: 12 };
+            Chart.defaults.plugins.tooltip.padding = 10;
+            
+            // CLT Chart
+            new Chart(document.getElementById('cltChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Poorly Designed Lesson', 'Well-Designed Lesson'],
+                    datasets: [
+                        { label: 'Extraneous Load', data: [60, 10], backgroundColor: '#ef4444' },
+                        { label: 'Intrinsic Load', data: [20, 20], backgroundColor: '#f59e0b' },
+                        { label: 'Germane Load (Learning)', data: [20, 70], backgroundColor: '#22c55e' }
+                    ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: { x: { stacked: true }, y: { stacked: true, max: 100, ticks: { callback: value => value + '%' } } },
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+
+            // UDL Chart
+            new Chart(document.getElementById('udlChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Engagement (Why)', 'Representation (What)', 'Action & Expression (How)'],
+                    datasets: [{
+                        data: [1, 1, 1],
+                        backgroundColor: ['#3b82f6', '#10b981', '#f97316']
+                    }]
+                },
+                options: { maintainAspectRatio: false, responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+
+            // Wait Time Chart
+            new Chart(document.getElementById('waitTimeChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Typical Wait Time', 'Optimal Wait Time'],
+                    datasets: [{
+                        label: 'Seconds',
+                        data: [0.9, 4],
+                        backgroundColor: ['#f87171', '#4ade80'],
+                        barPercentage: 0.5
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false, responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, title: { display: true, text: 'Seconds' } } }
+                }
+            });
+
+            // Toolkit Data
+            const toolkitData = {
+                "Clarity & Load": {
+                    data: "- Teacher gives multi-step verbal instructions (>3 steps) without visual support.<br>- Students ask 'What are we supposed to be doing?' after instructions.",
+                    interventions: "- **Chunking:** Break instructions into 1-2 steps at a time.<br>- **Dual Coding:** Provide instructions both verbally and visually (e.g., on the board).<br>- **Worked Examples:** Model a full solution before asking for independent work."
+                },
+                "Engagement": {
+                    data: "- The same 3-4 students answer all questions.<br>- Several students have heads down or are doodling during direct instruction.",
+                    interventions: "- **Increase Wait Time:** Silently count to 3-5 seconds after asking a question.<br>- **Think-Pair-Share:** Lower the risk of individual participation.<br>- **Use Proximity:** Move around the room to reduce psychological distance."
+                },
+                "Understanding": {
+                    data: "- Teacher asks, 'Does everyone understand?' and moves on.<br>- Teacher only calls on students with hands raised.",
+                    interventions: "- **Avoid Yes/No Questions:** Ask for a content-based response (e.g., 'Can someone rephrase the goal?').<br>- **Probing Questions:** When a student gives a partial answer, ask 'Can you tell me more about that?'.<br>- **Use Rubrics:** Clarify expectations before an assignment is due."
+                },
+                "Behavior": {
+                    data: "- A student is fidgeting, tapping a pen, or rocking.<br>- A student has an emotional outburst (yells, cries).",
+                    interventions: "- **Shift Perspective:** Is the behavior communicating a need (sensory, safety)?<br>- **Offer Sensory Support:** Quietly offer a fidget tool or a break in a calm corner.<br>- **Co-Regulate:** For outbursts, stay calm, approach privately, and validate the feeling ('I see you're upset')."
+                },
+                "Lab Procedures": {
+                    data: "- Students are unsure how to use equipment.<br>- Groups are not following the protocol in the correct order.",
+                    interventions: "- **Pre-Lab Videos:** Use short videos to demonstrate techniques beforehand.<br>- **Live 'I Do' Demo:** Begin with a brief, focused demonstration of new equipment.<br>- **Checkpoints:** Announce time checkpoints to help groups pace themselves."
+                }
+            };
+
+            const toolkitNav = document.getElementById('toolkit-nav');
+            const toolkitDetails = document.getElementById('toolkit-details');
+            let firstKey = null;
+
+            for (const key in toolkitData) {
+                if (!firstKey) firstKey = key;
+                const button = document.createElement('button');
+                button.textContent = key;
+                button.dataset.key = key;
+                button.className = 'toolkit-btn w-full text-left p-3 rounded-md transition hover:bg-gray-200';
+                toolkitNav.appendChild(button);
+            }
+
+            function showToolkitDetails(key) {
+                const item = toolkitData[key];
+                toolkitDetails.innerHTML = `
+                    <h4 class="text-xl font-bold text-gray-700 mb-4">Observation Data (Low-Inference)</h4>
+                    <div class="prose prose-sm max-w-none mb-6">${item.data}</div>
+                    <h4 class="text-xl font-bold text-blue-700 mb-4">Research-Backed Interventions</h4>
+                    <div class="prose prose-sm max-w-none text-gray-800">${item.interventions}</div>
+                `;
+                toolkitNav.querySelectorAll('.toolkit-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.key === key);
+                });
+            }
+
+            toolkitNav.addEventListener('click', (e) => {
+                if (e.target.matches('.toolkit-btn')) {
+                    showToolkitDetails(e.target.dataset.key);
+                }
+            });
+
+            if (firstKey) {
+                showToolkitDetails(firstKey);
+            }
+
+        });
+    </script>
+</body>
+</html>
