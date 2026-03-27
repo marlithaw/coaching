@@ -377,11 +377,12 @@ body{
   padding-top: 8rem;
   padding-bottom: 8rem;
   position: relative;
-  background-color: #fff;
-  background-image: 
-    linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
-    linear-gradient(#eee .1em, transparent .1em);
-  background-size: 100% 1.2em;
+  background-color: #0f2026;
+  background-image:
+    linear-gradient(130deg, rgba(26, 26, 26, 0.45), rgba(26, 26, 26, 0.82)),
+    url('9_An_overhead_view_of_a_circle_o_1_20260327_123628.jpg');
+  background-size: cover;
+  background-position: center;
   border-top: 2px solid var(--dark);
   box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
   z-index: 2;
@@ -390,13 +391,12 @@ body{
 .scenario-sec::before {
   content: '';
   position: absolute;
-  top: 0; bottom: 0; left: max(2rem, calc((100% - 1100px)/2 - 2rem));
-  width: 2px;
-  background: rgba(220, 50, 50, 0.4);
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 60%);
   z-index: 0;
 }
 
-.scenario-intro { position: relative; z-index: 2; margin-left: 2rem; }
+.scenario-intro { position: relative; z-index: 2; }
 
 .scenario-intro-label {
   font-family: 'Space Mono', monospace; 
@@ -404,21 +404,21 @@ body{
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--primary);
+  color: var(--secondary);
   margin-bottom: 1rem; 
   display: inline-flex; 
   align-items: center; 
   gap: 10px;
-  background: var(--surface);
+  background: rgba(0,0,0,0.55);
   padding: 4px 12px;
-  border: 1px solid var(--dark);
+  border: 1px solid rgba(255,255,255,0.2);
 }
 .scenario-intro-label::before { content:'REC'; display:inline-block; color:var(--primary); font-weight:700; animation: pulse-red 2s infinite; }
 
-.scenario-intro-head{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(36px,4.5vw,52px);font-weight:700;color:var(--dark);line-height:1.1;margin-bottom:1rem}
-.scenario-intro-body{font-size:clamp(18px,2vw,22px);color:var(--body);line-height:1.6; margin-bottom:3rem; max-width: 700px; font-weight: 400;}
+.scenario-intro-head{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(36px,4.5vw,52px);font-weight:700;color:var(--surface);line-height:1.1;margin-bottom:1rem}
+.scenario-intro-body{font-size:clamp(18px,2vw,22px);color:#e7e7e7;line-height:1.6; margin-bottom:3rem; max-width: 700px; font-weight: 400;}
 
-.sc-categories{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:3rem; margin-left: 2rem; position: relative; z-index: 2;}
+.sc-categories{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:3rem; position: relative; z-index: 2;}
 
 .sc-cat-btn {
   font-family: 'Space Mono', monospace;
@@ -427,30 +427,40 @@ body{
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 1rem 1.5rem;
-  border: 2px solid var(--dark);
-  background: #fdfae5; 
+  border: 2px solid rgba(255,255,255,0.7);
+  background: rgba(250, 245, 234, 0.95);
   color: var(--dark);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
   box-shadow: 4px 4px 0px rgba(0,0,0,0.15);
   transform: rotate(-1deg);
-  border-radius: 2px;
+  border-radius: 12px;
+  position: relative;
+}
+.sc-cat-btn::after{
+  content:'TAPE';
+  position:absolute;
+  right:10px;
+  top:8px;
+  font-size:10px;
+  letter-spacing:0.15em;
+  color:#444;
 }
 .sc-cat-btn:nth-child(even) { transform: rotate(2deg); }
 .sc-cat-btn:hover { transform: scale(1.05) rotate(0deg); box-shadow: 6px 8px 10px rgba(0,0,0,0.15); background: #fff;}
-.sc-cat-btn.active { background: var(--dark); color: #fff; box-shadow: 4px 4px 0px var(--secondary); transform: rotate(0deg); }
+.sc-cat-btn.active { background: var(--secondary); color: #111; box-shadow: 4px 4px 0px rgba(0,0,0,0.5); transform: rotate(0deg); border-color:#111; }
 
-.sc-prompt{text-align:center;padding:3rem 1rem;color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(20px,2.4vw,24px)}
+.sc-prompt{text-align:center;padding:3rem 1rem;color:#e6e6e6;font-style:italic;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(20px,2.4vw,24px)}
 
 .scenario-card {
-  background: var(--surface);
+  background: rgba(255,255,255,0.93);
   padding: 3rem;
   border: 3px solid var(--dark);
   box-shadow: 12px 12px 0px var(--shadow-color);
   position: relative;
   z-index: 2;
-  margin-left: 2rem;
   max-width: 900px;
+  margin-inline: auto;
 }
 
 .scenario-card::before {
@@ -468,7 +478,7 @@ body{
 
 .boombox-anchor {
   width: 100%;
-  height: 200px;
+  height: 240px;
   margin-bottom: 3rem;
   border-radius: 4px;
   overflow: hidden;
@@ -552,7 +562,7 @@ body{
 }
 
 .assessment-card {
-  background: rgba(40, 40, 40, 0.6);
+  background: rgba(20, 24, 28, 0.72);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 3rem;
@@ -577,7 +587,17 @@ body{
 .a-opt:hover{border-color: var(--secondary); background: #222; color: #fff; transform:translateX(4px); box-shadow: -4px 0px 0px var(--secondary);}
 .a-opt.chosen{border-color: var(--secondary); background: #222; color: #fff; box-shadow: -4px 0px 0px var(--secondary), 0 0 20px rgba(230, 179, 37, 0.15);}
 
-.a-result { display: none; }
+.a-result { display: none; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.25); border-radius: 10px; padding: 2rem; background: linear-gradient(145deg, rgba(22,22,22,0.8), rgba(32,32,32,0.72)); }
+.a-result::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(130deg, rgba(26,26,26,0.45), rgba(26,26,26,0.76)),
+    url('4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg') center/cover no-repeat;
+  z-index:0;
+}
+.a-result > *{position:relative; z-index:1;}
 .a-result.active { display: block; animation: aFadeUp 0.45s ease forwards; }
 
 .result-badge{display:inline-block;padding:8px 16px;font-family:'Space Mono',monospace; font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.5rem; background:var(--secondary);color:var(--dark); border-radius: 4px; box-shadow: 0 0 15px rgba(230, 179, 37, 0.4);}
@@ -904,24 +924,27 @@ body{
 .sec-alt {
   padding-top: 6rem;
   padding-bottom: 6rem;
-  background: var(--surface);
+  background: linear-gradient(180deg, #f7f2e8, #fefcf8);
   position: relative;
   z-index: 3;
   box-shadow: 0 -20px 40px rgba(0,0,0,0.05);
 }
 
-.rap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:3rem}
-.rap-col{position:relative;}
-.rap-col-head{font-family:'Space Mono',monospace; font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:2rem; display:inline-block; padding:8px 16px; background:var(--primary); color:var(--surface); border-radius: 4px;}
+.rap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:3rem}
+.rap-col{position:relative;background:#fffdf8;border:2px solid #1f1f1f;border-radius:14px;overflow:hidden;box-shadow:12px 16px 0 rgba(0,0,0,0.08);}
+.rap-col-head{font-family:'Space Mono',monospace; font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin:1.2rem 1.2rem 1rem; display:inline-block; padding:8px 16px; background:var(--primary); color:var(--surface); border-radius: 999px;}
+.phase-art{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 1.2rem 1.2rem}
+.phase-art img{width:100%;height:150px;object-fit:cover;border:2px solid #222;border-radius:10px;box-shadow:0 6px 12px rgba(0,0,0,0.16);}
 .rap-item{cursor:pointer;padding:16px;margin:-16px;transition:background 0.2s;margin-bottom:8px;outline:none; border:2px solid transparent; border-radius: 8px;}
 .rap-item:hover{background:var(--bg-color); border-color:var(--border);}
+.rap-col .rap-item, .rap-col .rap-detail{margin-left:1.2rem;margin-right:1.2rem}
 .rap-row{display:flex;align-items:baseline;gap:16px}
 .rap-letter{font-family:'Cormorant Garamond',Georgia,serif; font-size:32px;font-weight:700;color:var(--primary);min-width:24px;flex-shrink:0; font-style:italic;}
 .rap-term{font-family:'Space Mono',monospace; font-size:clamp(14px,1.6vw,16px);color:var(--dark);flex:1;font-weight:700; text-transform:uppercase; letter-spacing:0.05em;}
 .rap-wtag{font-size:11px;color:var(--muted);text-transform:uppercase; letter-spacing:0.2em;}
 .expand-caret{font-size:12px;color:var(--dark);transition:transform 0.3s ease;margin-left:8px}
 .rap-item.active .expand-caret{transform:rotate(180deg);color:var(--primary)}
-.rap-detail{font-size:clamp(16px,1.8vw,18px);color:var(--body);line-height:1.8;margin-top:0;padding:0 20px;background:var(--bg-color);border-left:4px solid var(--primary);max-height:0;overflow:hidden;opacity:0;transition:max-height 0.4s ease,opacity 0.3s ease,padding 0.4s ease,margin 0.4s ease}
+.rap-detail{font-size:clamp(16px,1.8vw,18px);color:var(--body);line-height:1.8;margin-top:0;padding:0 20px;background:#faf5eb;border-left:4px solid var(--primary);max-height:0;overflow:hidden;opacity:0;transition:max-height 0.4s ease,opacity 0.3s ease,padding 0.4s ease,margin 0.4s ease}
 .rap-detail.open{max-height:900px;opacity:1;padding:20px 24px;margin-top:16px; margin-bottom:24px; border:2px solid var(--dark); border-left:8px solid var(--primary); box-shadow: 8px 8px 0px rgba(0,0,0,0.08); border-radius: 0 8px 8px 0;}
 .rap-detail strong{color:var(--dark); font-weight:700;}
 
@@ -1022,8 +1045,12 @@ body{
 .remix-sec {
   padding-top: 8rem;
   padding-bottom: 8rem;
-  background-color: var(--dark);
-  background-image: radial-gradient(circle at 50% 0%, rgba(230, 179, 37, 0.15) 0%, transparent 50%);
+  background-color: #17262b;
+  background-image:
+    linear-gradient(155deg, rgba(26, 26, 26, 0.44), rgba(26, 26, 26, 0.82)),
+    url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg');
+  background-size: cover;
+  background-position: center;
   text-align: center;
   display: flex;
   align-items: center;
@@ -1034,6 +1061,14 @@ body{
   box-shadow: 0 -20px 40px rgba(0,0,0,0.2);
   position: relative;
 }
+.remix-sec::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at 50% 25%, rgba(230, 179, 37, 0.22), rgba(230,179,37,0) 52%);
+  pointer-events:none;
+}
+.remix-sec > *{position:relative; z-index:1;}
 
 .remix-eyebrow{font-family:'Space Mono',monospace; font-size:12px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--secondary);margin-bottom:3rem}
 .remix-phase{display:none;width:100%}
@@ -1104,7 +1139,7 @@ body{
 .rs-w { opacity: 0; display: inline-block; transform: translateY(12px); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); margin-right: 6px; }
 .rs-w.show { opacity: 1; transform: translateY(0); }
 .rs-glow-text { color: var(--secondary); transition: text-shadow 1.5s ease, color 1.5s ease; display: inline-block;}
-.rs-glow-text.full-glow { color: #FFF; text-shadow: 0 0 20px rgba(230, 179, 37, 0.8), 0 0 40px rgba(230, 179, 37, 0.4), 0 0 60px rgba(230, 179, 37, 0.2); }
+.rs-glow-text.full-glow { color: #fff7da; text-shadow: 0 0 18px rgba(255, 215, 120, 0.9), 0 0 35px rgba(255, 200, 75, 0.5), 0 0 52px rgba(255, 184, 48, 0.3); }
 
 .rtb-btn{background:transparent;color:var(--surface);border:2px solid var(--surface); border-radius: 50px; padding:1rem 2.5rem;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;opacity:0;transition:all 0.4s; display:inline-flex; align-items:center; gap:10px;}
 .rtb-btn.show{opacity:1}
@@ -1223,10 +1258,10 @@ body{
     </div>
 
     <div class="sc-categories fade-in d1">
-      <button class="sc-cat-btn" onclick="selectCategory('classroom', this)">In the Classroom</button>
-      <button class="sc-cat-btn" onclick="selectCategory('caregiving', this)">In Caregiving</button>
-      <button class="sc-cat-btn" onclick="selectCategory('workplace', this)">In the Workplace</button>
-      <button class="sc-cat-btn" onclick="selectCategory('relationships', this)">In Relationships</button>
+      <button class="sc-cat-btn" onclick="selectCategory('classroom', this)">Tape A · Classroom</button>
+      <button class="sc-cat-btn" onclick="selectCategory('caregiving', this)">Tape B · Caregiving</button>
+      <button class="sc-cat-btn" onclick="selectCategory('workplace', this)">Tape C · Workplace</button>
+      <button class="sc-cat-btn" onclick="selectCategory('relationships', this)">Tape D · Relationships</button>
     </div>
 
     <div id="sc-prompt-wrap">
@@ -1398,6 +1433,10 @@ body{
       <!-- Phase 1 -->
       <div class="rap-col rc1">
         <p class="rap-col-head">Phase 1: Reflection</p>
+        <div class="phase-art">
+          <img src="1_A_vinyl_record_spins_on_a_turn_1_20260327_123519.jpg" alt="Spinning vinyl for Reflection phase">
+          <img src="2_A_pair_of_vintage_studio_headp_1_20260327_123529.jpg" alt="Headphones over lyric sheets for Reflection phase">
+        </div>
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r1')">
           <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reflect</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
         </div>
@@ -1417,6 +1456,10 @@ body{
       <!-- Phase 2 -->
       <div class="rap-col rc2">
         <p class="rap-col-head">Phase 2: Resistance</p>
+        <div class="phase-art">
+          <img src="4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg" alt="Chrome cassette texture for Resistance phase">
+          <img src="3_A_microphone_stand_holds_a_vin_1_20260327_123538.jpg" alt="Glowing vintage microphone for Resistance phase">
+        </div>
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r4')">
           <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Resist</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
         </div>
@@ -1436,6 +1479,10 @@ body{
       <!-- Phase 3 -->
       <div class="rap-col rc3">
         <p class="rap-col-head">Phase 3: Revelation</p>
+        <div class="phase-art">
+          <img src="7_A_record_player_s_tonearm_touc_1_20260327_123609.jpg" alt="DJ hands and tonearm for Revelation phase">
+          <img src="8_A_Black_woman_sits_cross_legge_1_20260327_123619.jpg" alt="Meditative mastery artwork for Revelation phase">
+        </div>
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r7')">
           <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reveal</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
         </div>
