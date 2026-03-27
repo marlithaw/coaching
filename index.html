@@ -537,7 +537,7 @@ body{
 }
 
 .assessment-card {
-  background: rgba(40, 40, 40, 0.6);
+  background: rgba(20, 24, 28, 0.72);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 3rem;
@@ -1035,6 +1035,14 @@ body{
   box-shadow: 0 -20px 40px rgba(0,0,0,0.22);
   position: relative;
 }
+.remix-sec::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at 50% 25%, rgba(230, 179, 37, 0.22), rgba(230,179,37,0) 52%);
+  pointer-events:none;
+}
+.remix-sec > *{position:relative; z-index:1;}
 
 .remix-eyebrow{font-family:'Space Mono',monospace; font-size:12px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--secondary);margin-bottom:3rem}
 .remix-phase{display:none;width:100%}
@@ -1225,10 +1233,10 @@ body{
     </div>
 
     <div class="sc-categories fade-in d1">
-      <button class="sc-cat-btn" onclick="selectCategory('classroom', this)">In the Classroom</button>
-      <button class="sc-cat-btn" onclick="selectCategory('caregiving', this)">In Caregiving</button>
-      <button class="sc-cat-btn" onclick="selectCategory('workplace', this)">In the Workplace</button>
-      <button class="sc-cat-btn" onclick="selectCategory('relationships', this)">In Relationships</button>
+      <button class="sc-cat-btn" onclick="selectCategory('classroom', this)">Tape A · Classroom</button>
+      <button class="sc-cat-btn" onclick="selectCategory('caregiving', this)">Tape B · Caregiving</button>
+      <button class="sc-cat-btn" onclick="selectCategory('workplace', this)">Tape C · Workplace</button>
+      <button class="sc-cat-btn" onclick="selectCategory('relationships', this)">Tape D · Relationships</button>
     </div>
 
     <div id="sc-prompt-wrap">
