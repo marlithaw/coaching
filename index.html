@@ -1,374 +1,1871 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Framework for Effective Teacher Interventions</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The R³ Model by AH-HA Coaching — a sequenced framework for emotional regulation through Reflection, Resistance, and Revelation. Move from automatic reaction to conscious choice.">
+<title>R³ Agency Practice (R.A.P.) — AH-HA Coaching, LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Outfit:wght@300;400;500;600;700&family=Rubik+Dirt&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Reenie+Beanie&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 
-    <!-- Chosen Palette: Calm & Focused -->
-    <!-- Application Structure Plan: A tab-based SPA for intuitive navigation. The structure is designed around user tasks rather than the report's linear chapters: 1) 'Foundations' for the theory, 2) 'Proactive Strategies' for lesson planning, 3) 'Responsive Interventions' for in-the-moment behavior management, and 4) an interactive 'Coach's Toolkit' that operationalizes the report's matrix for practical use. This non-linear structure allows educators to quickly access the specific information they need. -->
-    <!-- Visualization & Content Choices: Data is presented via Chart.js for quantitative comparisons (e.g., Cognitive Load, Wait Time) and styled HTML/CSS for qualitative frameworks (e.g., Scaffolding Flowchart, Learning Zone Matrix). This creates an engaging mix of interactive charts and clear, static diagrams. The Coach's Toolkit uses JS to create an interactive filter, turning a static table into a dynamic, user-driven tool. All choices prioritize clarity and user engagement. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+:root{
+  --primary: #C24D2C; 
+  --secondary: #E6B325; 
+  --tertiary: #2A4B46; 
+  
+  --dark: #1A1A1A; 
+  --body: #333333; 
+  --muted: #7A7A7A; 
+  
+  --bg-color: #F8F6F0; 
+  --surface: #FFFFFF; 
+  --border: #E2DDD0; 
+  
+  --shadow-color: rgba(26, 26, 26, 0.15);
+  --heavy-shadow: rgba(26, 26, 26, 0.4);
+}
 
-    <style>
-        body {
-            font-family: 'Lato', sans-serif;
-            background-color: #f8f9fa;
-            color: #212529;
-        }
-        h1, h2, h3, h4, .font-display {
-            font-family: 'Roboto', sans-serif;
-        }
-        .nav-link {
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
-        }
-        .nav-link.active {
-            border-bottom-color: #007bff;
-            color: #007bff;
-        }
-        .content-section {
-            display: none;
-        }
-        .content-section.active {
-            display: block;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
-        }
-        .toolkit-btn.active {
-            background-color: #007bff;
-            color: white;
-        }
-    </style>
+body{
+  font-family:'Outfit',sans-serif;
+  background-color: var(--bg-color);
+  background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+  color:var(--body);
+  min-height:100vh;
+  padding:0; 
+  position: relative; 
+  overflow-x: hidden;
+}
+
+::selection{background:var(--secondary);color:var(--dark)}
+.page{max-width:100%;margin:0 auto;background:transparent;overflow-x:hidden;position:relative; z-index: 1;}
+.cg{font-family:'Cormorant Garamond',Georgia,serif}
+.mono{font-family:'Space Mono',monospace}
+.handwritten{font-family: 'Reenie Beanie', cursive; font-size: 28px; color: var(--primary);}
+
+/* SCROLL REVEAL */
+.fade-in { opacity: 0; animation: pageLoadFade 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
+@keyframes pageLoadFade { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+.d1 { animation-delay: 0.15s; }
+.d2 { animation-delay: 0.3s; }
+.d3 { animation-delay: 0.45s; }
+
+/* SPACING CONSTRAINTS */
+.sec,.sec-alt,.assessment-sec,.scenario-sec,.remix-sec,.footer{padding-left:max(3.5rem, calc((100% - 1100px)/2));padding-right:max(3.5rem, calc((100% - 1100px)/2))}
+
+/* VIEWS */
+.view { display: none; opacity: 0; transition: opacity 0.5s ease; position: relative; z-index: 1;}
+.view.active { display: block; opacity: 1; }
+
+/* ==========================================================================
+   HERO COLLAGE (The Analog Desk)
+   ========================================================================== */
+.hd-collage {
+  position: relative;
+  width: 100%;
+  min-height: 85vh;
+  padding: 4rem max(3.5rem, calc((100% - 1100px)/2));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 80% 20%, #E8E2D5 0%, var(--bg-color) 60%);
+}
+
+.hd-gradient-bar{height:8px;background:linear-gradient(to right,var(--tertiary),var(--secondary),var(--primary));position:absolute;top:0;left:0;right:0; z-index: 10;}
+
+.collage-meta-top {
+  position: absolute;
+  top: 3rem;
+  left: max(3.5rem, calc((100% - 1100px)/2));
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  z-index: 5;
+}
+
+.c-brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--dark);
+  border: 1px solid var(--dark);
+  padding: 6px 12px;
+  background: var(--surface);
+  transform: rotate(-1deg);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+}
+
+.c-video-prop {
+  position: absolute;
+  top: 1.5rem; 
+  right: max(1rem, calc((100% - 1200px)/2)); 
+  background: var(--surface);
+  border: 2px solid var(--dark);
+  padding: 10px 10px 28px 10px; 
+  box-shadow: 8px 12px 20px var(--shadow-color);
+  transform: rotate(3deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: clamp(200px, 20vw, 320px); 
+  z-index: 1; 
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, z-index 0s;
+}
+
+.c-video-prop:hover {
+  transform: rotate(1deg) scale(1.05);
+  box-shadow: 15px 20px 30px var(--shadow-color);
+  z-index: 10; 
+}
+
+.c-video-prop::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 80px;
+  height: 25px;
+  background: rgba(255, 255, 255, 0.9); 
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+.c-video-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 2px solid var(--dark);
+  background: #000;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.c-video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.c-video-caption {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(16px, 1.4vw, 18px);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--dark);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.collage-center {
+  position: relative;
+  z-index: 3; 
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 2rem; 
+}
+
+.c-title-small {
+  font-family: 'Space Mono', monospace; 
+  font-size: clamp(14px, 1.8vw, 18px);
+  font-weight: 700;
+  color: var(--surface);
+  background: var(--dark);
+  padding: 8px 24px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  align-self: flex-start;
+  margin-left: 12%; 
+  z-index: 4;
+  position: relative;
+  box-shadow: 4px 4px 0px var(--primary);
+  transform: rotate(-3deg);
+}
+
+.rap-composition {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 2rem;
+}
+
+.lets-text {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(50px, 10vw, 120px); 
+  font-weight: 600;
+  color: var(--tertiary);
+  position: absolute;
+  top: -8%;
+  left: -10%; 
+  transform: rotate(-10deg);
+  z-index: 2; 
+  text-shadow: 3px 6px 15px rgba(0,0,0,0.15);
+}
+
+.rap-mask-wrapper {
+  filter: drop-shadow(15px 25px 10px rgba(0, 0, 0, 0.25)); 
+  transform: rotate(-2deg);
+  position: relative;
+  z-index: 3; 
+  width: 100%;
+  text-align: center;
+}
+
+.c-massive-mask {
+  font-family: 'Rubik Dirt', 'Permanent Marker', cursive; 
+  font-size: clamp(120px, 24vw, 320px);
+  line-height: 0.85;
+  color: transparent;
+  background: url('https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=2000&auto=format&fit=crop') center/cover, var(--primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+/* THE NEW MICROPHONE PHOTO PROP */
+.mic-container {
+  position: absolute;
+  bottom: -30%;
+  right: -5%;
+  z-index: 5; 
+  filter: drop-shadow(10px 15px 20px rgba(0,0,0,0.4));
+}
+
+.mic-image {
+  width: clamp(140px, 18vw, 220px);
+  height: auto;
+  border: 4px solid #fff;
+  border-radius: 2px;
+  transform: rotate(6deg);
+  display: block;
+}
+
+/* Tape for the photo */
+.mic-container::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  width: 40px;
+  height: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  transform: rotate(15deg);
+  border: 1px solid rgba(0,0,0,0.05);
+  z-index: 6;
+}
+
+.hero-catchphrase {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(24px, 2.8vw, 36px); 
+  font-style: italic;
+  font-weight: 600;
+  color: var(--tertiary); 
+  text-align: center;
+  max-width: 850px;
+  margin-top: 2rem;
+  line-height: 1.4;
+  position: relative;
+  z-index: 5;
+  padding: 0 1.5rem;
+}
+
+.collage-bottom {
+  position: relative;
+  z-index: 5;
+  margin-top: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.c-premise-pull {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.1;
+  max-width: 600px;
+}
+.c-premise-pull em {
+  font-style: italic;
+  color: var(--primary);
+}
+
+.c-btn-record {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--dark);
+  padding: 8px 8px 8px 24px;
+  border-radius: 50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 2px solid var(--dark);
+}
+
+.c-btn-record:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+  background: var(--surface);
+}
+
+.c-btn-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--surface);
+  transition: color 0.3s;
+}
+
+.c-btn-record:hover .c-btn-text {
+  color: var(--dark);
+}
+
+.c-btn-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--dark);
+  color: var(--dark);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* Background aesthetic elements */
+.vinyl-silhouette {
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  border: 40px solid rgba(43, 38, 36, 0.03);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ==========================================================================
+   SCENARIOS (The Composition Notebook)
+   ========================================================================== */
+.scenario-sec {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  position: relative;
+  background-color: #fff;
+  background-image: 
+    linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+    linear-gradient(#eee .1em, transparent .1em);
+  background-size: 100% 1.2em;
+  border-top: 2px solid var(--dark);
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+  z-index: 2;
+}
+
+.scenario-sec::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: max(2rem, calc((100% - 1100px)/2 - 2rem));
+  width: 2px;
+  background: rgba(220, 50, 50, 0.4);
+  z-index: 0;
+}
+
+.scenario-intro { position: relative; z-index: 2; margin-left: 2rem; }
+
+.scenario-intro-label {
+  font-family: 'Space Mono', monospace; 
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 1rem; 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 10px;
+  background: var(--surface);
+  padding: 4px 12px;
+  border: 1px solid var(--dark);
+}
+.scenario-intro-label::before { content:'REC'; display:inline-block; color:var(--primary); font-weight:700; animation: pulse-red 2s infinite; }
+
+.scenario-intro-head{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(36px,4.5vw,52px);font-weight:700;color:var(--dark);line-height:1.1;margin-bottom:1rem}
+.scenario-intro-body{font-size:clamp(18px,2vw,22px);color:var(--body);line-height:1.6; margin-bottom:3rem; max-width: 700px; font-weight: 400;}
+
+.sc-categories{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:3rem; margin-left: 2rem; position: relative; z-index: 2;}
+
+.sc-cat-btn {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--dark);
+  background: #fdfae5; 
+  color: var(--dark);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.15);
+  transform: rotate(-1deg);
+  border-radius: 2px;
+}
+.sc-cat-btn:nth-child(even) { transform: rotate(2deg); }
+.sc-cat-btn:hover { transform: scale(1.05) rotate(0deg); box-shadow: 6px 8px 10px rgba(0,0,0,0.15); background: #fff;}
+.sc-cat-btn.active { background: var(--dark); color: #fff; box-shadow: 4px 4px 0px var(--secondary); transform: rotate(0deg); }
+
+.sc-prompt{text-align:center;padding:3rem 1rem;color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(20px,2.4vw,24px)}
+
+.scenario-card {
+  background: var(--surface);
+  padding: 3rem;
+  border: 3px solid var(--dark);
+  box-shadow: 12px 12px 0px var(--shadow-color);
+  position: relative;
+  z-index: 2;
+  margin-left: 2rem;
+  max-width: 900px;
+}
+
+.scenario-card::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+  width: 100px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.boombox-anchor {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 3rem;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid #222;
+  box-shadow: 6px 6px 0px var(--shadow-color);
+  background: var(--dark);
+}
+.boombox-anchor img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+}
+
+.scenario-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:2px dashed var(--border)}
+.scenario-nav button{background:var(--bg-color);border:2px solid var(--dark);color:var(--dark);width:45px;height:45px;font-size:1.2rem;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center; border-radius: 50%; box-shadow: 2px 2px 0px var(--dark);}
+.scenario-nav button:hover{background:var(--secondary); transform:translate(-2px,-2px); box-shadow: 4px 4px 0px var(--dark);}
+.scenario-counter{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--dark); background: var(--bg-color); padding: 4px 12px; border: 1px solid var(--border);}
+.scenario-trigger{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,3vw,34px);font-weight:700;font-style:italic;color:var(--primary);margin-bottom:2.5rem;line-height:1.3;text-align:center; padding: 0 2rem;}
+
+.sc-toggle{display:flex;justify-content:center;background:var(--bg-color);padding:6px;max-width:600px;margin:0 auto 2.5rem;border:2px solid var(--dark); border-radius: 50px;}
+.sc-btn{flex:1;padding:1rem 1.5rem;border:none;background:transparent;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.3s;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:0.1em;text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:10px; border-radius: 40px;}
+.sc-btn svg { width: 18px; height: 18px; fill: currentColor; }
+.sc-btn.active{background:var(--dark);color:var(--surface); box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
+
+.sc-content{display:none;text-align:left;animation:aFadeUp 0.4s ease;background:var(--bg-color);padding:2.5rem;border:2px solid var(--dark);font-size:clamp(16px,1.8vw,18px);line-height:1.8;color:var(--body); position: relative;}
+.sc-content.active{display:block}
+.sc-content.conditioned{border-left:8px solid var(--primary)}
+.sc-content.conscious{border-left:8px solid var(--tertiary)}
+.sc-content p + p{margin-top:1.5rem}
+.sc-content strong{color:var(--dark);font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; display:block; margin-bottom:8px;}
+
+/* ==========================================================================
+   EQUALIZER BOARD (Studio Mode)
+   ========================================================================== */
+.assessment-sec {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  /* Changed from black to a deep, rich teal for a beautiful fallback */
+  background-color: #17262b;
+  background-image: 
+    /* Lightened the overlay heavily so the vibrant red/teal artwork shines through */
+    linear-gradient(rgba(23, 38, 43, 0.4), rgba(26, 26, 26, 0.85)),
+    url('5_Close_up_on_a_mixing_board_wit_1_20260327_123554.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; 
+  color: var(--surface);
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 -20px 40px rgba(0,0,0,0.3), 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.assessment-intro-label {
+  font-family: 'Space Mono', monospace; 
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--secondary); 
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(230, 179, 37, 0.5);
+}
+
+.assessment-intro-head {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(36px, 4.5vw, 52px);
+  font-weight: 700;
+  color: var(--surface);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.assessment-intro-body {
+  font-size: clamp(18px, 2vw, 22px);
+  color: #A0A0A0;
+  line-height: 1.6; 
+  margin-bottom: 3.5rem;
+  max-width: 600px;
+}
+
+.assessment-card {
+  background: rgba(40, 40, 40, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 3rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.mixer-container { margin-bottom: 3rem; background: #111; padding:24px; border-radius:8px; box-shadow: inset 0 10px 20px rgba(0,0,0,0.8); border: 2px solid #222;}
+.mixer-labels { display: flex; justify-content: space-between; font-family:'Space Mono',monospace; font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 16px;}
+.mixer-track { width: 100%; height: 16px; background: #0a0a0a; border-radius: 8px; position: relative; box-shadow: inset 0 2px 8px rgba(0,0,0,1); border:1px solid #1a1a1a; }
+.mixer-fill { height: 100%; border-radius: 8px; background: linear-gradient(90deg, #c0392b, #e67e22, #27ae60); width: 0%; transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 0 15px rgba(230, 126, 34, 0.4); }
+.mixer-knob { width: 32px; height: 56px; background: linear-gradient(to bottom, #d4d4d4, #7a7a7a); border: 2px solid #000; border-radius: 4px; position: absolute; top: -20px; left: 0%; transform: translateX(-50%); transition: left 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 8px 16px rgba(0,0,0,0.8), inset 0 2px 0 rgba(255,255,255,0.9), inset 0 -2px 0 rgba(0,0,0,0.5); cursor: grab;}
+.mixer-knob::after { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:80%; height:4px; background:#111; box-shadow: 0 8px 0 #111, 0 -8px 0 #111;}
+
+.a-step { display: none; }
+.a-step.active { display: block; animation: aFadeUp 0.4s ease forwards; }
+
+.a-question{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(24px,3vw,32px);font-weight:600; font-style: italic; color:var(--surface);line-height:1.3;margin-bottom:2rem}
+.a-options{display:flex;flex-direction:column;gap:16px}
+.a-opt{background: rgba(20, 20, 20, 0.8); border:1px solid #444; border-radius: 8px; padding:1.25rem 1.5rem; text-align:left; cursor:pointer; font-family:'Outfit',sans-serif; font-size:clamp(16px,1.8vw,18px); color:#ccc; line-height:1.6; transition:all 0.2s;}
+.a-opt:hover{border-color: var(--secondary); background: #222; color: #fff; transform:translateX(4px); box-shadow: -4px 0px 0px var(--secondary);}
+.a-opt.chosen{border-color: var(--secondary); background: #222; color: #fff; box-shadow: -4px 0px 0px var(--secondary), 0 0 20px rgba(230, 179, 37, 0.15);}
+
+.a-result { display: none; }
+.a-result.active { display: block; animation: aFadeUp 0.45s ease forwards; }
+
+.result-badge{display:inline-block;padding:8px 16px;font-family:'Space Mono',monospace; font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.5rem; background:var(--secondary);color:var(--dark); border-radius: 4px; box-shadow: 0 0 15px rgba(230, 179, 37, 0.4);}
+.result-head{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(32px,4vw,42px);font-weight:700;color:var(--surface);line-height:1.1;margin-bottom:1rem}
+.result-body{font-size:clamp(18px,2vw,20px);color:#aaa;line-height:1.8;margin-bottom:2.5rem}
+
+.result-cta{background:var(--primary);color:var(--surface);border:none; border-radius: 50px; padding:12px 28px;text-decoration:none;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.3s;display:inline-block; cursor:pointer; box-shadow: 0 10px 20px rgba(194, 77, 44, 0.3);}
+.result-cta:hover{transform:translateY(-4px); box-shadow: 0 15px 25px rgba(194, 77, 44, 0.5); background: #d65531;}
+
+.restart-btn{background:transparent;border:none;color:var(--muted);font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer; padding:10px 15px; transition:all 0.2s;}
+.restart-btn:hover{color:var(--surface);}
+
+/* ==========================================================================
+   AGENCY CONSOLE: THE TURNTABLE (The Desk Environment)
+   ========================================================================== */
+#phases {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  position: relative;
+  background-color: #E8E2D5;
+  background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+  z-index: 2;
+  overflow: hidden;
+}
+
+.eyebrow{font-family:'Space Mono',monospace; font-size:13px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--dark);margin-bottom:2rem; text-align: center; background: rgba(255,255,255,0.5); display: inline-block; padding: 6px 16px; border: 1px solid var(--dark); border-radius: 50px; position: relative; left: 50%; transform: translateX(-50%); backdrop-filter: blur(4px);}
+
+.agency-console {
+  background: var(--bg-color);
+  border: 3px solid var(--dark);
+  border-radius: 12px;
+  box-shadow: 20px 25px 40px rgba(0,0,0,0.2), inset 0 0 20px rgba(0,0,0,0.05);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+}
+
+.deck-panel {
+  padding: 4rem 3rem;
+  background: #DFD9C9;
+  border-right: 3px solid var(--dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  box-shadow: inset -10px 0 20px rgba(0,0,0,0.05);
+}
+
+.turntable-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1;
+  background: #F4F1EA;
+  border: 3px solid var(--dark);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: inset 5px 5px 15px rgba(0,0,0,0.1), 10px 10px 0px rgba(0,0,0,0.1);
+  margin-bottom: 3.5rem;
+}
+
+.turntable-platter {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #111;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 6px solid #2B2624;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4), inset 0 0 15px rgba(255,255,255,0.1);
+}
+
+.record {
+  width: 96%;
+  height: 96%;
+  border-radius: 50%;
+  background: #181818;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 1s ease;
+  box-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+
+.record::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: repeating-radial-gradient( #111 0px, #1a1a1a 2px, #111 4px );
+  z-index: 1;
+}
+
+.record::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient( from 0deg, rgba(255,255,255,0.05) 0deg, rgba(255,255,255,0) 45deg, rgba(255,255,255,0.15) 90deg, rgba(255,255,255,0) 135deg, rgba(255,255,255,0.05) 180deg, rgba(255,255,255,0) 225deg, rgba(255,255,255,0.15) 270deg, rgba(255,255,255,0) 315deg, rgba(255,255,255,0.05) 360deg );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.record.spinning { animation: spinRecord 1.8s linear infinite; }
+@keyframes spinRecord { 100% { transform: rotate(360deg); } }
+
+.record-label {
+  width: 35%;
+  height: 35%;
+  border-radius: 50%;
+  background: var(--tertiary);
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px solid #000;
+  transition: background 0.4s ease;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+.record-label::before {
+  content: 'TRACK';
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--surface);
+  letter-spacing: 0.15em;
+  opacity: 0.9;
+  margin-bottom: 2px;
+}
+
+.record-label-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--surface);
+  line-height: 1;
+}
+
+.record-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: #E8E2D5;
+  border-radius: 50%;
+  border: 3px solid #000;
+  z-index: 4;
+}
+
+.tonearm-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 65%;
+  transform-origin: 25px 25px;
+  transform: rotate(15deg);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  filter: drop-shadow(-6px 12px 6px rgba(0,0,0,0.5));
+}
+
+.tonearm-base {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #eee, #999);
+  border-radius: 50%;
+  border: 2px solid var(--dark);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  box-shadow: inset 0 2px 5px rgba(255,255,255,0.8);
+}
+
+.tonearm-base::after {
+  content:'';
+  position:absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px; height: 20px;
+  background: var(--dark);
+  border-radius: 50%;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.tonearm-rod {
+  width: 10px;
+  height: 100%;
+  background: linear-gradient(90deg, #d4d4d4, #ffffff, #a3a3a3);
+  border: 1px solid var(--dark);
+  position: absolute;
+  top: 25px;
+  left: 20px;
+  border-radius: 5px;
+}
+
+.tonearm-head {
+  width: 22px;
+  height: 45px;
+  background: #222;
+  border: 1px solid #000;
+  position: absolute;
+  bottom: -20px;
+  left: 14px;
+  border-radius: 4px;
+  transform-origin: top center;
+  transform: rotate(-25deg);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.2);
+}
+
+.console-pads {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  justify-content: center;
+}
+
+.pad-btn {
+  flex: 1;
+  padding: 16px 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--dark);
+  background: var(--surface);
+  border: 3px solid var(--dark);
+  border-radius: 8px;
+  box-shadow: 0 8px 0px var(--dark);
+  cursor: pointer;
+  transition: all 0.1s;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.pad-btn span {
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.pad-btn:active {
+  transform: translateY(8px);
+  box-shadow: 0 0px 0px var(--dark);
+}
+
+.pad-btn.active {
+  background: var(--dark);
+  color: var(--surface);
+  box-shadow: 0 4px 0px var(--dark);
+  transform: translateY(4px);
+  border-color: var(--dark);
+}
+
+.pad-btn.active span {
+  color: var(--secondary); 
+}
+
+.readout-panel {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.readout-tag {
+  position: absolute;
+  top: -16px;
+  left: 4rem;
+  background: var(--dark);
+  color: var(--secondary); 
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  padding: 6px 16px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  border: 2px solid var(--dark);
+  border-radius: 50px;
+}
+
+.readout-content {
+  animation: consoleFade 0.4s ease forwards;
+}
+
+.readout-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--tertiary);
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  transition: color 0.3s ease;
+}
+
+.readout-desc {
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.8;
+  color: var(--body);
+}
+
+/* ==========================================================================
+   LINER NOTES (The Breakdown) 
+   ========================================================================== */
+.sec-alt {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background: var(--surface);
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 -20px 40px rgba(0,0,0,0.05);
+}
+
+.rap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:3rem}
+.rap-col{position:relative;}
+.rap-col-head{font-family:'Space Mono',monospace; font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:2rem; display:inline-block; padding:8px 16px; background:var(--primary); color:var(--surface); border-radius: 4px;}
+.rap-item{cursor:pointer;padding:16px;margin:-16px;transition:background 0.2s;margin-bottom:8px;outline:none; border:2px solid transparent; border-radius: 8px;}
+.rap-item:hover{background:var(--bg-color); border-color:var(--border);}
+.rap-row{display:flex;align-items:baseline;gap:16px}
+.rap-letter{font-family:'Cormorant Garamond',Georgia,serif; font-size:32px;font-weight:700;color:var(--primary);min-width:24px;flex-shrink:0; font-style:italic;}
+.rap-term{font-family:'Space Mono',monospace; font-size:clamp(14px,1.6vw,16px);color:var(--dark);flex:1;font-weight:700; text-transform:uppercase; letter-spacing:0.05em;}
+.rap-wtag{font-size:11px;color:var(--muted);text-transform:uppercase; letter-spacing:0.2em;}
+.expand-caret{font-size:12px;color:var(--dark);transition:transform 0.3s ease;margin-left:8px}
+.rap-item.active .expand-caret{transform:rotate(180deg);color:var(--primary)}
+.rap-detail{font-size:clamp(16px,1.8vw,18px);color:var(--body);line-height:1.8;margin-top:0;padding:0 20px;background:var(--bg-color);border-left:4px solid var(--primary);max-height:0;overflow:hidden;opacity:0;transition:max-height 0.4s ease,opacity 0.3s ease,padding 0.4s ease,margin 0.4s ease}
+.rap-detail.open{max-height:900px;opacity:1;padding:20px 24px;margin-top:16px; margin-bottom:24px; border:2px solid var(--dark); border-left:8px solid var(--primary); box-shadow: 8px 8px 0px rgba(0,0,0,0.08); border-radius: 0 8px 8px 0;}
+.rap-detail strong{color:var(--dark); font-weight:700;}
+
+/* ==========================================================================
+   CONTEXTS (The Crates - Vinyl Sleeves)
+   ========================================================================== */
+.contexts-sec {
+  padding-top: 6rem;
+  padding-bottom: 8rem;
+  background: var(--bg-color);
+}
+
+.ctx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:4rem}
+
+/* Vinyl Sleeve Design */
+.ctx-card {
+  padding: 3rem 2rem;
+  background: var(--surface); 
+  border: 2px solid var(--dark);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+  box-shadow: 10px 10px 0px var(--shadow-color);
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* Vinyl Record peaking out of sleeve */
+.ctx-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 120px;
+  height: 120px;
+  background: #111;
+  border-radius: 50%;
+  border: 1px solid #333;
+  box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+
+.ctx-card:hover {
+  transform: translateY(-8px) rotate(-1deg);
+  box-shadow: 15px 20px 0px var(--shadow-color);
+}
+
+.ctx-card:hover::before {
+  transform: translate(-10px, 10px) rotate(45deg);
+}
+
+.ctx1{border-top:8px solid var(--tertiary)}
+.ctx2{border-top:8px solid var(--primary)}
+.ctx3{border-top:8px solid var(--secondary)}
+
+.ctx-label {
+  font-family: 'Space Mono', monospace; 
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 16px; 
+  color: var(--dark);
+  position: relative;
+  z-index: 1;
+}
+
+.ctx-punch {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(24px, 3vw, 30px);
+  font-weight: 700;
+  font-style: italic; 
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.ctx-body {
+  font-size: clamp(16px, 1.8vw, 18px);
+  color: var(--body);
+  line-height: 1.8;
+  position: relative;
+  z-index: 1;
+}
+
+/* FLOW */
+.flow-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding:3rem 0}
+.flow-node{text-align:center;padding:16px 32px; border:2px solid var(--dark); background:var(--surface); transition:all 0.2s; box-shadow: 6px 6px 0px var(--shadow-color); border-radius: 50px;}
+.flow-node:hover{transform:translate(-2px,-2px);box-shadow: 8px 8px 0px var(--shadow-color); background: var(--secondary);}
+.flow-label{font-family:'Space Mono',monospace; font-size:clamp(13px,1.6vw,15px);font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--dark);}
+.flow-arrow{font-size:24px;color:var(--primary);padding:0;flex-shrink:0; font-weight: bold;}
+
+/* ==========================================================================
+   R.A.P. REMIX SECTION (The Cypher / PLURAL)
+   ========================================================================== */
+.remix-sec {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  background-color: var(--dark);
+  background-image: radial-gradient(circle at 50% 0%, rgba(230, 179, 37, 0.15) 0%, transparent 50%);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 700px; 
+  color: var(--surface); 
+  border-top: 4px solid var(--secondary);
+  box-shadow: 0 -20px 40px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.remix-eyebrow{font-family:'Space Mono',monospace; font-size:12px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--secondary);margin-bottom:3rem}
+.remix-phase{display:none;width:100%}
+.remix-phase.active{display:block}
+.p0-plural-space{height:clamp(80px,14vw,120px);display:flex;align-items:flex-end;justify-content:center;margin-bottom:0}
+.p0-plural-row{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);display:flex;justify-content:center;align-items:flex-end;gap:clamp(8px, 1.2vw, 18px);opacity:0;transition:opacity 0.7s ease, bottom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);line-height:1;z-index:10;width:max-content}
+.p0-plural-row.show{opacity:1;bottom:88%}
+.p0-pl{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(48px,8vw,80px);font-weight:700;color:var(--bg-color);line-height:1;display:inline-block;letter-spacing:0.05em}
+.p0-word{display:flex;align-items:baseline;justify-content:center;margin-bottom:2rem}
+.p0-left-wrap{display:inline-flex;align-items:baseline;transition:opacity 0.65s ease}
+.p0-self-txt{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(40px,7vw,70px);font-weight:400;color:#888;line-height:0.88; font-style:italic;}
+.p0-cen-txt{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(40px,7vw,70px);font-weight:400;color:#888;line-height:0.88;display:inline-block;overflow:hidden;max-width:0;opacity:0;white-space:nowrap;transition:max-width 0.5s ease,opacity 0.5s ease; font-style:italic;}
+.p0-cen-txt.show{max-width:180px;opacity:1}
+.p0-letter-wrap{position:relative;display:inline-block;line-height:0.88}
+.p0-i{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(110px,20vw,200px);font-weight:700;color:var(--primary);line-height:0.88;display:inline-block;transition:color 0.5s ease,opacity 0.6s ease}
+.p0-i.to-teal{color:var(--secondary)}
+.p0-i.fade-out{opacity:0}
+
+.p0-t-overlay{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(110px,20vw,200px);font-weight:700;color:var(--secondary);line-height:0.88;position:absolute;top:0;left:50%;opacity:0;transition:opacity 0.6s ease,text-shadow 0.5s ease,transform 0.5s ease;text-shadow:0 0 30px rgba(230,179,37,0.2);transform:translateX(-50%) scale(1);white-space:nowrap; z-index: 2;}
+.p0-t-overlay.show{opacity:1}
+.p0-t-overlay.loaded{text-shadow:0 0 50px rgba(230,179,37,0.5);transform:translateX(-50%) scale(1.05)}
+.p0-t-overlay.fade-out{opacity:0!important;transition:opacity 0.8s ease!important}
+
+.p0-t-beam {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: clamp(110px,20vw,200px);
+  color: #D4A373;
+  line-height: 0.88;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateX(-50%) scale(1);
+  text-shadow: 
+    0px -2px 0px #Fae5cd,
+    -3px 0px 0px #b08151,
+    3px 0px 0px #b08151,
+    0px 5px 0px #7d5731,
+    0px 15px 30px rgba(0,0,0,0.8);
+  z-index: 1;
+}
+.p0-t-beam.show { opacity: 1; transform: translateX(-50%) scale(1.05); }
+.p0-t-beam.fade-out { opacity: 0 !important; transition: opacity 0.8s ease !important; }
+
+.p0-right-wrap{position:relative;display:inline-block;line-height:0.88;transition:opacity 0.65s ease}
+.p0-sh-txt{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(40px,7vw,70px);font-weight:400;color:#888;line-height:0.88;display:inline-block;transition:opacity 0.4s ease; font-style:italic;}
+.p0-sh-txt.fade-out{opacity:0}
+.p0-er-txt{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(40px,7vw,70px);font-weight:400;color:#888;line-height:0.88;position:absolute;left:0;top:0;opacity:0;transition:opacity 0.4s ease;white-space:nowrap; font-style:italic;}
+.p0-er-txt.show{opacity:1}
+
+.p0-desc{font-size:clamp(16px,2vw,20px);color:#aaa;line-height:1.8;margin-bottom:0;transition:opacity 0.4s ease}
+
+.remix-btn{background:var(--primary);color:var(--surface);border:none; border-radius: 50px; padding:1.25rem 3rem;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all 0.3s; display:inline-flex; align-items:center; gap:12px; box-shadow: 0 10px 20px rgba(194, 77, 44, 0.4);}
+.remix-btn:hover{transform:translateY(-4px); box-shadow: 0 15px 30px rgba(194, 77, 44, 0.6); background:#d65531;}
+
+.plural-eyebrow-line{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(24px,3vw,32px);font-style:italic;color:var(--secondary);margin-bottom:4rem;opacity:0;transition:opacity 0.6s ease}
+.plural-eyebrow-line.show{opacity:1}
+.plural-full{display:flex;justify-content:space-between;align-items:flex-start;width:100%;margin-bottom:5rem; position: relative; z-index: 5;}
+.pf-item{display:flex;flex-direction:column;align-items:center;flex:1;opacity:0;transform:translateY(12px);transition:opacity 0.5s ease,transform 0.5s ease;padding:0 10px}
+.pf-item.show{opacity:1;transform:translateY(0)}
+.pf-letter{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(52px,9vw,90px);font-weight:700;color:var(--surface);line-height:1;display:block; margin-bottom:12px; text-shadow: 0 0 15px rgba(255,255,255,0.2);}
+.pf-meaning{font-family:'Space Mono',monospace; font-size:clamp(9px,1.2vw,12px);letter-spacing:0.1em;text-transform:uppercase;color:#aaa;display:block;opacity:0;transition:opacity 0.5s ease 0.35s;line-height:1.6;max-width:140px}
+.pf-item.show .pf-meaning{opacity:1}
+
+.remix-statement{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,4vw,40px);font-weight:600;color:var(--surface);line-height:1.5;max-width:800px;margin:0 auto 4rem;font-style:italic;}
+.rs-w { opacity: 0; display: inline-block; transform: translateY(12px); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); margin-right: 6px; }
+.rs-w.show { opacity: 1; transform: translateY(0); }
+.rs-glow-text { color: var(--secondary); transition: text-shadow 1.5s ease, color 1.5s ease; display: inline-block;}
+.rs-glow-text.full-glow { color: #FFF; text-shadow: 0 0 20px rgba(230, 179, 37, 0.8), 0 0 40px rgba(230, 179, 37, 0.4), 0 0 60px rgba(230, 179, 37, 0.2); }
+
+.rtb-btn{background:transparent;color:var(--surface);border:2px solid var(--surface); border-radius: 50px; padding:1rem 2.5rem;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;opacity:0;transition:all 0.4s; display:inline-flex; align-items:center; gap:10px;}
+.rtb-btn.show{opacity:1}
+.rtb-btn:hover{background:var(--surface);color:var(--dark);}
+
+/* FOOTER */
+.footer{padding-top:3rem;padding-bottom:3rem;border-top:2px solid var(--dark);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px;background:var(--bg-color)}
+.footer-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:700;color:var(--dark); font-style:italic;}
+.footer-sub{font-family:'Space Mono',monospace; font-size:12px;color:var(--muted);letter-spacing:0.2em; text-transform:uppercase;}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  .agency-console { grid-template-columns: 1fr; }
+  .deck-panel { border-right: none; border-bottom: 3px solid var(--dark); padding: 3rem 2rem; }
+  .readout-panel { padding: 3rem 2rem; }
+  .readout-tag { left: 2rem; }
+}
+@media(max-width:768px){
+  .sec,.sec-alt,.contexts-sec,.assessment-sec,.scenario-sec,.remix-sec,.footer {padding-left:1.5rem;padding-right:1.5rem}
+  .rap-grid,.ctx-grid{grid-template-columns:1fr}
+  .flow-row{flex-direction:column;gap:16px}
+  .flow-arrow{transform:rotate(90deg);font-size:20px}
+  .result-actions{flex-direction:column;align-items:flex-start}
+  
+  .c-video-prop {
+    position: relative;
+    top: 0; right: 0; margin: 2rem auto;
+    width: 90%; max-width: 320px;
+    transform: rotate(1deg); z-index: 10;
+  }
+  .hd-collage { padding: 4rem 1.5rem; }
+  .collage-meta-top { position: relative; top: 0; left: 0; margin-bottom: 2rem; }
+  .c-title-small { margin-left: 0; align-self: center; margin-bottom: 1rem; transform: rotate(0); }
+  .rap-composition { flex-direction: column; margin-top: 3rem; }
+  .lets-text { top: -40px; left: 0; font-size: 60px; z-index: 1; }
+  
+  /* Fixed Mic container centering on mobile */
+  .mic-container { position: relative; bottom: 0; right: 0; margin-top: 2rem; margin-left: auto; margin-right: auto; transform: rotate(10deg); }
+  
+  .hero-catchphrase { font-size: clamp(20px, 6vw, 24px); margin-top: 3rem; }
+  .collage-bottom { margin-top: 4rem; flex-direction: column; align-items: flex-start; }
+  
+  .plural-full { flex-wrap:wrap; gap:20px; }
+  .pf-item { flex: 0 0 40%; }
+}
+</style>
 </head>
-<body class="antialiased">
+<body>
+<div class="page">
 
-    <div class="bg-white shadow-md">
-        <header class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <h1 class="text-2xl font-bold text-gray-800">Observation to Action</h1>
-                <nav id="main-nav" class="hidden md:flex items-center space-x-6">
-                    <a href="#foundations" data-tab="foundations" class="nav-link font-semibold text-gray-600 hover:text-blue-600 active">Foundations</a>
-                    <a href="#proactive" data-tab="proactive" class="nav-link font-semibold text-gray-600 hover:text-blue-600">Proactive Strategies</a>
-                    <a href="#responsive" data-tab="responsive" class="nav-link font-semibold text-gray-600 hover:text-blue-600">Responsive Interventions</a>
-                    <a href="#toolkit" data-tab="toolkit" class="nav-link font-semibold text-gray-600 hover:text-blue-600">Coach's Toolkit</a>
-                </nav>
-            </div>
-        </header>
+<!-- NEW HERO COLLAGE -->
+<div id="home-view" class="view active">
+  
+  <div class="hd-collage fade-in">
+    <div class="hd-gradient-bar"></div>
+
+    <div class="collage-meta-top">
+      <div class="c-brand">AH-HA Coaching, LLC</div>
     </div>
 
-    <main class="container mx-auto p-4 md:p-8">
+    <!-- THE VIDEO POLAROID PROP (Unlisted YouTube Embed for fast loading) -->
+    <div class="c-video-prop fade-in d2">
+      <div class="c-video-wrapper">
+        <iframe 
+          src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=YOUR_VIDEO_ID&controls=0&showinfo=0&rel=0&modestbranding=1" 
+          frameborder="0" 
+          allow="autoplay; encrypted-media; fullscreen" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="c-video-caption">
+        A sequenced approach to<br>awareness, choice, and change.
+      </div>
+    </div>
 
-        <section id="foundations-content" class="content-section active">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-gray-800 mb-2">The Science of a Thriving Classroom</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Effective teaching isn't magic; it's a science. This application explores the core frameworks that empower educators to move from simply observing to implementing high-leverage, research-backed interventions.</p>
+    <div class="collage-center d1">
+      <div class="c-title-small">R³ Agency Practice</div>
+      
+      <div class="rap-composition">
+        <div class="lets-text">Let's</div>
+        
+        <div class="rap-mask-wrapper">
+          <div class="c-massive-mask">R.A.P.</div>
+        </div>
+        
+        <!-- THE SM58 MICROPHONE IMAGE PROP -->
+        <div class="mic-container">
+          <img src="3_A_microphone_stand_holds_a_vin_1_20260327_123538.jpg" class="mic-image" alt="Vintage Microphone">
+        </div>
+      </div>
+
+      <div class="hero-catchphrase fade-in d2">
+        "What rap did in giving voice, this framework does for you — it takes what you've been carrying and gives it structure, direction, and language."
+      </div>
+    </div>
+
+    <div class="collage-bottom d3">
+      <p class="c-premise-pull">
+        Do it on <em>purpose</em>. Not perfectly —<br><em>purposefully</em>.
+      </p>
+      
+      <a class="c-btn-record" onclick="document.getElementById('scenarios').scrollIntoView();" title="See the framework in action">
+        <span class="c-btn-text">Enter The Cypher</span>
+        <div class="c-btn-icon">↓</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- SCENARIO SECTION (The Cypher / Tape Deck) -->
+  <div class="scenario-sec fade-in" id="scenarios">
+
+    <div class="scenario-intro">
+      <p class="scenario-intro-label">In The Booth</p>
+      <p class="scenario-intro-head cg">Which track feels most like yours right now?</p>
+      <p class="scenario-intro-body">Choose your context and see how the R³ Model shifts the same high-stress moment from a conditioned reaction to a conscious remix.</p>
+    </div>
+
+    <div class="sc-categories fade-in d1">
+      <button class="sc-cat-btn" onclick="selectCategory('classroom', this)">In the Classroom</button>
+      <button class="sc-cat-btn" onclick="selectCategory('caregiving', this)">In Caregiving</button>
+      <button class="sc-cat-btn" onclick="selectCategory('workplace', this)">In the Workplace</button>
+      <button class="sc-cat-btn" onclick="selectCategory('relationships', this)">In Relationships</button>
+    </div>
+
+    <div id="sc-prompt-wrap">
+      <p class="sc-prompt">Select a tape above to load the track.</p>
+    </div>
+
+    <div class="scenario-card" id="scenario-card" style="display:none; opacity:1;">
+      
+      <!-- BOOMBOX VISUAL ANCHOR -->
+      <div class="boombox-anchor">
+        <img src="6_A_classic_silver_boombox_sits_1_20260327_123602.jpg" alt="Silver Boombox Deck">
+      </div>
+
+      <div class="scenario-nav">
+        <button onclick="prevScenario()" aria-label="Previous scenario">
+           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+        </button>
+        <span class="scenario-counter" id="sc-counter">Track 1 of 5</span>
+        <button onclick="nextScenario()" aria-label="Next scenario">
+           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </button>
+      </div>
+      
+      <div class="scenario-trigger" id="sc-trigger"></div>
+      
+      <div class="sc-toggle">
+        <button class="sc-btn active" id="sc-btn-conditioned" onclick="switchSc('conditioned')">
+          <svg viewBox="0 0 24 24"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg> The Default Track
+        </button>
+        <button class="sc-btn" id="sc-btn-conscious" onclick="switchSc('conscious')">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> The Remix (With R³)
+        </button>
+      </div>
+      
+      <div class="sc-content conditioned active" id="sc-conditioned"></div>
+      <div class="sc-content conscious" id="sc-conscious"></div>
+    </div>
+  </div>
+
+  <!-- EQUALIZER BOARD -->
+  <div class="assessment-sec fade-in" id="assessment">
+    <div class="assessment-intro">
+      <p class="assessment-intro-label">Find Your Levels</p>
+      <p class="assessment-intro-head cg">Where are you on the Equalizer Board right now?</p>
+      <p class="assessment-intro-body">Take 60 seconds to find your entry point. Your answers shape how the R³ Model isolates your specific frequency.</p>
+    </div>
+
+    <div class="assessment-card fade-in d1">
+      
+      <!-- FADER UI -->
+      <div class="mixer-container">
+        <div class="mixer-labels">
+            <span>Input</span>
+            <span>Processing</span>
+            <span>Master Out</span>
+        </div>
+        <div class="mixer-track">
+            <div class="mixer-fill" id="mixer-fill"></div>
+            <div class="mixer-knob" id="mixer-knob"></div>
+        </div>
+      </div>
+
+      <div class="a-step active" id="step-0">
+        <p class="a-question cg">Which of these feels most like your truth right now?</p>
+        <div class="a-options">
+          <button class="a-opt" onclick="pickAnswer(0,'reflection',this)">I keep responding the same way — I hear the scratched record playing, but I can't stop it.</button>
+          <button class="a-opt" onclick="pickAnswer(0,'resistance',this)">I understand my patterns. What I'm missing is the ability to hit pause when the moment arrives.</button>
+          <button class="a-opt" onclick="pickAnswer(0,'revelation',this)">I've had real breakthroughs. They just don't seem to stick on a regular loop.</button>
+        </div>
+      </div>
+
+      <div class="a-step" id="step-1">
+        <p class="a-question cg">When something difficult happens, what does your body do?</p>
+        <div class="a-options">
+          <button class="a-opt" onclick="pickAnswer(1,null,this)">I go quiet and numb — I shut down completely.</button>
+          <button class="a-opt" onclick="pickAnswer(1,null,this)">I escalate — louder, sharper, faster than I mean to.</button>
+          <button class="a-opt" onclick="pickAnswer(1,null,this)">I over-function — I start managing everything around me.</button>
+        </div>
+      </div>
+
+      <div class="a-step" id="step-2">
+        <p class="a-question cg">After the moment passes, what do you usually feel?</p>
+        <div class="a-options">
+          <button class="a-opt" onclick="finishAssessment(this)">Frustrated — I knew better, but I still played the same track.</button>
+          <button class="a-opt" onclick="finishAssessment(this)">Resigned — like my rhythm will never actually change.</button>
+          <button class="a-opt" onclick="finishAssessment(this)">Clear — but only once it's too late to use that clarity.</button>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="a-result" id="result-reflection">
+        <span class="result-badge">Phase 1: Reflection (Hearing the Beat)</span>
+        <p class="result-head cg">The R³ Model begins exactly where you are.</p>
+        <p class="result-body">Reflection is the practice of seeing clearly what's happening beneath the automatic response. Like a producer isolating an audio track, it’s about separating the raw truth from the emotional noise — while it's happening. This is where your work begins.</p>
+        <div class="result-actions">
+          <button class="result-cta" onclick="document.getElementById('phases').scrollIntoView(); setTimeout(()=>playTrack(1), 500);">Load Track 1 →</button>
+          <button class="restart-btn" onclick="resetAssessment()">Reset Fader</button>
+        </div>
+      </div>
+
+      <div class="a-result" id="result-resistance">
+        <span class="result-badge">Phase 2: Resistance (Hitting Pause)</span>
+        <p class="result-head cg">You've done the listening. Now comes the pause.</p>
+        <p class="result-body">Resistance is where automaticity—the conditioned reflex that skips like a scratched record—gets interrupted. By hitting pause on the track, conscious choice becomes possible. The R³ Model gives you a structure for exactly this space.</p>
+        <div class="result-actions">
+          <button class="result-cta" onclick="document.getElementById('phases').scrollIntoView(); setTimeout(()=>playTrack(2), 500);">Load Track 2 →</button>
+          <button class="restart-btn" onclick="resetAssessment()">Reset Fader</button>
+        </div>
+      </div>
+
+      <div class="a-result" id="result-revelation">
+        <span class="result-badge">Phase 3: Revelation (Flipping the Sample)</span>
+        <p class="result-head cg">You've found the sample. Now make it your default.</p>
+        <p class="result-body">Purposeful Practicing — applying insight consistently — is how neuroplasticity works. You have to play the new beat repeatedly until the nervous system updates its default rhythm. That's what Phase 3 builds toward.</p>
+        <div class="result-actions">
+          <button class="result-cta" onclick="document.getElementById('phases').scrollIntoView(); setTimeout(()=>playTrack(3), 500);">Load Track 3 →</button>
+          <button class="restart-btn" onclick="resetAssessment()">Reset Fader</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AGENCY CONSOLE (THE DESK METAPHOR) -->
+  <div class="sec fade-in" id="phases">
+    <p class="eyebrow fade-in">The Studio Desk</p>
+    
+    <div class="agency-console fade-in d1">
+      
+      <!-- Deck / Controls -->
+      <div class="deck-panel">
+        <div class="turntable-wrapper">
+          <div class="turntable-platter">
+            <div class="record" id="vinyl-record">
+              <div class="record-label" id="record-label">
+                <span class="record-label-text">01</span>
+              </div>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold text-blue-700 mb-4">Cognitive Load Theory</h3>
-                    <p class="mb-4">Working memory is limited. Great instruction manages this 'cognitive budget' by reducing unproductive mental effort (extraneous load) to maximize the resources available for deep learning (germane load).</p>
-                    <div class="chart-container h-[300px] md:h-[350px]">
-                        <canvas id="cltChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold text-blue-700 mb-4">Psychological Safety</h3>
-                    <p class="mb-4">Learning is a risk. Optimal performance happens in the 'Learning Zone,' where students feel safe enough to make mistakes (High Safety) and are challenged to grow (High Accountability).</p>
-                     <div class="h-[300px] md:h-[350px] flex flex-col justify-center">
-                         <div class="grid grid-cols-2 grid-rows-2 gap-2 text-center text-white h-full">
-                            <div class="bg-red-500 rounded-tl-lg flex items-center justify-center p-3">Anxiety Zone</div>
-                            <div class="bg-green-500 rounded-tr-lg flex items-center justify-center p-3">LEARNING ZONE</div>
-                            <div class="bg-gray-400 rounded-bl-lg flex items-center justify-center p-3">Apathy Zone</div>
-                            <div class="bg-blue-400 rounded-br-lg flex items-center justify-center p-3">Comfort Zone</div>
-                        </div>
-                     </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold text-blue-700 mb-4">Universal Design (UDL)</h3>
-                    <p class="mb-4">Good design is inclusive design. UDL provides a blueprint for creating flexible learning environments that accommodate learner variability from the start, focusing on multiple means of Engagement, Representation, and Action & Expression.</p>
-                    <div class="chart-container h-[300px] md:h-[350px]">
-                        <canvas id="udlChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold text-blue-700 mb-4">Trauma-Informed Pedagogy</h3>
-                    <p class="mb-4">Behavior communicates an unmet need. This approach reframes challenging behavior not as defiance, but as a potential survival response, prioritizing connection and co-regulation over punishment to help students feel safe and ready to learn.</p>
-                    <div class="h-[300px] md:h-[350px] flex items-center justify-center">
-                        <div class="text-center font-bold text-2xl p-4 rounded-lg bg-blue-100 text-blue-800">
-                            Connect Before You Redirect
-                        </div>
-                    </div>
-                </div>
+            <div class="tonearm-container" id="tonearm">
+              <div class="tonearm-base"></div>
+              <div class="tonearm-rod"></div>
+              <div class="tonearm-head"></div>
             </div>
-        </section>
+          </div>
+        </div>
 
-        <section id="proactive-content" class="content-section">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-gray-800 mb-2">Designing for Success</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Explore proactive strategies that embed the core frameworks into the DNA of your lessons, creating a classroom that is clear, engaging, and accessible for all learners.</p>
-            </div>
-            <div class="space-y-12">
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold text-blue-700 mb-4">Scaffolding: The Gradual Release of Responsibility</h3>
-                    <p class="mb-6">Effective scaffolding builds student confidence and mastery by systematically transferring responsibility from teacher to learner.</p>
-                    <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 text-center">
-                        <div class="p-4 rounded-lg bg-blue-50 w-full md:w-1/4">
-                            <div class="text-4xl mb-2">🙋‍♂️</div>
-                            <h4 class="font-bold text-lg">I Do</h4><p>Teacher models explicitly.</p>
-                        </div>
-                        <div class="text-3xl text-blue-400 font-light">➡️</div>
-                        <div class="p-4 rounded-lg bg-blue-100 w-full md:w-1/4">
-                            <div class="text-4xl mb-2">🤝</div>
-                            <h4 class="font-bold text-lg">We Do</h4><p>Guided practice together.</p>
-                        </div>
-                        <div class="text-3xl text-blue-400 font-light">➡️</div>
-                        <div class="p-4 rounded-lg bg-blue-200 w-full md:w-1/4">
-                             <div class="text-4xl mb-2">🏃‍♀️</div>
-                            <h4 class="font-bold text-lg">You Do</h4><p>Independent application.</p>
-                        </div>
-                    </div>
-                </div>
+        <div class="console-pads">
+          <button class="pad-btn active" id="pad-1" onclick="playTrack(1)"><span>1</span> Reflect</button>
+          <button class="pad-btn" id="pad-2" onclick="playTrack(2)"><span>2</span> Resist</button>
+          <button class="pad-btn" id="pad-3" onclick="playTrack(3)"><span>3</span> Reveal</button>
+        </div>
+      </div>
 
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold text-blue-700 mb-4">The Power of Questioning & Wait Time</h3>
-                    <p class="mb-6">Increasing wait time after asking a question is one of the most powerful, low-effort strategies to improve the quality of student thought and participation.</p>
-                    <div class="chart-container h-64 md:h-80">
-                        <canvas id="waitTimeChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <!-- Readout Screen / Liner Notes -->
+      <div class="readout-panel">
+        <div class="readout-tag">Track Info</div>
+        <div id="readout-content" class="readout-content">
+            <!-- Populated via JS -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
-        <section id="responsive-content" class="content-section">
-             <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-gray-800 mb-2">Responding with Skill & Compassion</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">This section focuses on non-punitive, research-backed responses to challenging behavior, shifting the goal from compliance to connection and skill-building.</p>
-            </div>
-             <div class="space-y-12">
-                 <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold text-blue-700 mb-4">The Pathway to Self-Regulation</h3>
-                    <p class="mb-6">Self-regulation is a skill that must be taught. When a student is dysregulated, they first need co-regulation from a calm adult to help their nervous system reset. The goal is connection, then redirection.</p>
-                     <div class="flex flex-col md:flex-row items-center justify-around space-y-4 md:space-y-0 text-center">
-                        <div class="p-4 rounded-lg bg-blue-50 w-full md:w-1/4">
-                            <h4 class="font-bold text-lg">1. Teacher Self-Regulates</h4>
-                            <p class="text-sm">Pause, breathe. Be the calm.</p>
-                        </div>
-                         <div class="text-2xl text-blue-400">➡️</div>
-                        <div class="p-4 rounded-lg bg-blue-100 w-full md:w-1/4">
-                            <h4 class="font-bold text-lg">2. Co-Regulate</h4>
-                            <p class="text-sm">Validate the feeling. Offer help.</p>
-                        </div>
-                         <div class="text-2xl text-blue-400">➡️</div>
-                        <div class="p-4 rounded-lg bg-blue-200 w-full md:w-1/4">
-                            <h4 class="font-bold text-lg">3. Teach & Build Skills</h4>
-                            <p class="text-sm">Proactively teach coping skills when calm.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                     <h3 class="text-2xl font-bold text-blue-700 mb-4">Sensory Support for Regulation</h3>
-                    <p class="mb-6">Fidgeting and other behaviors are often the body's attempt to self-regulate. Providing appropriate sensory tools is a supportive, non-punitive intervention.</p>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                        <div><div class="text-4xl">🏋️</div><h4 class="font-semibold">Proprioceptive</h4><p class="text-sm">Weighted lap pads, deep pressure</p></div>
-                        <div><div class="text-4xl">🖐️</div><h4 class="font-semibold">Tactile</h4><p class="text-sm">Fidget tools, putty, textures</p></div>
-                        <div><div class="text-4xl">🤸</div><h4 class="font-semibold">Vestibular</h4><p class="text-sm">Wobble cushions, bouncy bands</p></div>
-                        <div><div class="text-4xl">🎧</div><h4 class="font-semibold">Auditory/Visual</h4><p class="text-sm">Headphones, desk screens</p></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- RAP ARCHITECTURE (LINER NOTES) -->
+  <div class="sec-alt fade-in">
+    <div class="rap-grid fade-in d1">
+      
+      <!-- Phase 1 -->
+      <div class="rap-col rc1">
+        <p class="rap-col-head">Phase 1: Reflection</p>
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r1')">
+          <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reflect</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
+        </div>
+        <div class="rap-detail" id="r1">Reflection is not about reliving or judging the moment. It is about looking at it clearly enough to understand what it is showing you. You can't remix a song if you don't listen to the original sample first.</div>
+        
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r2')">
+          <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Aware &amp; Attentive</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
+        </div>
+        <div class="rap-detail" id="r2">Aware and Attentive are the two points of analysis.<br><br><strong>Aware</strong> — What emotional or physical load did you bring into this moment? You are naming the background noise that was already playing.<br><br><strong>Attentive</strong> — What is your body doing right now? Jaw tight. Shoulders elevated. The body registers the threat before the mind names it. This is your rhythm section telling you something is off.</div>
+        
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r3')">
+          <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Pondering</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
+        </div>
+        <div class="rap-detail" id="r3">Purposeful Pondering asks: what is this moment actually showing me, and what does that make possible? This is not spiraling into always and never thinking. It is active inquiry—transforming observation into direction so you can write a better verse.</div>
+      </div>
 
-        <section id="toolkit-content" class="content-section">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-gray-800 mb-2">The Coach's Toolkit</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">An interactive tool to connect classroom observations with research-backed interventions. Select a focus area to see actionable strategies.</p>
-            </div>
-            <div class="flex flex-col md:flex-row gap-8">
-                <div id="toolkit-nav" class="flex md:flex-col flex-wrap justify-center md:justify-start gap-2 md:w-1/4">
-                </div>
-                <div id="toolkit-details" class="md:w-3/4 bg-white p-6 rounded-lg shadow-lg min-h-[300px]">
-                </div>
-            </div>
-        </section>
+      <!-- Phase 2 -->
+      <div class="rap-col rc2">
+        <p class="rap-col-head">Phase 2: Resistance</p>
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r4')">
+          <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Resist</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
+        </div>
+        <div class="rap-detail" id="r4">The intentional interruption of the conditioned response (inhibitory control)—like catching the needle before it drops on a bad track. Resistance is the practice of hitting pause long enough to choose whether to press forward or change direction based on consciousness, not habit.</div>
+        
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r5')">
+          <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Act</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
+        </div>
+        <div class="rap-detail" id="r5">Remaining present creates conditions for intentional action. Act moves through three layers:<br><br><strong>Pattern Recognition</strong> — Am I playing the default track or making a choice?<br><br><strong>Alignment Check</strong> — Does this align with my values and what I am trying to preserve?<br><br><strong>Consequence Awareness</strong> — What does my action produce? What is the cost of this verse?</div>
+        
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r6')">
+          <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Pressing</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
+        </div>
+        <div class="rap-detail" id="r6">When direction is informed by concrete actions rather than habit, choice becomes the new evidence the nervous system needs. You practice it until the intentional response replaces the scratched record, leading to lasting growth.</div>
+      </div>
 
-    </main>
+      <!-- Phase 3 -->
+      <div class="rap-col rc3">
+        <p class="rap-col-head">Phase 3: Revelation</p>
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r7')">
+          <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reveal</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
+        </div>
+        <div class="rap-detail" id="r7">Revelation is the AH-HA moment: the point at which objective awareness and conscious choice combine to generate truth about yourself. Revelation is not another round of inward examination—it is flipping the sample to find the gold.</div>
+        
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r8')">
+          <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Accept</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
+        </div>
+        <div class="rap-detail" id="r8">The practice of receiving the truth and integrating it.<br><br><strong>Receive the insight</strong> — Name the pattern recognized, not just the feeling.<br><br><strong>Integrate without judgment</strong> — Holding the truth without shame or deflection. The AH-HA is not the end of the process. It is the moment the process becomes productive.</div>
+        
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r9')">
+          <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Practicing</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
+        </div>
+        <div class="rap-detail" id="r9">The truth compounds through consistent application. The nervous system does not update on insight alone (neuroplasticity requires repetition). Purposeful Practicing is the commitment to playing the new beat continuously, generating new evidence with each cycle until you've permanently changed your rhythm.</div>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const mainNav = document.getElementById('main-nav');
-            const sections = document.querySelectorAll('.content-section');
+  <!-- CONTEXTS (The Crates) -->
+  <div class="contexts-sec fade-in">
+    <div style="text-align: center;">
+      <p class="fade-in d1" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(32px,4vw,42px);font-weight:700;color:var(--dark);line-height:1.2;margin-bottom:1rem;">The environment changes.<br><span style="color:var(--primary); font-style:italic;">What the model targets does not.</span></p>
+    </div>
+    
+    <div class="ctx-grid fade-in d2">
+      <!-- Vinyl Sleeves -->
+      <div class="ctx-card ctx1">
+        <p class="ctx-label">Personal</p>
+        <p class="ctx-punch">Without requiring the full origin story.</p>
+        <p class="ctx-body">The nervous system carries the imprint of past harm, and present triggers can activate survival responses (like an old track firing up). The R³ Model interrupts those patterns, building capacity to ground your response in current reality.</p>
+      </div>
+      <div class="ctx-card ctx2">
+        <p class="ctx-label">Educator</p>
+        <p class="ctx-punch">Your reaction travels across the room.</p>
+        <p class="ctx-body">Educators are rarely given tools to interrupt their own conditioned responses under pressure. The R³ Model restores intentional response, giving educators a process for navigating stress with clarity rather than conditioning.</p>
+      </div>
+      <div class="ctx-card ctx3">
+        <p class="ctx-label">Culture Change</p>
+        <p class="ctx-punch">This is a precision intervention.</p>
+        <p class="ctx-body">Organizational culture isn't built by values statements. It's built by what people do in high-stress moments. When people develop the capacity to interrupt automatic patterns, culture shifts from the inside out.</p>
+      </div>
+    </div>
 
-            function switchTab(tabName) {
-                mainNav.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.toggle('active', link.dataset.tab === tabName);
-                });
-                sections.forEach(section => {
-                    section.classList.toggle('active', section.id === `${tabName}-content`);
-                });
-            }
+    <!-- FLOW -->
+    <div class="flow-row fade-in d3">
+      <div class="flow-node fn1"><span class="flow-label">Self-awareness</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node fn2"><span class="flow-label">Intentional choice</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node fn3"><span class="flow-label">Sustained practice</span></div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-node fn4"><span class="flow-label" style="color:var(--primary);">Mastery</span></div>
+    </div>
+  </div>
 
-            mainNav.addEventListener('click', (e) => {
-                if (e.target.matches('.nav-link')) {
-                    e.preventDefault();
-                    const tabName = e.target.dataset.tab;
-                    switchTab(tabName);
-                    window.history.pushState(null, '', `#${tabName}`);
-                }
-            });
+  <!-- R.A.P. REMIX SECTION (The Cypher / PLURAL) -->
+  <div class="remix-sec fade-in">
+    <div class="remix-phase active" id="remix-p0">
+      <p class="remix-eyebrow">The Mastered Flow</p>
+      <div class="p0-plural-space"></div>
+      <div class="p0-word">
+        <span class="p0-left-wrap" id="p0-left-wrap">
+          <span class="p0-self-txt">self</span><span class="p0-cen-txt" id="p0-cen">cen</span>
+        </span>
+        <span class="p0-letter-wrap">
+          <span class="p0-plural-row" id="p0-plural-row">
+            <span class="p0-pl">P</span><span class="p0-pl">L</span><span class="p0-pl">U</span><span class="p0-pl">R</span><span class="p0-pl">A</span><span class="p0-pl">L</span>
+          </span>
+          <span class="p0-i" id="p0-i">I</span>
+          
+          <span class="p0-t-overlay" id="p0-t">T</span>
+          <span class="p0-t-beam" id="p0-t-beam">T</span>
 
-            const initialTab = window.location.hash.substring(1) || 'foundations';
-            switchTab(initialTab);
+        </span>
+        <span class="p0-right-wrap" id="p0-right-wrap">
+          <span class="p0-sh-txt" id="p0-sh">sh</span><span class="p0-er-txt" id="p0-er">er</span>
+        </span>
+      </div>
+      
+      <div class="narrative-box" style="height: 64px; display: flex; align-items: center; justify-content: center; margin-bottom: 3.5rem;">
+        <div class="p0-desc" id="p0-desc" style="transition: opacity 0.4s ease; width: 100%;">
+          <p>Singular focus. Immediate. The Default Track.</p>
+          <p>Driven by impulse rather than awareness.</p>
+        </div>
+      </div>
+      
+      <button class="remix-btn" id="remix-btn" onclick="startRemix()">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg> 
+        Drop The Remix
+      </button>
+    </div>
 
-            // Chart.js global tooltip configuration
-            const tooltipTitleCallback = (tooltipItems) => {
-                const item = tooltipItems[0];
-                let label = item.chart.data.labels[item.dataIndex];
-                if (Array.isArray(label)) {
-                    return label.join(' ');
-                }
-                return label;
-            };
+    <div class="remix-phase" id="remix-p2">
+      <p class="plural-eyebrow-line cg" id="plural-eyebrow-line">Whole enough to grow. Present enough to notice.</p>
+      <div class="plural-full">
+        <div class="pf-item" id="pf-P"><span class="pf-letter">P</span><span class="pf-meaning">A nervous system that finally knows it's safe</span></div>
+        <div class="pf-item" id="pf-L"><span class="pf-letter">L</span><span class="pf-meaning">Relationships that don't require you to disappear</span></div>
+        <div class="pf-item" id="pf-U"><span class="pf-letter">U</span><span class="pf-meaning">Seeing your own patterns without shame</span></div>
+        <div class="pf-item" id="pf-R"><span class="pf-letter">R</span><span class="pf-meaning">Being treated the way you've always deserved</span></div>
+        <div class="pf-item" id="pf-A"><span class="pf-letter">A</span><span class="pf-meaning">Making peace with what was — without excusing it</span></div>
+        <div class="pf-item" id="pf-L2"><span class="pf-letter">L</span><span class="pf-meaning">Turning every hard season into something you carry forward</span></div>
+      </div>
+      
+      <div class="remix-statement cg" id="remix-statement">
+        <span class="rs-w">This</span> <span class="rs-w">is</span> <span class="rs-w">what</span> <span class="rs-w">you're</span> <span class="rs-w">building</span> <span class="rs-w">toward.</span><br>
+        <span class="rs-w">A</span> <span class="rs-w">life</span> <span class="rs-w">where</span>
+        <span class="rs-glow-text" id="rs-glow-container">
+          <span class="rs-w">you</span> <span class="rs-w">are</span> <span class="rs-w">enough</span> <span class="rs-w">—</span> <span class="rs-w">and</span> <span class="rs-w">still</span> <span class="rs-w">becoming.</span>
+        </span>
+      </div>
 
-            Chart.defaults.plugins.tooltip.callbacks.title = tooltipTitleCallback;
-            Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-            Chart.defaults.plugins.tooltip.titleFont = { size: 14 };
-            Chart.defaults.plugins.tooltip.bodyFont = { size: 12 };
-            Chart.defaults.plugins.tooltip.padding = 10;
-            
-            // CLT Chart
-            new Chart(document.getElementById('cltChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Poorly Designed Lesson', 'Well-Designed Lesson'],
-                    datasets: [
-                        { label: 'Extraneous Load', data: [60, 10], backgroundColor: '#ef4444' },
-                        { label: 'Intrinsic Load', data: [20, 20], backgroundColor: '#f59e0b' },
-                        { label: 'Germane Load (Learning)', data: [20, 70], backgroundColor: '#22c55e' }
-                    ]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    responsive: true,
-                    scales: { x: { stacked: true }, y: { stacked: true, max: 100, ticks: { callback: value => value + '%' } } },
-                    plugins: { legend: { position: 'bottom' } }
-                }
-            });
+      <button class="rtb-btn" id="rtb-btn" onclick="resetRemix()">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+        Run That Back
+      </button>
+    </div>
+  </div>
+</div> <!-- END HOME VIEW -->
 
-            // UDL Chart
-            new Chart(document.getElementById('udlChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Engagement (Why)', 'Representation (What)', 'Action & Expression (How)'],
-                    datasets: [{
-                        data: [1, 1, 1],
-                        backgroundColor: ['#3b82f6', '#10b981', '#f97316']
-                    }]
-                },
-                options: { maintainAspectRatio: false, responsive: true, plugins: { legend: { position: 'bottom' } } }
-            });
+<!-- SHARED FOOTER -->
+<div class="footer">
+  <div class="footer-left">
+    <span class="footer-name cg">AH-HA Coaching, LLC</span>
+  </div>
+  <span class="footer-sub">ahhacoaching.com</span>
+</div>
 
-            // Wait Time Chart
-            new Chart(document.getElementById('waitTimeChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Typical Wait Time', 'Optimal Wait Time'],
-                    datasets: [{
-                        label: 'Seconds',
-                        data: [0.9, 4],
-                        backgroundColor: ['#f87171', '#4ade80'],
-                        barPercentage: 0.5
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false, responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { beginAtZero: true, title: { display: true, text: 'Seconds' } } }
-                }
-            });
+</div><!-- end .page -->
 
-            // Toolkit Data
-            const toolkitData = {
-                "Clarity & Load": {
-                    data: "- Teacher gives multi-step verbal instructions (>3 steps) without visual support.<br>- Students ask 'What are we supposed to be doing?' after instructions.",
-                    interventions: "- **Chunking:** Break instructions into 1-2 steps at a time.<br>- **Dual Coding:** Provide instructions both verbally and visually (e.g., on the board).<br>- **Worked Examples:** Model a full solution before asking for independent work."
-                },
-                "Engagement": {
-                    data: "- The same 3-4 students answer all questions.<br>- Several students have heads down or are doodling during direct instruction.",
-                    interventions: "- **Increase Wait Time:** Silently count to 3-5 seconds after asking a question.<br>- **Think-Pair-Share:** Lower the risk of individual participation.<br>- **Use Proximity:** Move around the room to reduce psychological distance."
-                },
-                "Understanding": {
-                    data: "- Teacher asks, 'Does everyone understand?' and moves on.<br>- Teacher only calls on students with hands raised.",
-                    interventions: "- **Avoid Yes/No Questions:** Ask for a content-based response (e.g., 'Can someone rephrase the goal?').<br>- **Probing Questions:** When a student gives a partial answer, ask 'Can you tell me more about that?'.<br>- **Use Rubrics:** Clarify expectations before an assignment is due."
-                },
-                "Behavior": {
-                    data: "- A student is fidgeting, tapping a pen, or rocking.<br>- A student has an emotional outburst (yells, cries).",
-                    interventions: "- **Shift Perspective:** Is the behavior communicating a need (sensory, safety)?<br>- **Offer Sensory Support:** Quietly offer a fidget tool or a break in a calm corner.<br>- **Co-Regulate:** For outbursts, stay calm, approach privately, and validate the feeling ('I see you're upset')."
-                },
-                "Lab Procedures": {
-                    data: "- Students are unsure how to use equipment.<br>- Groups are not following the protocol in the correct order.",
-                    interventions: "- **Pre-Lab Videos:** Use short videos to demonstrate techniques beforehand.<br>- **Live 'I Do' Demo:** Begin with a brief, focused demonstration of new equipment.<br>- **Checkpoints:** Announce time checkpoints to help groups pace themselves."
-                }
-            };
+<script>
+/* ══════════════════════════════════════════════
+   SCENARIO LOGIC
+   ══════════════════════════════════════════════ */
+const categoryScenarios = {
+classroom: [
+    {
+      trigger: '"A student erupts in anger, shouting across the room during independent work."',
+      conditioned: `<p><strong>The Default Track:</strong> Your heart pounds. Feeling disrespected and already carrying the weight of a difficult day, you respond immediately — your voice sharp, your command loud enough for everyone to hear.</p><p><strong>The Result:</strong> The student doubles down. The class freezes in a different kind of silence — not calm, but afraid. The relational thread you need begins to fray.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You walked in carrying a difficult morning. <span class="r3-label">Attentive:</span> You feel your jaw lock and a surge of heat move up your chest — your system moving into defense before you've consciously chosen a response.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to match their volume is a conditioned response — playing the old track that authority must be loud to be real. You pause the track.</p><p><strong>Revelation:</strong> You see that your need to respond with force comes from a conditioned belief that your authority is only real when it's visible. Recognizing it is what makes a different choice possible. You lower your voice instead of raising it: <em>"We're going to figure this out — but not like this. Take a breath. I'll check in with you in five minutes."</em></p>`
+    }
+  ],
+  caregiving: [
+    {
+      trigger: '"Your care recipient refuses their medication again, insisting you\'re trying to control them."',
+      conditioned: `<p><strong>The Default Track:</strong> Exhausted and frightened, you argue back — listing consequences, pleading, raising your voice out of desperation.</p><p><strong>The Result:</strong> They become more agitated. You spend the evening managing the fallout of an argument — and the medication still wasn't taken.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You've been awake since before dawn running on fear. <span class="r3-label">Attentive:</span> You feel your voice tighten and a wave of helplessness.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to argue is a conditioned track — you've learned that if you present consequences clearly enough, they'll understand. You hit pause.</p><p><strong>Revelation:</strong> You set the medication down. You sit beside them rather than standing over them: <em>"I hear you. I'm not trying to control you. Can you tell me what's scaring you right now?"</em> The medication can wait two minutes for that.</p>`
+    }
+  ],
+  workplace: [
+    {
+      trigger: '"You share an idea in a meeting. It\'s met with silence, a quick pivot, or a dismissive response."',
+      conditioned: `<p><strong>The Default Track:</strong> You go quiet for the rest of the meeting. Later, you replay it obsessively or resolve never to speak up again.</p><p><strong>The Result:</strong> Your contribution narrows. Resentment grows. The team loses what you were offering.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You came into this meeting already uncertain if your perspective was valued. <span class="r3-label">Attentive:</span> You feel the heat of embarrassment and the pull toward making yourself smaller.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to withdraw is a conditioned pattern. You interrupt the reflex to disappear.</p><p><strong>Revelation:</strong> You stay present in the meeting. At a pause, you say: <em>"I want to come back to the point I raised earlier — I think it connects to what we're discussing now."</em> You give it a second landing. You stop waiting for permission to be heard.</p>`
+    }
+  ],
+  relationships: [
+    {
+      trigger: '"You\'re trying to work through something important and your partner goes completely silent."',
+      conditioned: `<p><strong>The Default Track:</strong> You pursue harder — your voice rising. Or you shut down yourself, matching their silence.</p><p><strong>The Result:</strong> The original issue is buried. Both of you are further from connection.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You came into this already carrying the weight of feeling unheard. <span class="r3-label">Attentive:</span> You feel a spike of anxiety — a panic that is familiar and old.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to pursue harder is a conditioned response. You pause the track instead of escalating.</p><p><strong>Revelation:</strong> You stay in the room, lowering your posture: <em>"I'm not going anywhere. I also can't keep talking into silence. I'm going to give us both time to breathe — can we come back to this in an hour?"</em> You hold the relationship without holding them hostage.</p>`
+    }
+  ]
+};
 
-            const toolkitNav = document.getElementById('toolkit-nav');
-            const toolkitDetails = document.getElementById('toolkit-details');
-            let firstKey = null;
+Object.keys(categoryScenarios).forEach(k => {
+  while(categoryScenarios[k].length < 5) {
+      categoryScenarios[k].push(categoryScenarios[k][0]);
+  }
+});
 
-            for (const key in toolkitData) {
-                if (!firstKey) firstKey = key;
-                const button = document.createElement('button');
-                button.textContent = key;
-                button.dataset.key = key;
-                button.className = 'toolkit-btn w-full text-left p-3 rounded-md transition hover:bg-gray-200';
-                toolkitNav.appendChild(button);
-            }
+let currentCategory = null;
+let scIndex = 0;
 
-            function showToolkitDetails(key) {
-                const item = toolkitData[key];
-                toolkitDetails.innerHTML = `
-                    <h4 class="text-xl font-bold text-gray-700 mb-4">Observation Data (Low-Inference)</h4>
-                    <div class="prose prose-sm max-w-none mb-6">${item.data}</div>
-                    <h4 class="text-xl font-bold text-blue-700 mb-4">Research-Backed Interventions</h4>
-                    <div class="prose prose-sm max-w-none text-gray-800">${item.interventions}</div>
-                `;
-                toolkitNav.querySelectorAll('.toolkit-btn').forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.key === key);
-                });
-            }
+function selectCategory(cat, element) {
+  currentCategory = cat;
+  scIndex = 0;
+  document.querySelectorAll('.sc-cat-btn').forEach(function(btn) {
+    btn.classList.remove('active');
+  });
+  if(element) element.classList.add('active');
+  document.getElementById('sc-prompt-wrap').style.display = 'none';
+  
+  var card = document.getElementById('scenario-card');
+  card.classList.remove('fade-in'); 
+  card.style.display = 'block';
+  card.style.opacity = '1';
+  
+  card.style.animation = 'none';
+  card.offsetHeight; 
+  card.style.animation = 'aFadeUp 0.4s ease forwards';
+  
+  renderScenario();
+  switchSc('conditioned');
+}
 
-            toolkitNav.addEventListener('click', (e) => {
-                if (e.target.matches('.toolkit-btn')) {
-                    showToolkitDetails(e.target.dataset.key);
-                }
-            });
+function renderScenario() {
+  if (!currentCategory) return;
+  var scenes = categoryScenarios[currentCategory];
+  var s = scenes[scIndex];
+  document.getElementById('sc-counter').textContent = 'Track ' + (scIndex + 1) + ' of ' + scenes.length;
+  document.getElementById('sc-trigger').textContent = s.trigger;
+  document.getElementById('sc-conditioned').innerHTML = s.conditioned;
+  document.getElementById('sc-conscious').innerHTML = s.conscious;
+}
 
-            if (firstKey) {
-                showToolkitDetails(firstKey);
-            }
+function nextScenario() {
+  if (!currentCategory) return;
+  var scenes = categoryScenarios[currentCategory];
+  scIndex = (scIndex + 1) % scenes.length;
+  renderScenario();
+  switchSc('conditioned');
+}
 
-        });
-    </script>
+function prevScenario() {
+  if (!currentCategory) return;
+  var scenes = categoryScenarios[currentCategory];
+  scIndex = (scIndex - 1 + scenes.length) % scenes.length;
+  renderScenario();
+  switchSc('conditioned');
+}
+
+function switchSc(type) {
+  document.getElementById('sc-btn-conditioned').classList.remove('active');
+  document.getElementById('sc-btn-conscious').classList.remove('active');
+  document.getElementById('sc-conditioned').classList.remove('active');
+  document.getElementById('sc-conscious').classList.remove('active');
+  document.getElementById('sc-btn-' + type).classList.add('active');
+  document.getElementById('sc-' + type).classList.add('active');
+}
+
+setTimeout(() => {
+    document.querySelectorAll('.fade-in').forEach(el => {
+        if(!el.classList.contains('visible')) {
+            el.classList.add('visible');
+        }
+    });
+}, 1200);
+
+/* ══════════════════════════════════════════════
+   ASSESSMENT & TURNTABLE LOGIC 
+   ══════════════════════════════════════════════ */
+let currentStep = 0;
+let assignedPhase = null;
+
+function updateMixer(step) {
+    const fill = document.getElementById('mixer-fill');
+    const knob = document.getElementById('mixer-knob');
+    let percent = 0;
+    if(step === 1) percent = 33;
+    if(step === 2) percent = 66;
+    if(step === 3) percent = 100;
+    
+    fill.style.width = percent + '%';
+    knob.style.left = percent + '%';
+}
+
+function pickAnswer(stepNum, phase, btn) {
+  btn.closest('.a-options').querySelectorAll('.a-opt').forEach(b => b.classList.remove('chosen'));
+  btn.classList.add('chosen');
+  if (stepNum === 0) assignedPhase = phase;
+  setTimeout(() => goToStep(stepNum + 1), 380);
+}
+
+function goToStep(next) {
+  updateMixer(next);
+  document.getElementById('step-' + currentStep).classList.remove('active');
+  currentStep = next;
+  if (next <= 2) {
+    document.getElementById('step-' + next).classList.add('active');
+  }
+}
+
+function finishAssessment(btn) {
+  btn.closest('.a-options').querySelectorAll('.a-opt').forEach(b => b.classList.remove('chosen'));
+  btn.classList.add('chosen');
+  updateMixer(3);
+  setTimeout(() => {
+    document.getElementById('step-2').classList.remove('active');
+    const resultId = 'result-' + (assignedPhase || 'reflection');
+    document.getElementById(resultId).classList.add('active');
+  }, 380);
+}
+
+function resetAssessment() {
+  currentStep = 0;
+  assignedPhase = null;
+  updateMixer(0);
+  document.querySelectorAll('.a-step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.a-result').forEach(r => r.classList.remove('active'));
+  document.querySelectorAll('.a-opt').forEach(b => b.classList.remove('chosen'));
+  document.getElementById('step-0').classList.add('active');
+}
+
+const tracks = {
+    1: { title: "Reflection", color: "var(--tertiary)", textColor: "var(--surface)", angle: "15deg", desc: "The objective examination of what is actually happening. Like a producer isolating an audio track, it’s about separating the raw truth from the emotional noise—listening past the noise to hear the underlying beat." },
+    2: { title: "Resistance", color: "var(--primary)", textColor: "var(--surface)", angle: "28deg", desc: "The intentional interruption of automatic response patterns. This is where automaticity—the conditioned reflex that skips like a scratched record—gets interrupted. You hit pause on the track long enough to consciously choose your response." },
+    3: { title: "Revelation", color: "var(--secondary)", textColor: "var(--dark)", angle: "40deg", desc: "The emergence of truth that Reflection and Resistance produce. The AH-HA moment where you flip the sample and create a new flow. Through purposeful practice, you play the new beat repeatedly until the nervous system updates its default rhythm." }
+};
+
+function playTrack(trackId) {
+    document.querySelectorAll('.pad-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById('pad-' + trackId).classList.add('active');
+
+    const tonearm = document.getElementById('tonearm');
+    tonearm.style.transform = `rotate(${tracks[trackId].angle})`;
+
+    const record = document.getElementById('vinyl-record');
+    const label = document.getElementById('record-label');
+    
+    if (!record.classList.contains('spinning')) { record.classList.add('spinning'); }
+    
+    label.style.background = tracks[trackId].color;
+    label.querySelector('.record-label-text').style.color = tracks[trackId].textColor;
+    label.querySelector('.record-label-text').textContent = '0' + trackId;
+    label.style.setProperty('--pseudo-color', tracks[trackId].textColor);
+
+    const readout = document.getElementById('readout-content');
+    readout.classList.remove('fade-content');
+    void readout.offsetWidth; 
+    readout.innerHTML = `<h3 class="readout-title" style="color: ${tracks[trackId].color}">${tracks[trackId].title}</h3><p class="readout-desc">${tracks[trackId].desc}</p>`;
+    readout.classList.add('fade-content');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    playTrack(1);
+    const style = document.createElement('style');
+    document.head.appendChild(style);
+    style.sheet.insertRule(".record-label::before { color: var(--pseudo-color, var(--surface)); }", 0);
+});
+
+/* ══════════════════════════════════════════════
+   R.A.P. REMIX ANIMATION (PLURAL)
+   ══════════════════════════════════════════════ */
+function startRemix() {
+  const btn  = document.getElementById('remix-btn');
+  const desc = document.getElementById('p0-desc');
+  const bigI = document.getElementById('p0-i');
+  const bigT = document.getElementById('p0-t');
+  const beamT = document.getElementById('p0-t-beam');
+
+  btn.style.pointerEvents = 'none';
+  btn.style.opacity = '0.3';
+  desc.style.opacity = '0';
+
+  setTimeout(() => { bigI.classList.add('to-teal'); }, 300);
+  setTimeout(() => { bigT.classList.add('show'); }, 700);
+  setTimeout(() => { bigI.classList.add('fade-out'); }, 1100);
+  setTimeout(() => { document.getElementById('p0-sh').classList.add('fade-out'); document.getElementById('p0-er').classList.add('show'); }, 1300);
+  setTimeout(() => { document.getElementById('p0-cen').classList.add('show'); }, 1500);
+
+  setTimeout(() => {
+    desc.innerHTML = '<p style="font-family:\'Cormorant Garamond\',Georgia,serif; font-size:clamp(18px,2.2vw,22px); font-style:italic; color:var(--secondary); font-weight:600;">Hitting pause. Becoming a <span style="text-decoration:underline;">centered self</span>.</p>';
+    desc.style.opacity = '1';
+  }, 1700);
+  
+  setTimeout(() => { desc.style.opacity = '0'; }, 4700); 
+  setTimeout(() => { document.getElementById('p0-left-wrap').style.opacity = '0'; document.getElementById('p0-right-wrap').style.opacity = '0'; }, 5000);
+  setTimeout(() => { bigT.classList.add('fade-out'); beamT.classList.add('show'); }, 5200);
+  setTimeout(() => { document.getElementById('p0-plural-row').classList.add('show'); }, 5800);
+
+  setTimeout(() => {
+    desc.innerHTML = '<p style="font-family:\'Cormorant Garamond\',Georgia,serif; font-size:clamp(18px,2.2vw,22px); font-style:italic; color:var(--secondary); font-weight:600;">The foundation for a Plural life.</p>';
+    desc.style.opacity = '1';
+  }, 6200);
+  
+  setTimeout(() => { desc.style.opacity = '0'; }, 9200);
+  setTimeout(() => { beamT.classList.add('fade-out'); document.getElementById('p0-plural-row').style.opacity = '0'; }, 9500);
+
+  setTimeout(() => {
+    document.getElementById('remix-p0').classList.remove('active');
+    document.getElementById('remix-p2').classList.add('active');
+    setTimeout(() => { document.getElementById('plural-eyebrow-line').classList.add('show'); }, 150);
+    
+    setTimeout(() => {
+      ['pf-P','pf-L','pf-U','pf-R','pf-A','pf-L2'].forEach(id => {
+        document.getElementById(id).classList.add('show');
+      });
+    }, 500);
+
+    setTimeout(() => {
+      const words = document.querySelectorAll('.rs-w');
+      words.forEach((w, idx) => {
+        setTimeout(() => { w.classList.add('show'); }, idx * 250); 
+      });
+    }, 1800);
+
+    setTimeout(() => { document.getElementById('rs-glow-container').classList.add('full-glow'); }, 6800);
+    setTimeout(() => { document.getElementById('rtb-btn').classList.add('show'); }, 8000);
+
+  }, 10200);
+}
+
+function resetRemix() {
+  ['pf-P','pf-L','pf-U','pf-R','pf-A','pf-L2'].forEach(id => { document.getElementById(id).classList.remove('show'); });
+  document.getElementById('plural-eyebrow-line').classList.remove('show');
+  document.getElementById('rtb-btn').classList.remove('show');
+
+  document.getElementById('p0-i').classList.remove('to-teal','fade-out');
+  document.getElementById('p0-t').classList.remove('show','loaded','fade-out');
+  document.getElementById('p0-t-beam').classList.remove('show','fade-out');
+  document.getElementById('p0-sh').classList.remove('fade-out');
+  document.getElementById('p0-er').classList.remove('show');
+  document.getElementById('p0-cen').classList.remove('show');
+  document.getElementById('p0-plural-row').classList.remove('show');
+  document.getElementById('p0-plural-row').style.opacity = ''; 
+  document.getElementById('p0-left-wrap').style.opacity = '';
+  document.getElementById('p0-right-wrap').style.opacity = '';
+  
+  document.getElementById('rs-glow-container').classList.remove('full-glow');
+  document.querySelectorAll('.rs-w').forEach(w => w.classList.remove('show'));
+  
+  var desc = document.getElementById('p0-desc');
+  desc.innerHTML = '<p>Singular focus. Immediate. The Default Track.</p><p>Driven by impulse rather than awareness.</p>';
+  desc.style.opacity = '1';
+  
+  var btn = document.getElementById('remix-btn');
+  btn.style.opacity = '1';
+  btn.style.pointerEvents = 'auto';
+
+  document.getElementById('remix-p2').classList.remove('active');
+  document.getElementById('remix-p0').classList.add('active');
+}
+
+function toggleRap(el, id) {
+  const d = document.getElementById(id);
+  const open = d.classList.contains('open');
+  d.classList.toggle('open', !open);
+  el.classList.toggle('active', !open);
+  el.setAttribute('aria-expanded', !open);
+}
+</script>
 </body>
 </html>
