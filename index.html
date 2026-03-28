@@ -260,6 +260,24 @@ body{
   transform: rotate(6deg);
   display: block;
 }
+.asset-missing{
+  position: relative;
+  background: linear-gradient(135deg, rgba(42,75,70,0.28), rgba(194,77,44,0.28));
+}
+.asset-missing::after{
+  content:'Asset not found';
+  position:absolute;
+  inset:auto 12px 12px 12px;
+  font-family:'Space Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:#fff;
+  background:rgba(26,26,26,0.75);
+  border:1px solid rgba(255,255,255,0.25);
+  padding:6px 10px;
+  border-radius:4px;
+}
 
 /* Tape for the photo */
 .mic-container::after {
@@ -1182,7 +1200,7 @@ body{
     <div class="c-video-prop fade-in d2">
       <div class="c-video-wrapper">
         <iframe 
-          src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=YOUR_VIDEO_ID&controls=0&showinfo=0&rel=0&modestbranding=1" 
+          src="https://www.youtube.com/embed/4-0FLxcjGDg?autoplay=1&mute=1&loop=1&playlist=4-0FLxcjGDg&controls=0&rel=0&modestbranding=1"
           frameborder="0" 
           allow="autoplay; encrypted-media; fullscreen" 
           allowfullscreen>
@@ -1787,10 +1805,34 @@ function playTrack(trackId) {
 
 document.addEventListener('DOMContentLoaded', () => {
     playTrack(1);
+    wireAssetFallbacks();
     const style = document.createElement('style');
     document.head.appendChild(style);
     style.sheet.insertRule(".record-label::before { color: var(--pseudo-color, var(--surface)); }", 0);
 });
+
+function wireAssetFallbacks() {
+  const assetMap = {
+    '4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg': 'missing-4',
+    '5_Close_up_on_a_mixing_board_wit_1_20260327_123554.jpg': 'missing-5',
+    '9_An_overhead_view_of_a_circle_o_1_20260327_123628.jpg': 'missing-9',
+    '10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg': 'missing-10'
+  };
+
+  Object.entries(assetMap).forEach(([fileName, className]) => {
+    const probe = new Image();
+    probe.onerror = () => document.body.classList.add(className);
+    probe.src = fileName;
+  });
+
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('error', () => {
+      const fallbackBox = img.closest('.boombox-anchor, .mic-container, .phase-visuals');
+      if (fallbackBox) fallbackBox.classList.add('asset-missing');
+      img.style.display = 'none';
+    });
+  });
+}
 
 /* ══════════════════════════════════════════════
    R.A.P. REMIX ANIMATION (PLURAL)
