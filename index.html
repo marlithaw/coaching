@@ -47,9 +47,13 @@ body{
 /* SCROLL REVEAL */
 .fade-in { opacity: 0; animation: pageLoadFade 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
 @keyframes pageLoadFade { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes pulse-red { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@keyframes aFadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 .d1 { animation-delay: 0.15s; }
 .d2 { animation-delay: 0.3s; }
 .d3 { animation-delay: 0.45s; }
+@keyframes aFadeUp { 0% { opacity: 0; transform: translateY(18px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes pulse-red { 0%,100% { opacity: .8; } 50% { opacity: 1; text-shadow: 0 0 6px rgba(194,77,44,0.7);} }
 
 /* SPACING CONSTRAINTS */
 .sec,.sec-alt,.assessment-sec,.scenario-sec,.remix-sec,.footer{padding-left:max(3.5rem, calc((100% - 1100px)/2));padding-right:max(3.5rem, calc((100% - 1100px)/2))}
@@ -256,6 +260,24 @@ body{
   transform: rotate(6deg);
   display: block;
 }
+.asset-missing{
+  position: relative;
+  background: linear-gradient(135deg, rgba(42,75,70,0.28), rgba(194,77,44,0.28));
+}
+.asset-missing::after{
+  content:'Asset not found';
+  position:absolute;
+  inset:auto 12px 12px 12px;
+  font-family:'Space Mono',monospace;
+  font-size:11px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:#fff;
+  background:rgba(26,26,26,0.75);
+  border:1px solid rgba(255,255,255,0.25);
+  padding:6px 10px;
+  border-radius:4px;
+}
 
 /* Tape for the photo */
 .mic-container::after {
@@ -371,35 +393,22 @@ body{
 }
 
 /* ==========================================================================
-   SCENARIOS (The Composition Notebook)
+   SCENARIOS (The Tape Deck / Cypher)
    ========================================================================== */
 .scenario-sec {
   padding-top: 8rem;
   padding-bottom: 8rem;
   position: relative;
-  background-color: #1a2a2f;
-  background-image:
-    linear-gradient(rgba(26, 42, 47, 0.55), rgba(26, 26, 26, 0.75)),
-    url('9_An_overhead_view_of_a_circle_o_1_20260327_123628.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background:
+    linear-gradient(rgba(18, 30, 35, 0.58), rgba(26, 26, 26, 0.75)),
+    url('9_An_overhead_view_of_a_circle_o_1_20260327_123628.jpg') center/cover no-repeat;
   border-top: 2px solid var(--dark);
-  box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.16);
   z-index: 2;
   color: var(--surface);
 }
 
-.scenario-sec::before {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0; left: 0; right: 0;
-  background: radial-gradient(ellipse at 50% 30%, rgba(230, 179, 37, 0.08) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.scenario-intro { position: relative; z-index: 2; margin-left: 2rem; color: var(--surface); }
+.scenario-intro { position: relative; z-index: 2; }
 
 .scenario-intro-label {
   font-family: 'Space Mono', monospace;
@@ -412,108 +421,94 @@ body{
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(0,0,0,0.4);
-  padding: 4px 12px;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 4px;
+  background: rgba(12, 17, 19, 0.88);
+  padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,0.24);
 }
-.scenario-intro-label::before { content:'REC'; display:inline-block; color:var(--primary); font-weight:700; animation: pulse-red 2s infinite; }
+.scenario-intro-label::before { content:'REC'; display:inline-block; color:var(--secondary); font-weight:700; animation: pulse-red 2s infinite; }
 
-.scenario-intro-head{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(36px,4.5vw,52px);font-weight:700;color:var(--surface);line-height:1.1;margin-bottom:1rem}
-.scenario-intro-body{font-size:clamp(18px,2vw,22px);color:#c0c0c0;line-height:1.6; margin-bottom:3rem; max-width: 700px; font-weight: 400;}
+.scenario-intro-head{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(36px,4.5vw,52px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:1rem;text-shadow:0 8px 24px rgba(0,0,0,0.55)}
+.scenario-intro-body{font-size:clamp(18px,2vw,22px);color:#e8e8e8;line-height:1.6; margin-bottom:3rem; max-width: 760px; font-weight: 400;}
 
-.sc-categories{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:3rem; margin-left: 2rem; position: relative; z-index: 2; padding: 2rem 0;}
+.sc-categories{display:grid;grid-template-columns:repeat(4,minmax(130px,1fr));gap:14px;margin-bottom:3rem;position: relative;z-index: 2;}
 
 .sc-cat-btn {
   font-family: 'Space Mono', monospace;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 1.2rem 1.8rem 1.2rem 1.8rem;
-  border: 2px solid #555;
-  background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 40%, #1a1a1a 100%);
-  color: #ccc;
+  padding: 1.6rem 1.1rem;
+  border: 2px solid rgba(255,255,255,0.26);
+  background:
+    linear-gradient(rgba(20,20,20,0.65), rgba(20,20,20,0.35)),
+    url('9_An_overhead_view_of_a_circle_o_1_20260327_123628.jpg') center/cover;
+  color: #fff;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 4px 4px 12px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
-  transform: rotate(-1deg);
-  border-radius: 6px;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 12px 18px rgba(0,0,0,0.35);
+  border-radius: 10px;
 }
-/* Cassette reel holes */
-.sc-cat-btn::before {
-  content: '';
-  position: absolute;
-  top: 6px; left: 12px;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: #111;
-  border: 1.5px solid #555;
-  box-shadow: calc(100% - 36px) 0 0 0 #111, calc(100% - 36px) 0 0 1.5px #555;
+.sc-cat-btn:hover { transform: translateY(-4px) rotate(-1deg); box-shadow: 0 18px 28px rgba(0,0,0,0.4); }
+.sc-cat-btn.active {
+  background:
+    linear-gradient(rgba(194, 77, 44, 0.84), rgba(26, 26, 26, 0.65)),
+    url('4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg') center/cover;
+  color: #fff;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 2px rgba(230,179,37,0.4), 0 14px 26px rgba(0,0,0,0.45);
 }
-.sc-cat-btn:nth-child(even) { transform: rotate(1.5deg); }
-.sc-cat-btn:hover { transform: scale(1.06) rotate(0deg); box-shadow: 6px 8px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15); background: linear-gradient(135deg, #4a4a4a 0%, #333 40%, #222 100%); color: #fff; border-color: var(--secondary);}
-.sc-cat-btn.active { background: linear-gradient(135deg, #444 0%, #222 100%); color: var(--secondary); box-shadow: 0 0 20px rgba(230, 179, 37, 0.3), inset 0 1px 0 rgba(255,255,255,0.1); transform: rotate(0deg) scale(1.02); border-color: var(--secondary); }
 
-.sc-prompt{text-align:center;padding:3rem 1rem;color:#aaa;font-style:italic;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(20px,2.4vw,24px)}
+.sc-prompt{text-align:center;padding:2.2rem 1rem;color:#f6f2dc;font-style:italic;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(22px,2.4vw,28px);background:rgba(0,0,0,0.35);border:1px dashed rgba(255,255,255,0.35);border-radius:10px;max-width:740px;margin:0 auto}
 
 .scenario-card {
-  background: rgba(30, 30, 30, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 3rem;
-  border: 2px solid rgba(255,255,255,0.12);
-  border-radius: 12px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+  background: rgba(245, 242, 232, 0.96);
+  padding: 2.5rem;
+  border: 2px solid rgba(0,0,0,0.78);
+  box-shadow: 12px 18px 35px rgba(0,0,0,0.35);
   position: relative;
   z-index: 2;
-  margin-left: 2rem;
-  max-width: 900px;
-  color: var(--surface);
-}
-
-.scenario-card::before {
-  display: none;
+  max-width: 980px;
+  margin: 0 auto;
+  border-radius: 14px;
 }
 
 .boombox-anchor {
   width: 100%;
-  height: 220px;
-  margin-bottom: 3rem;
-  border-radius: 8px;
+  height: 240px;
+  margin-bottom: 2rem;
+  border-radius: 10px;
   overflow: hidden;
-  border: 2px solid rgba(255,255,255,0.15);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+  border: 2px solid #222;
+  box-shadow: 0 10px 18px rgba(0,0,0,0.32);
   background: var(--dark);
+  position: relative;
 }
 .boombox-anchor img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 35%;
+  object-position: center;
   display: block;
 }
 
-.scenario-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:2px dashed rgba(255,255,255,0.15)}
-.scenario-nav button{background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.2);color:var(--surface);width:45px;height:45px;font-size:1.2rem;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center; border-radius: 50%;}
-.scenario-nav button:hover{background:var(--secondary); color:var(--dark); transform:translate(-2px,-2px); box-shadow: 4px 4px 0px rgba(0,0,0,0.3);}
-.scenario-counter{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--secondary); background: rgba(0,0,0,0.3); padding: 4px 12px; border: 1px solid rgba(255,255,255,0.15); border-radius: 4px;}
-.scenario-trigger{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,3vw,34px);font-weight:700;font-style:italic;color:var(--secondary);margin-bottom:2.5rem;line-height:1.3;text-align:center; padding: 0 2rem;}
+.scenario-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1.2rem;border-bottom:2px dashed #b5aea0}
+.scenario-nav button{background:#f9f5e8;border:2px solid var(--dark);color:var(--dark);width:45px;height:45px;font-size:1.2rem;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center; border-radius: 50%; box-shadow: 2px 2px 0px var(--dark);}
+.scenario-nav button:hover{background:var(--secondary); transform:translate(-2px,-2px); box-shadow: 4px 4px 0px var(--dark);}
+.scenario-counter{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--dark); background: #efe7d8; padding: 4px 12px; border: 1px solid #c8bcaa;}
+.scenario-trigger{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,3vw,34px);font-weight:700;font-style:italic;color:var(--primary);margin-bottom:2rem;line-height:1.3;text-align:center; padding: 0 1rem;}
 
-.sc-toggle{display:flex;justify-content:center;background:rgba(0,0,0,0.3);padding:6px;max-width:600px;margin:0 auto 2.5rem;border:2px solid rgba(255,255,255,0.15); border-radius: 50px;}
-.sc-btn{flex:1;padding:1rem 1.5rem;border:none;background:transparent;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.3s;color:#888;font-family:'Space Mono',monospace;letter-spacing:0.1em;text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:10px; border-radius: 40px;}
+.sc-toggle{display:flex;justify-content:center;background:#efe7d8;padding:6px;max-width:640px;margin:0 auto 2rem;border:2px solid var(--dark); border-radius: 50px;}
+.sc-btn{flex:1;padding:1rem 1.3rem;border:none;background:transparent;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.3s;color:#575757;font-family:'Space Mono',monospace;letter-spacing:0.1em;text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:10px; border-radius: 40px;}
 .sc-btn svg { width: 18px; height: 18px; fill: currentColor; }
 .sc-btn.active{background:rgba(255,255,255,0.12);color:var(--surface); box-shadow: 0 4px 10px rgba(0,0,0,0.3);}
 
-.sc-content{display:none;text-align:left;animation:aFadeUp 0.4s ease;background:rgba(20,20,20,0.6);padding:2.5rem;border:1px solid rgba(255,255,255,0.1);border-radius:8px;font-size:clamp(16px,1.8vw,18px);line-height:1.8;color:#ccc; position: relative;}
+.sc-content{display:none;text-align:left;animation:aFadeUp 0.4s ease;background:#f9f5ea;padding:2.3rem;border:2px solid #1a1a1a;font-size:clamp(16px,1.8vw,18px);line-height:1.8;color:var(--body); position: relative;border-radius:10px}
 .sc-content.active{display:block}
 .sc-content.conditioned{border-left:6px solid var(--primary)}
 .sc-content.conscious{border-left:6px solid var(--tertiary)}
 .sc-content p + p{margin-top:1.5rem}
-.sc-content strong{color:var(--surface);font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; display:block; margin-bottom:8px;}
-
+.sc-content strong{color:var(--dark);font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; display:block; margin-bottom:8px;}
 /* ==========================================================================
    EQUALIZER BOARD (Studio Mode)
    ========================================================================== */
@@ -564,7 +559,7 @@ body{
 }
 
 .assessment-card {
-  background: rgba(40, 40, 40, 0.6);
+  background: rgba(20, 24, 28, 0.72);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 3rem;
@@ -590,18 +585,7 @@ body{
 .a-opt.chosen{border-color: var(--secondary); background: #222; color: #fff; box-shadow: -4px 0px 0px var(--secondary), 0 0 20px rgba(230, 179, 37, 0.15);}
 
 .a-result { display: none; }
-.a-result.active {
-  display: block;
-  animation: aFadeUp 0.45s ease forwards;
-  background-image:
-    linear-gradient(rgba(30, 30, 30, 0.88), rgba(20, 20, 20, 0.92)),
-    url('4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg');
-  background-size: cover;
-  background-position: center;
-  padding: 2.5rem;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
-}
+.a-result.active { display: block; animation: aFadeUp 0.45s ease forwards; background: linear-gradient(rgba(15,15,15,0.62), rgba(15,15,15,0.8)), url('4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg') center/cover; border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 2rem; }
 
 .result-badge{display:inline-block;padding:8px 16px;font-family:'Space Mono',monospace; font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.5rem; background:var(--secondary);color:var(--dark); border-radius: 4px; box-shadow: 0 0 15px rgba(230, 179, 37, 0.4);}
 .result-head{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(32px,4vw,42px);font-weight:700;color:var(--surface);line-height:1.1;margin-bottom:1rem}
@@ -927,77 +911,42 @@ body{
 .sec-alt {
   padding-top: 6rem;
   padding-bottom: 6rem;
-  background: var(--surface);
+  background:
+    linear-gradient(180deg, #f8f3e9 0%, #f2eadc 100%);
   position: relative;
   z-index: 3;
   box-shadow: 0 -20px 40px rgba(0,0,0,0.05);
 }
 
-.liner-notes-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-.liner-notes-header .liner-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(32px, 4vw, 42px);
-  font-weight: 700;
-  color: var(--dark);
-  margin-bottom: 0.5rem;
-}
-.liner-notes-header .liner-sub {
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
+.rap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:2.5rem}
+.rap-col{position:relative;background:#fffef9;border:2px solid #231f1d;border-radius:14px;padding:1.2rem 1.1rem 1.3rem;box-shadow:0 18px 30px rgba(0,0,0,0.1)}
+.rap-col-head{font-family:'Space Mono',monospace; font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:1rem; display:inline-block; padding:8px 14px; background:var(--dark); color:#f8f6f0; border-radius: 999px;}
 
-.rap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:0}
-
-.rap-col{
-  position:relative;
-  background: var(--bg-color);
-  border: 2px solid var(--border);
-  border-radius: 12px;
-  padding: 0;
-  overflow: hidden;
-  box-shadow: 8px 8px 0px rgba(0,0,0,0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.rap-col:hover { transform: translateY(-4px); box-shadow: 12px 16px 0px rgba(0,0,0,0.08); }
-
-.rap-col-images {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  height: 180px;
-  overflow: hidden;
-}
-.rap-col-images img {
+.phase-art {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  height: 190px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #2a2523;
+  margin-bottom: 0.9rem;
+  position: relative;
 }
+.phase-art img{width:100%;height:100%;object-fit:cover;display:block}
+.phase-art.two-up{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.phase-art.two-up img{border-right:1px solid rgba(0,0,0,0.4)}
+.phase-art.two-up img:last-child{border-right:none}
 
-.rap-col-content { padding: 2rem 1.5rem; }
-
-.rap-col-head{font-family:'Space Mono',monospace; font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem; display:inline-block; padding:8px 16px; background:var(--primary); color:var(--surface); border-radius: 4px;}
-.rc2 .rap-col-head { background: var(--primary); }
-.rc3 .rap-col-head { background: var(--tertiary); }
-
-.rap-item{cursor:pointer;padding:16px;margin:0 -8px;transition:background 0.2s;margin-bottom:8px;outline:none; border:2px solid transparent; border-radius: 8px;}
-.rap-item:hover{background:var(--surface); border-color:var(--border);}
-.rap-row{display:flex;align-items:baseline;gap:16px}
-.rap-letter{font-family:'Cormorant Garamond',Georgia,serif; font-size:32px;font-weight:700;color:var(--primary);min-width:24px;flex-shrink:0; font-style:italic;}
-.rap-term{font-family:'Space Mono',monospace; font-size:clamp(14px,1.6vw,16px);color:var(--dark);flex:1;font-weight:700; text-transform:uppercase; letter-spacing:0.05em;}
-.rap-wtag{font-size:11px;color:var(--muted);text-transform:uppercase; letter-spacing:0.2em;}
-.expand-caret{font-size:12px;color:var(--dark);transition:transform 0.3s ease;margin-left:8px}
+.rap-item{cursor:pointer;padding:14px;margin:0 0 7px;transition:background 0.2s;border:2px solid transparent; border-radius: 8px;background:#f8f4ea}
+.rap-item:hover{background:#efe8d9; border-color:#d6cbb6;}
+.rap-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.rap-letter{font-family:'Cormorant Garamond',Georgia,serif; font-size:30px;font-weight:700;color:var(--primary);min-width:20px;flex-shrink:0; font-style:italic;}
+.rap-term{font-family:'Space Mono',monospace; font-size:clamp(13px,1.4vw,14px);color:var(--dark);flex:1;font-weight:700; text-transform:uppercase; letter-spacing:0.05em;}
+.rap-wtag{font-size:10px;color:var(--muted);text-transform:uppercase; letter-spacing:0.2em;}
+.expand-caret{font-size:12px;color:var(--dark);transition:transform 0.3s ease;margin-left:4px}
 .rap-item.active .expand-caret{transform:rotate(180deg);color:var(--primary)}
-.rap-detail{font-size:clamp(15px,1.6vw,17px);color:var(--body);line-height:1.8;margin-top:0;padding:0 12px;background:var(--surface);border-left:4px solid var(--primary);max-height:0;overflow:hidden;opacity:0;transition:max-height 0.4s ease,opacity 0.3s ease,padding 0.4s ease,margin 0.4s ease}
-.rap-detail.open{max-height:900px;opacity:1;padding:16px 20px;margin-top:12px; margin-bottom:16px; border:1px solid var(--border); border-left:6px solid var(--primary); border-radius: 0 8px 8px 0;}
+.rap-detail{font-size:clamp(15px,1.6vw,17px);color:#1f1f1f;line-height:1.75;margin-top:0;padding:0 14px;background:#fffef8;border-left:4px solid var(--primary);max-height:0;overflow:hidden;opacity:0;transition:max-height 0.4s ease,opacity 0.3s ease,padding 0.4s ease,margin 0.4s ease;border-radius:8px}
+.rap-detail.open{max-height:900px;opacity:1;padding:16px 18px;margin-top:10px; margin-bottom:15px; border:2px solid #1c1c1c; border-left:8px solid var(--primary); box-shadow: 4px 8px 0px rgba(0,0,0,0.08);}
 .rap-detail strong{color:var(--dark); font-weight:700;}
-
 /* ==========================================================================
    CONTEXTS (The Crates - Vinyl Sleeves)
    ========================================================================== */
@@ -1095,14 +1044,9 @@ body{
 .remix-sec {
   padding-top: 8rem;
   padding-bottom: 8rem;
-  background-color: var(--dark);
-  background-image:
-    radial-gradient(circle at 50% 0%, rgba(230, 179, 37, 0.12) 0%, transparent 40%),
-    linear-gradient(rgba(26, 26, 26, 0.55), rgba(26, 26, 26, 0.7)),
-    url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg');
-  background-size: cover, cover, cover;
-  background-position: center, center, center;
-  background-attachment: scroll, scroll, fixed;
+  background:
+    linear-gradient(180deg, rgba(20, 30, 36, 0.52) 0%, rgba(26, 26, 26, 0.78) 80%),
+    url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg') center/cover no-repeat;
   text-align: center;
   display: flex;
   align-items: center;
@@ -1110,9 +1054,17 @@ body{
   min-height: 700px;
   color: var(--surface);
   border-top: 4px solid var(--secondary);
-  box-shadow: 0 -20px 40px rgba(0,0,0,0.2);
+  box-shadow: 0 -20px 40px rgba(0,0,0,0.22);
   position: relative;
 }
+.remix-sec::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at 50% 25%, rgba(230, 179, 37, 0.22), rgba(230,179,37,0) 52%);
+  pointer-events:none;
+}
+.remix-sec > *{position:relative; z-index:1;}
 
 .remix-eyebrow{font-family:'Space Mono',monospace; font-size:12px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--secondary);margin-bottom:3rem}
 .remix-phase{display:none;width:100%}
@@ -1183,7 +1135,7 @@ body{
 .rs-w { opacity: 0; display: inline-block; transform: translateY(12px); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); margin-right: 6px; }
 .rs-w.show { opacity: 1; transform: translateY(0); }
 .rs-glow-text { color: var(--secondary); transition: text-shadow 1.5s ease, color 1.5s ease; display: inline-block;}
-.rs-glow-text.full-glow { color: #FFF; text-shadow: 0 0 20px rgba(230, 179, 37, 0.8), 0 0 40px rgba(230, 179, 37, 0.4), 0 0 60px rgba(230, 179, 37, 0.2); }
+.rs-glow-text.full-glow { color: #fff8d1; text-shadow: 0 0 20px rgba(230, 179, 37, 0.95), 0 0 45px rgba(230, 179, 37, 0.55), 0 0 80px rgba(230, 179, 37, 0.35); }
 
 .rtb-btn{background:transparent;color:var(--surface);border:2px solid var(--surface); border-radius: 50px; padding:1rem 2.5rem;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;opacity:0;transition:all 0.4s; display:inline-flex; align-items:center; gap:10px;}
 .rtb-btn.show{opacity:1}
@@ -1204,6 +1156,7 @@ body{
 @media(max-width:768px){
   .sec,.sec-alt,.contexts-sec,.assessment-sec,.scenario-sec,.remix-sec,.footer {padding-left:1.5rem;padding-right:1.5rem}
   .rap-grid,.ctx-grid{grid-template-columns:1fr}
+  .sc-categories{grid-template-columns:repeat(2,minmax(120px,1fr));}
   .flow-row{flex-direction:column;gap:16px}
   .flow-arrow{transform:rotate(90deg);font-size:20px}
   .result-actions{flex-direction:column;align-items:flex-start}
@@ -1256,7 +1209,7 @@ body{
     <div class="c-video-prop fade-in d2">
       <div class="c-video-wrapper">
         <iframe 
-          src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=YOUR_VIDEO_ID&controls=0&showinfo=0&rel=0&modestbranding=1" 
+          src="https://www.youtube.com/embed/4-0FLxcjGDg?autoplay=1&mute=1&loop=1&playlist=4-0FLxcjGDg&controls=0&rel=0&modestbranding=1"
           frameborder="0" 
           allow="autoplay; encrypted-media; fullscreen" 
           allowfullscreen>
@@ -1307,13 +1260,14 @@ body{
       <p class="scenario-intro-label">In The Booth</p>
       <p class="scenario-intro-head cg">Which track feels most like yours right now?</p>
       <p class="scenario-intro-body">Choose your context and see how the R³ Model shifts the same high-stress moment from a conditioned reaction to a conscious remix.</p>
+      <p class="scenario-intro-body" style="font-size:16px;margin-top:-1.5rem;max-width:640px;">Pick a cassette, load it into the deck, and compare the Default Track to the Conscious Remix.</p>
     </div>
 
     <div class="sc-categories fade-in d1">
-      <button class="sc-cat-btn" onclick="selectCategory('classroom', this)">In the Classroom</button>
-      <button class="sc-cat-btn" onclick="selectCategory('caregiving', this)">In Caregiving</button>
-      <button class="sc-cat-btn" onclick="selectCategory('workplace', this)">In the Workplace</button>
-      <button class="sc-cat-btn" onclick="selectCategory('relationships', this)">In Relationships</button>
+      <button class="sc-cat-btn" onclick="selectCategory('classroom', this)">Tape A · Classroom</button>
+      <button class="sc-cat-btn" onclick="selectCategory('caregiving', this)">Tape B · Caregiving</button>
+      <button class="sc-cat-btn" onclick="selectCategory('workplace', this)">Tape C · Workplace</button>
+      <button class="sc-cat-btn" onclick="selectCategory('relationships', this)">Tape D · Relationships</button>
     </div>
 
     <div id="sc-prompt-wrap">
@@ -1488,9 +1442,18 @@ body{
 
       <!-- Phase 1 -->
       <div class="rap-col rc1">
-        <div class="rap-col-images">
+        <p class="rap-col-head">Phase 1: Reflection</p>
+        <div class="phase-art two-up">
           <img src="1_A_vinyl_record_spins_on_a_turn_1_20260327_123519.jpg" alt="Spinning vinyl record">
           <img src="2_A_pair_of_vintage_studio_headp_1_20260327_123529.jpg" alt="Headphones over lyric sheets">
+        </div>
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r1')">
+          <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reflect</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
+        </div>
+        <div class="rap-detail" id="r1">Reflection is not about reliving or judging the moment. It is about looking at it clearly enough to understand what it is showing you. You can't remix a song if you don't listen to the original sample first.</div>
+        
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r2')">
+          <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Aware &amp; Attentive</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
         </div>
         <div class="rap-col-content">
           <p class="rap-col-head">Phase 1: Reflection</p>
@@ -1513,9 +1476,18 @@ body{
 
       <!-- Phase 2 -->
       <div class="rap-col rc2">
-        <div class="rap-col-images">
+        <p class="rap-col-head">Phase 2: Resistance</p>
+        <div class="phase-art two-up">
           <img src="4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg" alt="Chrome cassette tape">
-          <img src="3_A_microphone_stand_holds_a_vin_1_20260327_123538.jpg" alt="Vintage glowing microphone">
+          <img src="3_A_microphone_stand_holds_a_vin_1_20260327_123538.jpg" alt="Glowing vintage microphone">
+        </div>
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r4')">
+          <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Resist</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
+        </div>
+        <div class="rap-detail" id="r4">The intentional interruption of the conditioned response (inhibitory control)—like catching the needle before it drops on a bad track. Resistance is the practice of hitting pause long enough to choose whether to press forward or change direction based on consciousness, not habit.</div>
+        
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r5')">
+          <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Act</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
         </div>
         <div class="rap-col-content">
           <p class="rap-col-head">Phase 2: Resistance</p>
@@ -1538,9 +1510,18 @@ body{
 
       <!-- Phase 3 -->
       <div class="rap-col rc3">
-        <div class="rap-col-images">
-          <img src="7_A_record_player_s_tonearm_touc_1_20260327_123609.jpg" alt="DJ hands on tonearm">
-          <img src="8_A_Black_woman_sits_cross_legge_1_20260327_123619.jpg" alt="Black woman meditating with headphones">
+        <p class="rap-col-head">Phase 3: Revelation</p>
+        <div class="phase-art two-up">
+          <img src="7_A_record_player_s_tonearm_touc_1_20260327_123609.jpg" alt="DJ hands on turntable">
+          <img src="8_A_Black_woman_sits_cross_legge_1_20260327_123619.jpg" alt="Meditating Black woman">
+        </div>
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r7')">
+          <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reveal</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
+        </div>
+        <div class="rap-detail" id="r7">Revelation is the AH-HA moment: the point at which objective awareness and conscious choice combine to generate truth about yourself. Revelation is not another round of inward examination—it is flipping the sample to find the gold.</div>
+        
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r8')">
+          <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Accept</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
         </div>
         <div class="rap-col-content">
           <p class="rap-col-head" style="background: var(--tertiary);">Phase 3: Revelation</p>
@@ -1870,10 +1851,34 @@ function playTrack(trackId) {
 
 document.addEventListener('DOMContentLoaded', () => {
     playTrack(1);
+    wireAssetFallbacks();
     const style = document.createElement('style');
     document.head.appendChild(style);
     style.sheet.insertRule(".record-label::before { color: var(--pseudo-color, var(--surface)); }", 0);
 });
+
+function wireAssetFallbacks() {
+  const assetMap = {
+    '4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg': 'missing-4',
+    '5_Close_up_on_a_mixing_board_wit_1_20260327_123554.jpg': 'missing-5',
+    '9_An_overhead_view_of_a_circle_o_1_20260327_123628.jpg': 'missing-9',
+    '10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg': 'missing-10'
+  };
+
+  Object.entries(assetMap).forEach(([fileName, className]) => {
+    const probe = new Image();
+    probe.onerror = () => document.body.classList.add(className);
+    probe.src = fileName;
+  });
+
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('error', () => {
+      const fallbackBox = img.closest('.boombox-anchor, .mic-container, .phase-visuals');
+      if (fallbackBox) fallbackBox.classList.add('asset-missing');
+      img.style.display = 'none';
+    });
+  });
+}
 
 /* ══════════════════════════════════════════════
    R.A.P. REMIX ANIMATION (PLURAL)
