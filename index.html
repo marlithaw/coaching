@@ -405,6 +405,7 @@ body{
   border-top: 2px solid var(--dark);
   box-shadow: 0 -10px 40px rgba(0,0,0,0.16);
   z-index: 2;
+  color: var(--surface);
 }
 
 .scenario-intro { position: relative; z-index: 2; }
@@ -500,12 +501,12 @@ body{
 .sc-toggle{display:flex;justify-content:center;background:#efe7d8;padding:6px;max-width:640px;margin:0 auto 2rem;border:2px solid var(--dark); border-radius: 50px;}
 .sc-btn{flex:1;padding:1rem 1.3rem;border:none;background:transparent;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.3s;color:#575757;font-family:'Space Mono',monospace;letter-spacing:0.1em;text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:10px; border-radius: 40px;}
 .sc-btn svg { width: 18px; height: 18px; fill: currentColor; }
-.sc-btn.active{background:var(--dark);color:var(--surface); box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
+.sc-btn.active{background:rgba(255,255,255,0.12);color:var(--surface); box-shadow: 0 4px 10px rgba(0,0,0,0.3);}
 
 .sc-content{display:none;text-align:left;animation:aFadeUp 0.4s ease;background:#f9f5ea;padding:2.3rem;border:2px solid #1a1a1a;font-size:clamp(16px,1.8vw,18px);line-height:1.8;color:var(--body); position: relative;border-radius:10px}
 .sc-content.active{display:block}
-.sc-content.conditioned{border-left:8px solid var(--primary)}
-.sc-content.conscious{border-left:8px solid var(--tertiary)}
+.sc-content.conditioned{border-left:6px solid var(--primary)}
+.sc-content.conscious{border-left:6px solid var(--tertiary)}
 .sc-content p + p{margin-top:1.5rem}
 .sc-content strong{color:var(--dark);font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; display:block; margin-bottom:8px;}
 /* ==========================================================================
@@ -1180,7 +1181,15 @@ body{
   
   .plural-full { flex-wrap:wrap; gap:20px; }
   .pf-item { flex: 0 0 40%; }
+  .rap-col-images { height: 140px; }
 }
+
+@keyframes aFadeUp { 0% { opacity: 0; transform: translateY(16px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes consoleFade { 0% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes pulse-red { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* R3 labels in scenario content */
+.r3-label { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--secondary); margin-right: 4px; }
 </style>
 </head>
 <body>
@@ -1425,8 +1434,12 @@ body{
 
   <!-- RAP ARCHITECTURE (LINER NOTES) -->
   <div class="sec-alt fade-in">
+    <div class="liner-notes-header">
+      <p class="liner-title cg" style="font-style: italic;">Liner Notes</p>
+      <p class="liner-sub">The Three Phases of R.A.P.</p>
+    </div>
     <div class="rap-grid fade-in d1">
-      
+
       <!-- Phase 1 -->
       <div class="rap-col rc1">
         <p class="rap-col-head">Phase 1: Reflection</p>
@@ -1442,12 +1455,23 @@ body{
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r2')">
           <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Aware &amp; Attentive</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
         </div>
-        <div class="rap-detail" id="r2">Aware and Attentive are the two points of analysis.<br><br><strong>Aware</strong> — What emotional or physical load did you bring into this moment? You are naming the background noise that was already playing.<br><br><strong>Attentive</strong> — What is your body doing right now? Jaw tight. Shoulders elevated. The body registers the threat before the mind names it. This is your rhythm section telling you something is off.</div>
-        
-        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r3')">
-          <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Pondering</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
+        <div class="rap-col-content">
+          <p class="rap-col-head">Phase 1: Reflection</p>
+          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r1')">
+            <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reflect</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
+          </div>
+          <div class="rap-detail" id="r1">Reflection is not about reliving or judging the moment. It is about looking at it clearly enough to understand what it is showing you. You can't remix a song if you don't listen to the original sample first.</div>
+
+          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r2')">
+            <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Aware &amp; Attentive</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
+          </div>
+          <div class="rap-detail" id="r2">Aware and Attentive are the two points of analysis.<br><br><strong>Aware</strong> — What emotional or physical load did you bring into this moment? You are naming the background noise that was already playing.<br><br><strong>Attentive</strong> — What is your body doing right now? Jaw tight. Shoulders elevated. The body registers the threat before the mind names it. This is your rhythm section telling you something is off.</div>
+
+          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r3')">
+            <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Pondering</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
+          </div>
+          <div class="rap-detail" id="r3">Purposeful Pondering asks: what is this moment actually showing me, and what does that make possible? This is not spiraling into always and never thinking. It is active inquiry—transforming observation into direction so you can write a better verse.</div>
         </div>
-        <div class="rap-detail" id="r3">Purposeful Pondering asks: what is this moment actually showing me, and what does that make possible? This is not spiraling into always and never thinking. It is active inquiry—transforming observation into direction so you can write a better verse.</div>
       </div>
 
       <!-- Phase 2 -->
@@ -1465,12 +1489,23 @@ body{
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r5')">
           <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Act</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
         </div>
-        <div class="rap-detail" id="r5">Remaining present creates conditions for intentional action. Act moves through three layers:<br><br><strong>Pattern Recognition</strong> — Am I playing the default track or making a choice?<br><br><strong>Alignment Check</strong> — Does this align with my values and what I am trying to preserve?<br><br><strong>Consequence Awareness</strong> — What does my action produce? What is the cost of this verse?</div>
-        
-        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r6')">
-          <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Pressing</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
+        <div class="rap-col-content">
+          <p class="rap-col-head">Phase 2: Resistance</p>
+          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r4')">
+            <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Resist</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
+          </div>
+          <div class="rap-detail" id="r4">The intentional interruption of the conditioned response (inhibitory control)—like catching the needle before it drops on a bad track. Resistance is the practice of hitting pause long enough to choose whether to press forward or change direction based on consciousness, not habit.</div>
+
+          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r5')">
+            <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Act</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
+          </div>
+          <div class="rap-detail" id="r5">Remaining present creates conditions for intentional action. Act moves through three layers:<br><br><strong>Pattern Recognition</strong> — Am I playing the default track or making a choice?<br><br><strong>Alignment Check</strong> — Does this align with my values and what I am trying to preserve?<br><br><strong>Consequence Awareness</strong> — What does my action produce? What is the cost of this verse?</div>
+
+          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r6')">
+            <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Pressing</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
+          </div>
+          <div class="rap-detail" id="r6">When direction is informed by concrete actions rather than habit, choice becomes the new evidence the nervous system needs. You practice it until the intentional response replaces the scratched record, leading to lasting growth.</div>
         </div>
-        <div class="rap-detail" id="r6">When direction is informed by concrete actions rather than habit, choice becomes the new evidence the nervous system needs. You practice it until the intentional response replaces the scratched record, leading to lasting growth.</div>
       </div>
 
       <!-- Phase 3 -->
@@ -1488,12 +1523,23 @@ body{
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r8')">
           <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Accept</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
         </div>
-        <div class="rap-detail" id="r8">The practice of receiving the truth and integrating it.<br><br><strong>Receive the insight</strong> — Name the pattern recognized, not just the feeling.<br><br><strong>Integrate without judgment</strong> — Holding the truth without shame or deflection. The AH-HA is not the end of the process. It is the moment the process becomes productive.</div>
-        
-        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r9')">
-          <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Practicing</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
+        <div class="rap-col-content">
+          <p class="rap-col-head" style="background: var(--tertiary);">Phase 3: Revelation</p>
+          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r7')">
+            <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reveal</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
+          </div>
+          <div class="rap-detail" id="r7">Revelation is the AH-HA moment: the point at which objective awareness and conscious choice combine to generate truth about yourself. Revelation is not another round of inward examination—it is flipping the sample to find the gold.</div>
+
+          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r8')">
+            <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Accept</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
+          </div>
+          <div class="rap-detail" id="r8">The practice of receiving the truth and integrating it.<br><br><strong>Receive the insight</strong> — Name the pattern recognized, not just the feeling.<br><br><strong>Integrate without judgment</strong> — Holding the truth without shame or deflection. The AH-HA is not the end of the process. It is the moment the process becomes productive.</div>
+
+          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r9')">
+            <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Practicing</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
+          </div>
+          <div class="rap-detail" id="r9">The truth compounds through consistent application. The nervous system does not update on insight alone (neuroplasticity requires repetition). Purposeful Practicing is the commitment to playing the new beat continuously, generating new evidence with each cycle until you've permanently changed your rhythm.</div>
         </div>
-        <div class="rap-detail" id="r9">The truth compounds through consistent application. The nervous system does not update on insight alone (neuroplasticity requires repetition). Purposeful Practicing is the commitment to playing the new beat continuously, generating new evidence with each cycle until you've permanently changed your rhythm.</div>
       </div>
     </div>
   </div>
