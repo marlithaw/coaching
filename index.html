@@ -114,6 +114,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
 }
 .nav-links a:hover { color: var(--secondary); }
 
+/* HEADER SLIDESHOW FIX */
 .hd-collage {
   position: sticky;
   top: 0;
@@ -125,6 +126,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
+  background: transparent; /* Ensures slideshow is visible underneath */
 }
 
 .hero-slideshow { position: absolute; inset: 0; z-index: 0; }
@@ -141,61 +143,115 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
 .hero-overlay {
   position: absolute;
   inset: 0;
+  /* Soft gradient so the images show through but text remains readable */
   background: linear-gradient(135deg, rgba(252,249,244,0.85) 0%, rgba(252,249,244,0.95) 100%);
   z-index: 1;
 }
 
-.c-video-prop {
+/* =====================================================================
+   CREATIVE VIDEO INTEGRATION: THE VINYL RECORD PLAYER
+   ===================================================================== */
+.vinyl-prop-container {
   position: absolute;
   top: 6rem; 
   right: max(1rem, calc((100% - 1200px)/2)); 
-  background: var(--glass-bg);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.6);
-  padding: 10px 10px 24px 10px; 
-  border-radius: 1.5rem;
-  box-shadow: var(--shadow-soft);
-  transform: rotate(3deg);
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  width: clamp(200px, 20vw, 320px); 
-  z-index: 3; 
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, z-index 0s;
+  gap: 20px;
+  transform: rotate(3deg);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.vinyl-prop-container:hover {
+  transform: rotate(0deg) scale(1.05);
+  z-index: 10;
 }
 
-.c-video-prop:hover {
-  transform: rotate(1deg) scale(1.05);
-  box-shadow: var(--shadow-hover);
-  z-index: 10; 
-}
-
-.c-video-wrapper {
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  background: #000;
-  border-radius: 1rem;
-  overflow: hidden;
+.vinyl-record-wrap {
   position: relative;
+  width: clamp(200px, 20vw, 300px);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3));
 }
 
-.c-video-element {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
+.vinyl-grooves {
   position: absolute;
-  top: 0; left: 0;
+  inset: 0;
+  border-radius: 50%;
+  background: #111;
+  box-shadow: inset 0 0 10px rgba(255,255,255,0.2), 0 0 0 2px #333;
+  /* The grooves spin around the video! */
+  animation: spinRecord 4s linear infinite;
+}
+.vinyl-grooves::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(#111 0px, #1a1a1a 2px, #111 4px);
+}
+.vinyl-grooves::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(255,255,255,0.05) 0deg, rgba(255,255,255,0) 45deg, rgba(255,255,255,0.15) 90deg, rgba(255,255,255,0) 135deg, rgba(255,255,255,0.05) 180deg, rgba(255,255,255,0) 225deg, rgba(255,255,255,0.15) 270deg, rgba(255,255,255,0) 315deg, rgba(255,255,255,0.05) 360deg);
 }
 
-.c-video-caption {
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  font-style: italic;
-  color: var(--muted);
-  text-align: center;
+.video-label-center {
+  width: 42%;
+  height: 42%;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+  border: 3px solid var(--secondary);
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  background: #000;
 }
+
+.vinyl-hole-center {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--bg-color);
+  border-radius: 50%;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* The Purpose Plaque */
+.purpose-plaque {
+  background: linear-gradient(135deg, #D4AF37 0%, #aa8c2c 100%);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  text-align: center;
+  font-size: clamp(12px, 1.2vw, 15px);
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3), inset 0 1px 2px rgba(255,255,255,0.5);
+  border: 1px solid #e5c158;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.purpose-plaque em {
+  font-family: 'Reenie Beanie', cursive;
+  font-size: 1.6em;
+  text-transform: none;
+  color: #fff;
+  margin: 0 4px;
+  line-height: 0.5;
+}
+
+/* END CREATIVE VIDEO INTEGRATION */
 
 .collage-center {
   position: relative;
@@ -290,22 +346,6 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
   text-transform: uppercase;
 }
 
-.mic-container {
-  position: absolute;
-  bottom: -25%;
-  right: -10%;
-  z-index: 5; 
-  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
-}
-
-.mic-image {
-  width: clamp(160px, 22vw, 260px);
-  height: auto;
-  border-radius: 12px;
-  transform: rotate(-10deg);
-  display: block;
-}
-
 .hero-catchphrase {
   font-family: 'Inter', sans-serif;
   font-size: clamp(20px, 2.5vw, 28px); 
@@ -324,22 +364,8 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
   z-index: 5;
   margin-top: 4rem;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  gap: 2rem;
+  justify-content: center;
 }
-
-.c-premise-pull {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(24px, 3vw, 36px);
-  font-weight: 500;
-  color: var(--dark);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  max-width: 600px;
-}
-.c-premise-pull em { font-style: normal; color: var(--primary); }
 
 .btn-primary {
   background: var(--secondary);
@@ -367,7 +393,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
   padding-bottom: 8rem;
   position: relative;
   z-index: 10; 
-  background-image: linear-gradient(135deg, rgba(252,249,244,0.98) 0%, rgba(252,249,244,1) 100%), url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.png');
+  background-image: linear-gradient(135deg, rgba(252,249,244,0.95) 0%, rgba(252,249,244,1) 100%), url('1_A_vinyl_record_spins_on_a_turn_1_20260327_123519.jpg');
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
@@ -632,7 +658,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
     position: sticky;
     top: 120px;
   }
-  .boombox-anchor img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+  .boombox-anchor img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
   
   .scenario-trigger { grid-column: 2 / 3; grid-row: 1 / 2; order: unset; text-align: left; padding: 0; margin-bottom: 1.5rem;}
   .sc-toggle { grid-column: 2 / 3; grid-row: 2 / 3; order: unset; margin: 0 0 1.5rem 0; max-width:100%; }
@@ -654,9 +680,9 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
   padding-top: 8rem;
   padding-bottom: 8rem;
   background-color: var(--bg-color);
-  background-image:
+  background-image: 
     linear-gradient(rgba(252, 249, 244, 0.85), rgba(252, 249, 244, 0.95)),
-    url('5_Close_up_on_a_mixing_board_wit_1_20260327_123554.png');
+    url('5_Close_up_on_a_mixing_board_wit_1_20260327_123554.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed; 
@@ -764,12 +790,12 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
 .restart-btn { background: transparent; border: none; color: var(--muted); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; text-decoration: underline; cursor: pointer; transition: all 0.2s;}
 .restart-btn:hover { color: var(--dark); }
 
-#phases {
+.sec {
   padding-top: 6rem;
   padding-bottom: 6rem;
   position: relative;
   background-color: var(--bg-color);
-  background-image: linear-gradient(rgba(252, 249, 244, 0.85), rgba(252, 249, 244, 0.95)), url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.png');
+  background-image: linear-gradient(rgba(252, 249, 244, 0.85), rgba(252, 249, 244, 0.95)), url('13_A_Black_woman_stands_behind_a_1_20260328_182847.jpg');
   background-size: cover;
   background-attachment: fixed;
   z-index: 2;
@@ -840,6 +866,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
 .rap-detail{font-size:clamp(16px,1.8vw,18px);color:var(--body);line-height:1.8;margin-top:0;padding:0 20px;background:transparent;border-left:4px solid transparent;max-height:0;overflow:hidden;opacity:0;transition:max-height 0.4s ease,opacity 0.3s ease,padding 0.4s ease,margin 0.4s ease}
 .rap-detail.open{max-height:900px;opacity:1;padding:20px 24px;margin-top:16px; margin-bottom:24px; border:1px solid rgba(255,255,255,0.6); background:var(--glass-bg); backdrop-filter:blur(8px); border-left:8px solid var(--secondary); box-shadow: var(--shadow-soft); border-radius: 1rem;}
 .rap-detail strong{color:var(--dark); font-weight:600;}
+.rap-detail-img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid rgba(0,0,0,0.1); }
 
 .contexts-sec { padding-top: 6rem; padding-bottom: 8rem; background: var(--bg-color);}
 .ctx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:4rem}
@@ -847,9 +874,8 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
 .ctx-card:nth-child(2) { transform: translateY(2rem); border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%;}
 .ctx-card:hover { transform: translateY(-0.5rem); background: rgba(255,255,255,0.95); box-shadow: var(--shadow-hover); border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%;}
 
-/* Image wraps inside Context Cards */
-.ctx-img-wrap { width: 100%; height: 240px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; position: relative; z-index: 1;}
-.ctx-img-wrap img { width: 100%; height: 100%; object-fit: contain; background: rgba(252,249,244,0.5); }
+.ctx-img-wrap { width: 100%; height: 180px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; position: relative; z-index: 1;}
+.ctx-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
 
 .ctx-label { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; color: var(--primary); position: relative; z-index: 1;}
 .ctx-punch { font-family: 'Space Grotesk', sans-serif; font-size: clamp(24px, 3vw, 30px); font-weight: 600; color: var(--dark); line-height: 1.2; margin-bottom: 20px; position: relative; z-index: 1;}
@@ -865,7 +891,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
   padding-top: 10rem;
   padding-bottom: 8rem;
   background-color: var(--bg-color);
-  background-image: linear-gradient(rgba(252, 249, 244, 0.85), rgba(252, 249, 244, 0.95)), url('4_A_chrome_cassette_tape_lies_on_1_20260327_123546.png');
+  background-image: linear-gradient(rgba(252, 249, 244, 0.85), rgba(252, 249, 244, 0.95)), url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg');
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -998,9 +1024,8 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
 .floating-pic {
   position: absolute;
   width: 220px;
-  height: auto;
-  max-height: 280px;
-  object-fit: contain;
+  height: 220px;
+  object-fit: cover;
   border-radius: 12px;
   border: 8px solid #fff;
   box-shadow: var(--shadow-hover);
@@ -1032,7 +1057,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
   width: 350px;
   height: 350px;
   max-width: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 50%;
   border: 8px solid white;
   filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2));
@@ -1214,7 +1239,7 @@ textarea.form-control {
   
   .about-container { grid-template-columns: 1fr; gap: 2rem; }
   .about-visuals { height: 450px; }
-  .floating-pic { width: 150px; height: auto; max-height: 200px; }
+  .floating-pic { width: 150px; height: 150px; }
   .test-grid { grid-template-columns: 1fr 1fr; }
   
   .cta-container { grid-template-columns: 1fr; }
@@ -1297,7 +1322,9 @@ textarea.form-control {
   .rap-composition { flex-direction: column; margin-top: 3rem; }
   .lets-text { top: -40px; left: 0; font-size: 60px; z-index: 1; }
   
-  .mic-container { position: relative; bottom: 0; right: 0; margin-top: 2rem; margin-left: auto; margin-right: auto; transform: rotate(10deg); }
+  .vinyl-prop-container { position: relative; top: auto; right: auto; margin: 2rem auto; transform: none; width: clamp(260px, 60vw, 300px); }
+  .vinyl-prop-container:hover { transform: none; }
+  
   .hero-catchphrase { font-size: clamp(20px, 6vw, 24px); margin-top: 3rem; }
   .collage-bottom { margin-top: 4rem; flex-direction: column; align-items: flex-start; }
   
@@ -1335,18 +1362,24 @@ textarea.form-control {
 
 <div id="home-view" class="view active">
   <div class="hd-collage fade-in">
+    <!-- SLIDESHOW FIXED: Transparency restored -->
     <div class="hero-slideshow">
-      <div class="hero-slide active" style="background-image: url('1_A_vinyl_record_spins_on_a_turn_1_20260327_123519.png');"></div>
-      <div class="hero-slide" style="background-image: url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.png');"></div>
-      <div class="hero-slide" style="background-image: url('7_A_record_player_s_tonearm_touc_1_20260327_123609.png');"></div>
+      <div class="hero-slide active" style="background-image: url('1_A_vinyl_record_spins_on_a_turn_1_20260327_123519.jpg');"></div>
+      <div class="hero-slide" style="background-image: url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg');"></div>
+      <div class="hero-slide" style="background-image: url('7_A_record_player_s_tonearm_touc_1_20260327_123609.jpg');"></div>
     </div>
     <div class="hero-overlay"></div>
 
-    <div class="c-video-prop fade-in d2">
-      <div class="c-video-wrapper">
-        <video src="20220509_083743.mp4" autoplay loop muted playsinline class="c-video-element"></video>
+    <!-- THE VINYL VIDEO COMPONENT -->
+    <div class="vinyl-prop-container fade-in d2">
+      <div class="vinyl-record-wrap">
+        <div class="vinyl-record-body"></div>
+        <video src="20220509_083743.mp4" autoplay loop muted playsinline class="video-label-center"></video>
+        <div class="vinyl-hole-center"></div>
       </div>
-      <div class="c-video-caption" style="margin-top:12px;">A sequenced approach to<br>awareness, choice, and change.</div>
+      <div class="purpose-plaque">
+        Do it on <em>purpose</em>.<br>Not perfectly — purposefully.
+      </div>
     </div>
 
     <div class="collage-center d1">
@@ -1358,9 +1391,6 @@ textarea.form-control {
           <hr class="hero-divider">
           <p class="hero-tagline">A framework for conscious living.</p>
         </div>
-        <div class="mic-container">
-          <img src="2_A_pair_of_vintage_studio_headp_1_20260327_123529.png" class="mic-image" alt="Vintage Headphones">
-        </div>
       </div>
       <div class="hero-catchphrase fade-in d2">
         What rap did in giving voice, this framework does for you — it takes what you've been carrying and gives it structure, direction, and language.
@@ -1368,7 +1398,6 @@ textarea.form-control {
     </div>
 
     <div class="collage-bottom d3">
-      <p class="c-premise-pull">Do it on <em>purpose</em>. Not perfectly —<br><em>purposefully</em>.</p>
       <a class="btn-primary" onclick="document.getElementById('scenarios').scrollIntoView();" title="See the framework in action">Enter The Cypher →</a>
     </div>
   </div>
@@ -1393,7 +1422,7 @@ textarea.form-control {
 
     <div class="scenario-card" id="scenario-card" style="display:none; opacity:1;">
       <div class="boombox-anchor">
-        <img src="9_An_overhead_view_of_a_circle_o_1_20260327_123628.png" alt="Cassettes in a circle">
+        <img src="9_An_overhead_view_of_a_circle_o_1_20260327_123628.jpg" alt="Cassettes in a circle">
       </div>
 
       <div class="scenario-trigger" id="sc-trigger"></div>
@@ -1534,10 +1563,14 @@ textarea.form-control {
     <div class="rap-grid fade-in d1">
       <div class="rap-col rc1">
         <p class="rap-col-head">Phase 1: Reflection</p>
+        <!-- Deeper Integration of Assets -->
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r1')">
           <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reflect</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
         </div>
-        <div class="rap-detail" id="r1">Reflection is not about reliving or judging the moment. It is about looking at it clearly enough to understand what it is showing you. You can't remix a song if you don't listen to the original sample first.</div>
+        <div class="rap-detail" id="r1">
+          <img src="2_A_pair_of_vintage_studio_headp_1_20260327_123529.jpg" class="rap-detail-img" alt="Reflect">
+          Reflection is not about reliving or judging the moment. It is about looking at it clearly enough to understand what it is showing you. You can't remix a song if you don't listen to the original sample first.
+        </div>
         
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r2')">
           <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Aware &amp; Attentive</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
@@ -1555,7 +1588,10 @@ textarea.form-control {
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r4')">
           <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Resist</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
         </div>
-        <div class="rap-detail" id="r4">The intentional interruption of the conditioned response (inhibitory control)—like catching the needle before it drops on a bad track. Resistance is the practice of hitting pause long enough to choose whether to press forward or change direction based on consciousness, not habit.</div>
+        <div class="rap-detail" id="r4">
+          <img src="4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg" class="rap-detail-img" alt="Resist">
+          The intentional interruption of the conditioned response (inhibitory control)—like catching the needle before it drops on a bad track. Resistance is the practice of hitting pause long enough to choose whether to press forward or change direction based on consciousness, not habit.
+        </div>
         
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r5')">
           <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Act</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
@@ -1573,7 +1609,10 @@ textarea.form-control {
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r7')">
           <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reveal</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
         </div>
-        <div class="rap-detail" id="r7">Revelation is the AH-HA moment: the point at which objective awareness and conscious choice combine to generate truth about yourself. Revelation is not another round of inward examination—it is flipping the sample to find the gold.</div>
+        <div class="rap-detail" id="r7">
+          <img src="7_A_record_player_s_tonearm_touc_1_20260327_123609.jpg" class="rap-detail-img" alt="Reveal">
+          Revelation is the AH-HA moment: the point at which objective awareness and conscious choice combine to generate truth about yourself. Revelation is not another round of inward examination—it is flipping the sample to find the gold.
+        </div>
         
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r8')">
           <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Accept</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
@@ -1595,7 +1634,7 @@ textarea.form-control {
     
     <div class="ctx-grid fade-in d2">
       <div class="ctx-card ctx1">
-        <div class="ctx-img-wrap"><img src="8_A_Black_woman_sits_cross_legge_1_20260327_123619.png" alt="Personal Growth"></div>
+        <div class="ctx-img-wrap"><img src="8_A_Black_woman_sits_cross_legge_1_20260327_123619.jpg" alt="Personal Growth"></div>
         <p class="ctx-label">Personal</p>
         <p class="ctx-punch">Without requiring the full origin story.</p>
         <p class="ctx-body">The nervous system carries the imprint of past harm, and present triggers can activate survival responses (like an old track firing up). The R³ Model interrupts those patterns, building capacity to ground your response in current reality.</p>
@@ -1607,7 +1646,7 @@ textarea.form-control {
         <p class="ctx-body">Educators are rarely given tools to interrupt their own conditioned responses under pressure. The R³ Model restores intentional response, giving educators a process for navigating stress with clarity rather than conditioning.</p>
       </div>
       <div class="ctx-card ctx3">
-        <div class="ctx-img-wrap"><img src="IMG_2199.JPG" alt="Culture Change"></div>
+        <div class="ctx-img-wrap"><img src="IMG_2199.jpg" alt="Culture Change"></div>
         <p class="ctx-label">Culture Change</p>
         <p class="ctx-punch">This is a precision intervention.</p>
         <p class="ctx-body">Organizational culture isn't built by values statements. It's built by what people do in high-stress moments. When people develop the capacity to interrupt automatic patterns, culture shifts from the inside out.</p>
@@ -1698,7 +1737,7 @@ textarea.form-control {
         <p class="handwritten" style="color: var(--dark);">Your Signature Here</p>
       </div>
       <div class="about-visuals">
-        <img src="Resized_Resized_20220505_152015.JPEG" class="floating-pic pic-1" alt="Speaking or coaching photo">
+        <img src="13_A_Black_woman_stands_behind_a_1_20260328_182847.jpg" class="floating-pic pic-1" alt="Speaking or coaching photo">
         <img src="20211210_193049_capture(0).jpg" class="floating-pic pic-2" alt="Consulting or candid photo">
         
         <img src="20220412_131949.jpg" class="coach-cutout" alt="Coach Portrait">
