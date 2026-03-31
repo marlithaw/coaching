@@ -5,176 +5,202 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="The R³ Model by AH-HA Coaching — a sequenced framework for emotional regulation through Reflection, Resistance, and Revelation. Move from automatic reaction to conscious choice.">
 <title>R³ Agency Practice (R.A.P.) — AH-HA Coaching, LLC</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Outfit:wght@300;400;500;600;700&family=Rubik+Dirt&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Reenie+Beanie&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Permanent+Marker&family=Reenie+Beanie&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 
 :root{
-  --primary: #C24D2C; 
-  --secondary: #E6B325; 
-  --tertiary: #2A4B46; 
-  
-  --dark: #1A1A1A; 
-  --body: #333333; 
-  --muted: #7A7A7A; 
-  
-  --bg-color: #F8F6F0; 
+  --primary: #8B2C2D; 
+  --secondary: #D4AF37; 
+  --tertiary: #9CAB88; 
+  --dark: #2C2C2C; 
+  --body: #4A4A4A; 
+  --muted: #888888; 
+  --bg-color: #FCF9F4; 
   --surface: #FFFFFF; 
-  --border: #E2DDD0; 
+  --border: rgba(212, 175, 55, 0.2); 
   
-  --shadow-color: rgba(26, 26, 26, 0.15);
-  --heavy-shadow: rgba(26, 26, 26, 0.4);
+  --shadow-soft: 0 20px 30px -10px rgba(0,0,0,0.08);
+  --shadow-hover: 0 25px 40px -12px rgba(0,0,0,0.15);
+  --glass-bg: rgba(255, 255, 255, 0.85);
 }
 
 body{
-  font-family:'Outfit',sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: var(--bg-color);
-  background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-  color:var(--body);
-  min-height:100vh;
-  padding:0; 
+  color: var(--body);
+  line-height: 1.6;
+  min-height: 100vh;
   position: relative; 
-  overflow-x: hidden;
+  overflow-x: clip; 
 }
 
-::selection{background:var(--secondary);color:var(--dark)}
-.page{max-width:100%;margin:0 auto;background:transparent;overflow-x:hidden;position:relative; z-index: 1;}
-.cg{font-family:'Cormorant Garamond',Georgia,serif}
-.mono{font-family:'Space Mono',monospace}
-.handwritten{font-family: 'Reenie Beanie', cursive; font-size: 28px; color: var(--primary);}
+::selection{background:var(--secondary);color:#fff}
+.page{max-width:100%;margin:0 auto;background:transparent;overflow-x:clip;position:relative; z-index: 1;}
 
-/* SCROLL REVEAL */
-.fade-in { opacity: 0; animation: pageLoadFade 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
-@keyframes pageLoadFade { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
-@keyframes pulse-red { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
-@keyframes aFadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.sg { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
+.mono { font-family: 'Space Mono', monospace; }
+h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.02em; color: var(--dark); line-height: 1.1; }
+.handwritten{font-family: 'Reenie Beanie', cursive; font-size: 28px; color: var(--secondary);}
+
+.fade-in { opacity: 0; animation: pageLoadFade 0.8s cubic-bezier(0.2, 0.9, 0.4, 1) forwards; }
+@keyframes pageLoadFade { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
 .d1 { animation-delay: 0.15s; }
 .d2 { animation-delay: 0.3s; }
 .d3 { animation-delay: 0.45s; }
-@keyframes aFadeUp { 0% { opacity: 0; transform: translateY(18px); } 100% { opacity: 1; transform: translateY(0); } }
-@keyframes pulse-red { 0%,100% { opacity: .8; } 50% { opacity: 1; text-shadow: 0 0 6px rgba(194,77,44,0.7);} }
 
-/* SPACING CONSTRAINTS */
-.sec,.sec-alt,.assessment-sec,.scenario-sec,.remix-sec,.footer{padding-left:max(3.5rem, calc((100% - 1100px)/2));padding-right:max(3.5rem, calc((100% - 1100px)/2))}
+.sec, .sec-alt, .assessment-sec, .scenario-sec, .remix-sec, .footer, .contexts-sec, .about-sec, .testimonials-sec, .cta-sec {
+  padding-left: max(3.5rem, calc((100% - 1100px)/2));
+  padding-right: max(3.5rem, calc((100% - 1100px)/2));
+}
 
-/* VIEWS */
 .view { display: none; opacity: 0; transition: opacity 0.5s ease; position: relative; z-index: 1;}
 .view.active { display: block; opacity: 1; }
 
-/* ==========================================================================
-   HERO COLLAGE (The Analog Desk)
-   ========================================================================== */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(252,249,244,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem max(3.5rem, calc((100% - 1100px)/2));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+/* Mobile Menu Base Styles */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 5px;
+}
+.menu-toggle span {
+  width: 28px;
+  height: 2px;
+  background-color: var(--dark);
+  transition: all 0.3s;
+  border-radius: 2px;
+}
+.close-menu { display: none; }
+.menu-overlay { display: none; }
+
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.nav-links a:hover { color: var(--secondary); }
+
 .hd-collage {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 0;
   width: 100%;
-  min-height: 85vh;
-  padding: 4rem max(3.5rem, calc((100% - 1100px)/2));
+  min-height: 100vh; 
+  padding: 8rem max(3.5rem, calc((100% - 1100px)/2)) 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  background: radial-gradient(circle at 80% 20%, #E8E2D5 0%, var(--bg-color) 60%);
 }
 
-.hd-gradient-bar{height:8px;background:linear-gradient(to right,var(--tertiary),var(--secondary),var(--primary));position:absolute;top:0;left:0;right:0; z-index: 10;}
-
-.collage-meta-top {
+.hero-slideshow { position: absolute; inset: 0; z-index: 0; }
+.hero-slide {
   position: absolute;
-  top: 3rem;
-  left: max(3.5rem, calc((100% - 1100px)/2));
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  z-index: 5;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
 }
-
-.c-brand {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--dark);
-  border: 1px solid var(--dark);
-  padding: 6px 12px;
-  background: var(--surface);
-  transform: rotate(-1deg);
-  box-shadow: 2px 2px 0px var(--shadow-color);
+.hero-slide.active { opacity: 1; }
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(252,249,244,0.85) 0%, rgba(252,249,244,0.95) 100%);
+  z-index: 1;
 }
 
 .c-video-prop {
   position: absolute;
-  top: 1.5rem; 
+  top: 6rem; 
   right: max(1rem, calc((100% - 1200px)/2)); 
-  background: var(--surface);
-  border: 2px solid var(--dark);
-  padding: 10px 10px 28px 10px; 
-  box-shadow: 8px 12px 20px var(--shadow-color);
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.6);
+  padding: 10px 10px 24px 10px; 
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-soft);
   transform: rotate(3deg);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
   width: clamp(200px, 20vw, 320px); 
-  z-index: 1; 
+  z-index: 3; 
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, z-index 0s;
 }
 
 .c-video-prop:hover {
   transform: rotate(1deg) scale(1.05);
-  box-shadow: 15px 20px 30px var(--shadow-color);
+  box-shadow: var(--shadow-hover);
   z-index: 10; 
-}
-
-.c-video-prop::before {
-  content: '';
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-3deg);
-  width: 80px;
-  height: 25px;
-  background: rgba(255, 255, 255, 0.9); 
-  border: 1px solid rgba(0,0,0,0.1);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  z-index: 10;
 }
 
 .c-video-wrapper {
   width: 100%;
   aspect-ratio: 16 / 9;
-  border: 2px solid var(--dark);
   background: #000;
-  border-radius: 2px;
+  border-radius: 1rem;
   overflow: hidden;
   position: relative;
 }
 
-.c-video-wrapper iframe {
+.c-video-element {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
 }
 
 .c-video-caption {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(16px, 1.4vw, 18px);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
   font-style: italic;
-  font-weight: 600;
-  color: var(--dark);
+  color: var(--muted);
   text-align: center;
-  line-height: 1.2;
 }
 
 .collage-center {
   position: relative;
   z-index: 3; 
-  margin-top: 6rem;
+  margin-top: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -182,21 +208,20 @@ body{
 }
 
 .c-title-small {
-  font-family: 'Space Mono', monospace; 
-  font-size: clamp(14px, 1.8vw, 18px);
-  font-weight: 700;
-  color: var(--surface);
-  background: var(--dark);
-  padding: 8px 24px;
-  letter-spacing: 0.15em;
+  font-family: 'Inter', sans-serif; 
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--secondary);
+  background: rgba(212, 175, 55, 0.1);
+  padding: 6px 16px;
+  border-radius: 50px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 0;
+  margin-bottom: 1rem;
   align-self: flex-start;
   margin-left: 12%; 
   z-index: 4;
   position: relative;
-  box-shadow: 4px 4px 0px var(--primary);
-  transform: rotate(-3deg);
 }
 
 .rap-composition {
@@ -206,106 +231,93 @@ body{
   align-items: center;
   width: 100%;
   max-width: 1000px;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
-.lets-text {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-style: italic;
-  font-size: clamp(50px, 10vw, 120px); 
-  font-weight: 600;
-  color: var(--tertiary);
-  position: absolute;
-  top: -8%;
-  left: -10%; 
-  transform: rotate(-10deg);
-  z-index: 2; 
-  text-shadow: 3px 6px 15px rgba(0,0,0,0.15);
-}
-
-.rap-mask-wrapper {
-  filter: drop-shadow(15px 25px 10px rgba(0, 0, 0, 0.25)); 
-  transform: rotate(-2deg);
-  position: relative;
-  z-index: 3; 
-  width: 100%;
+.hero-title-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding: 2rem 0;
 }
 
-.c-massive-mask {
-  font-family: 'Rubik Dirt', 'Permanent Marker', cursive; 
-  font-size: clamp(120px, 24vw, 320px);
-  line-height: 0.85;
-  color: transparent;
-  background: url('https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=2000&auto=format&fit=crop') center/cover, var(--primary);
+.hero-main-title {
+  font-family: 'Permanent Marker', cursive;
+  font-size: clamp(50px, 9vw, 110px);
+  font-weight: 400;
+  background: linear-gradient(180deg, #FFF285 0%, #F0B825 45%, #DA9A15 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(3px 4px 0px #A8780E) drop-shadow(0px 8px 8px rgba(0,0,0,0.25));
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  padding-top: 0.3em;
+  letter-spacing: 0.05em;
 }
 
-/* THE NEW MICROPHONE PHOTO PROP */
+.sup-3 { font-size: 0.45em; vertical-align: top; position: relative; top: 0.2em; }
+
+.hero-sub-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(20px, 3.5vw, 36px);
+  font-weight: 400; 
+  color: #000000; 
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.hero-divider {
+  width: 100%;
+  max-width: 500px;
+  height: 2px;
+  background-color: #000000;
+  border: none;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.hero-tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: 400; 
+  color: #000000; 
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
 .mic-container {
   position: absolute;
-  bottom: -30%;
-  right: -5%;
+  bottom: -25%;
+  right: -10%;
   z-index: 5; 
-  filter: drop-shadow(10px 15px 20px rgba(0,0,0,0.4));
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
 }
 
 .mic-image {
-  width: clamp(140px, 18vw, 220px);
+  width: clamp(160px, 22vw, 260px);
   height: auto;
-  border: 4px solid #fff;
-  border-radius: 2px;
-  transform: rotate(6deg);
+  border-radius: 8px;
+  transform: rotate(-10deg);
   display: block;
-}
-.asset-missing{
-  position: relative;
-  background: linear-gradient(135deg, rgba(42,75,70,0.28), rgba(194,77,44,0.28));
-}
-.asset-missing::after{
-  content:'Asset not found';
-  position:absolute;
-  inset:auto 12px 12px 12px;
-  font-family:'Space Mono',monospace;
-  font-size:11px;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  color:#fff;
-  background:rgba(26,26,26,0.75);
-  border:1px solid rgba(255,255,255,0.25);
-  padding:6px 10px;
-  border-radius:4px;
-}
-
-/* Tape for the photo */
-.mic-container::after {
-  content: '';
-  position: absolute;
-  top: -10px;
-  right: 15px;
-  width: 40px;
-  height: 15px;
-  background: rgba(255, 255, 255, 0.8);
-  transform: rotate(15deg);
-  border: 1px solid rgba(0,0,0,0.05);
-  z-index: 6;
+  clip-path: polygon(0% 15%, 15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%);
 }
 
 .hero-catchphrase {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(24px, 2.8vw, 36px); 
-  font-style: italic;
-  font-weight: 600;
-  color: var(--tertiary); 
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(20px, 2.5vw, 28px); 
+  font-weight: 300;
+  color: var(--dark); 
   text-align: center;
   max-width: 850px;
-  margin-top: 2rem;
-  line-height: 1.4;
+  margin-top: 3rem;
+  line-height: 1.6;
   position: relative;
   z-index: 5;
-  padding: 0 1.5rem;
 }
 
 .collage-bottom {
@@ -320,214 +332,337 @@ body{
 }
 
 .c-premise-pull {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(28px, 4vw, 46px);
-  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 500;
   color: var(--dark);
-  line-height: 1.1;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   max-width: 600px;
 }
-.c-premise-pull em {
-  font-style: italic;
-  color: var(--primary);
-}
+.c-premise-pull em { font-style: normal; color: var(--primary); }
 
-.c-btn-record {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: var(--dark);
-  padding: 8px 8px 8px 24px;
-  border-radius: 50px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border: 2px solid var(--dark);
-}
-
-.c-btn-record:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
-  background: var(--surface);
-}
-
-.c-btn-text {
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--surface);
-  transition: color 0.3s;
-}
-
-.c-btn-record:hover .c-btn-text {
-  color: var(--dark);
-}
-
-.c-btn-icon {
-  width: 44px;
-  height: 44px;
+.btn-primary {
   background: var(--secondary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid var(--dark);
   color: var(--dark);
-  font-weight: bold;
-  font-size: 20px;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Space Grotesk', sans-serif;
+  display: inline-block;
+  text-decoration: none;
+  box-shadow: 0 10px 20px -5px rgba(212, 175, 55, 0.4);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: #c4a128;
+  box-shadow: 0 15px 25px -5px rgba(212, 175, 55, 0.5);
 }
 
-/* Background aesthetic elements */
-.vinyl-silhouette {
-  position: absolute;
-  top: -10%;
-  right: -5%;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  border: 40px solid rgba(43, 38, 36, 0.03);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ==========================================================================
-   SCENARIOS (The Tape Deck / Cypher)
-   ========================================================================== */
 .scenario-sec {
   padding-top: 8rem;
   padding-bottom: 8rem;
   position: relative;
-  background:
-    linear-gradient(rgba(18, 30, 35, 0.58), rgba(26, 26, 26, 0.75)),
-    url('9_An_overhead_view_of_a_circle_o_1_20260327_123628.jpg') center/cover no-repeat;
-  border-top: 2px solid var(--dark);
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.16);
-  z-index: 2;
-  color: var(--surface);
+  z-index: 10; 
+  background-image: linear-gradient(135deg, rgba(252,249,244,0.98) 0%, rgba(252,249,244,1) 100%), url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 -30px 60px rgba(0,0,0,0.15);
+  border-top-left-radius: 3rem;
+  border-top-right-radius: 3rem;
 }
 
-.scenario-intro { position: relative; z-index: 2; }
+.scenario-intro { 
+  position: relative; 
+  z-index: 2; 
+  text-align: center; 
+  margin: 0 auto; 
+  max-width: 800px; 
+}
 
 .scenario-intro-label {
-  font-family: 'Space Mono', monospace;
+  font-family: 'Space Mono', monospace; 
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--secondary);
-  margin-bottom: 1rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(12, 17, 19, 0.88);
-  padding: 6px 14px;
-  border: 1px solid rgba(255,255,255,0.24);
+  color: var(--primary);
+  margin-bottom: 1.5rem; 
+  display: inline-block;
+  background: rgba(139, 44, 45, 0.1);
+  padding: 6px 16px;
+  border-radius: 50px;
 }
-.scenario-intro-label::before { content:'REC'; display:inline-block; color:var(--secondary); font-weight:700; animation: pulse-red 2s infinite; }
 
-.scenario-intro-head{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(36px,4.5vw,52px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:1rem;text-shadow:0 8px 24px rgba(0,0,0,0.55)}
-.scenario-intro-body{font-size:clamp(18px,2vw,22px);color:#e8e8e8;line-height:1.6; margin-bottom:3rem; max-width: 760px; font-weight: 400;}
+.scenario-intro-head {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 4.5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--dark);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
 
-.sc-categories{display:grid;grid-template-columns:repeat(4,minmax(130px,1fr));gap:14px;margin-bottom:3rem;position: relative;z-index: 2;}
+.scenario-intro-body {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--body);
+  line-height: 1.6; 
+  margin-bottom: 4rem; 
+  font-weight: 300;
+}
+
+.sc-categories {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 4rem; 
+  position: relative; 
+  z-index: 2;
+}
 
 .sc-cat-btn {
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 1.6rem 1.1rem;
-  border: 2px solid rgba(255,255,255,0.26);
-  background:
-    linear-gradient(rgba(20,20,20,0.65), rgba(20,20,20,0.35)),
-    url('9_An_overhead_view_of_a_circle_o_1_20260327_123628.jpg') center/cover;
-  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 24px;
+  border: 1px solid rgba(0,0,0,0.05);
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  color: var(--dark);
+  border-radius: 50px;
   cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 12px 18px rgba(0,0,0,0.35);
-  border-radius: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 }
-.sc-cat-btn:hover { transform: translateY(-4px) rotate(-1deg); box-shadow: 0 18px 28px rgba(0,0,0,0.4); }
-.sc-cat-btn.active {
-  background:
-    linear-gradient(rgba(194, 77, 44, 0.84), rgba(26, 26, 26, 0.65)),
-    url('4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg') center/cover;
-  color: #fff;
+.sc-cat-btn:hover { 
+  transform: translateY(-2px); 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06); 
+}
+.sc-cat-btn.active { 
+  background: var(--secondary); 
   border-color: var(--secondary);
-  box-shadow: 0 0 0 2px rgba(230,179,37,0.4), 0 14px 26px rgba(0,0,0,0.45);
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2); 
 }
 
-.sc-prompt{text-align:center;padding:2.2rem 1rem;color:#f6f2dc;font-style:italic;font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(22px,2.4vw,28px);background:rgba(0,0,0,0.35);border:1px dashed rgba(255,255,255,0.35);border-radius:10px;max-width:740px;margin:0 auto}
+.sc-prompt {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+}
 
 .scenario-card {
-  background: rgba(245, 242, 232, 0.96);
-  padding: 2.5rem;
-  border: 2px solid rgba(0,0,0,0.78);
-  box-shadow: 12px 18px 35px rgba(0,0,0,0.35);
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 2rem 1.5rem; 
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 2rem;
+  box-shadow: var(--shadow-soft);
   position: relative;
   z-index: 2;
-  max-width: 980px;
+  max-width: 1000px;
   margin: 0 auto;
-  border-radius: 14px;
+  
+  display: flex;
+  flex-direction: column;
 }
 
-.boombox-anchor {
+.boombox-anchor { display: none; }
+
+.scenario-nav {
+  order: 4; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.scenario-nav button {
+  background: var(--surface);
+  border: none;
+  color: var(--dark);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.scenario-nav button:hover {
+  background: var(--secondary); 
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(212, 175, 55, 0.2);
+}
+
+.scenario-nav button svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+.scenario-counter {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted); 
+}
+
+.scenario-trigger {
+  order: 1;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(20px, 3vw, 28px); 
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--dark);
+  margin-bottom: 1.5rem; 
+  line-height: 1.3;
+  text-align: center; 
+  padding: 0 1rem;
+}
+
+.sc-toggle {
+  order: 2;
+  display: flex;
+  justify-content: center;
+  background: rgba(255,255,255,0.5);
+  padding: 6px;
+  max-width: 500px;
   width: 100%;
-  height: 240px;
-  margin-bottom: 2rem;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 2px solid #222;
-  box-shadow: 0 10px 18px rgba(0,0,0,0.32);
-  background: var(--dark);
+  margin: 0 auto 1.5rem; 
+  border: 1px solid rgba(255,255,255,0.8); 
+  border-radius: 50px;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.sc-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 8px; 
+  border-radius: 50px;
+}
+.sc-btn.active {
+  background: var(--surface);
+  color: var(--primary); 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.sc-content {
+  order: 3;
+  display: none;
+  animation: aFadeUp 0.5s ease forwards;
+  background: rgba(255,255,255,0.4);
+  padding: 1.5rem 2rem; 
+  border-radius: 1.5rem;
+  font-size: clamp(15px,1.6vw,17px);
+  line-height: 1.6; 
+  color: var(--body); 
   position: relative;
+  border: 1px solid rgba(255,255,255,0.6);
 }
-.boombox-anchor img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
+@keyframes aFadeUp { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+
+.sc-content.active { display: block; }
+.sc-content.conditioned { border-left: 6px solid var(--primary); }
+.sc-content.conscious { border-left: 6px solid var(--secondary); }
+.sc-content p + p { margin-top: 1.5rem; }
+.sc-content strong {
+  color: var(--dark);
+  font-family: 'Space Grotesk', sans-serif; 
+  font-size: 15px; 
+  font-weight: 600;
+  display: block; 
+  margin-bottom: 8px;
+}
+.r3-label {
+  color: var(--surface);
+  font-family: 'Space Mono', monospace; 
+  font-size: 11px; 
+  letter-spacing: 0.1em; 
+  text-transform: uppercase; 
+  background: var(--dark); 
+  padding: 4px 10px; 
+  border-radius: 4px; 
+  display: inline-block; 
+  margin-bottom: 4px; 
+  margin-right: 6px;
+  font-weight: 700;
 }
 
-.scenario-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1.2rem;border-bottom:2px dashed #b5aea0}
-.scenario-nav button{background:#f9f5e8;border:2px solid var(--dark);color:var(--dark);width:45px;height:45px;font-size:1.2rem;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center; border-radius: 50%; box-shadow: 2px 2px 0px var(--dark);}
-.scenario-nav button:hover{background:var(--secondary); transform:translate(-2px,-2px); box-shadow: 4px 4px 0px var(--dark);}
-.scenario-counter{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--dark); background: #efe7d8; padding: 4px 12px; border: 1px solid #c8bcaa;}
-.scenario-trigger{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,3vw,34px);font-weight:700;font-style:italic;color:var(--primary);margin-bottom:2rem;line-height:1.3;text-align:center; padding: 0 1rem;}
+@media(min-width: 900px) {
+  .scenario-card {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    grid-template-rows: auto auto 1fr auto; 
+    gap: 0 3rem;
+    padding: 3rem;
+  }
+  .boombox-anchor {
+    display: block;
+    grid-column: 1 / 2;
+    grid-row: 1 / 5;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    max-height: 350px;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    align-self: start;
+    position: sticky;
+    top: 120px;
+  }
+  .boombox-anchor img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+  
+  .scenario-trigger { grid-column: 2 / 3; grid-row: 1 / 2; order: unset; text-align: left; padding: 0; margin-bottom: 1.5rem;}
+  .sc-toggle { grid-column: 2 / 3; grid-row: 2 / 3; order: unset; margin: 0 0 1.5rem 0; max-width:100%; }
+  .sc-content { grid-column: 2 / 3; grid-row: 3 / 4; order: unset; }
+  .scenario-nav {
+    grid-column: 2 / 3;
+    grid-row: 4 / 5;
+    order: unset;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
 
-.sc-toggle{display:flex;justify-content:center;background:#efe7d8;padding:6px;max-width:640px;margin:0 auto 2rem;border:2px solid var(--dark); border-radius: 50px;}
-.sc-btn{flex:1;padding:1rem 1.3rem;border:none;background:transparent;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.3s;color:#575757;font-family:'Space Mono',monospace;letter-spacing:0.1em;text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:10px; border-radius: 40px;}
-.sc-btn svg { width: 18px; height: 18px; fill: currentColor; }
-.sc-btn.active{background:rgba(255,255,255,0.12);color:var(--surface); box-shadow: 0 4px 10px rgba(0,0,0,0.3);}
-
-.sc-content{display:none;text-align:left;animation:aFadeUp 0.4s ease;background:#f9f5ea;padding:2.3rem;border:2px solid #1a1a1a;font-size:clamp(16px,1.8vw,18px);line-height:1.8;color:var(--body); position: relative;border-radius:10px}
-.sc-content.active{display:block}
-.sc-content.conditioned{border-left:6px solid var(--primary)}
-.sc-content.conscious{border-left:6px solid var(--tertiary)}
-.sc-content p + p{margin-top:1.5rem}
-.sc-content strong{color:var(--dark);font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; display:block; margin-bottom:8px;}
-/* ==========================================================================
-   EQUALIZER BOARD (Studio Mode)
-   ========================================================================== */
 .assessment-sec {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-  /* Changed from black to a deep, rich teal for a beautiful fallback */
-  background-color: #17262b;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  background-color: var(--bg-color);
   background-image: 
-    /* Lightened the overlay heavily so the vibrant red/teal artwork shines through */
-    linear-gradient(rgba(23, 38, 43, 0.4), rgba(26, 26, 26, 0.85)),
+    linear-gradient(rgba(252, 249, 244, 0.85), rgba(252, 249, 244, 0.95)),
     url('5_Close_up_on_a_mixing_board_wit_1_20260327_123554.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed; 
-  color: var(--surface);
   position: relative;
   z-index: 3;
-  box-shadow: 0 -20px 40px rgba(0,0,0,0.3), 0 20px 40px rgba(0,0,0,0.3);
 }
 
 .assessment-intro-label {
@@ -536,87 +671,121 @@ body{
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--secondary); 
-  margin-bottom: 1rem;
-  text-shadow: 0 0 10px rgba(230, 179, 37, 0.5);
+  color: var(--primary); 
+  margin-bottom: 1.5rem;
+  background: rgba(139, 44, 45, 0.1);
+  padding: 6px 16px;
+  border-radius: 50px;
+  display: inline-block;
 }
 
 .assessment-intro-head {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(36px, 4.5vw, 52px);
-  font-weight: 700;
-  color: var(--surface);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 4.5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--dark);
   line-height: 1.1;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .assessment-intro-body {
+  font-family: 'Inter', sans-serif;
   font-size: clamp(18px, 2vw, 22px);
-  color: #A0A0A0;
+  color: var(--body);
   line-height: 1.6; 
-  margin-bottom: 3.5rem;
+  margin-bottom: 4rem;
   max-width: 600px;
+  font-weight: 300;
 }
 
 .assessment-card {
-  background: rgba(20, 24, 28, 0.72);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 3rem;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 4rem;
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 2.5rem;
+  box-shadow: var(--shadow-soft);
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.mixer-container { margin-bottom: 3rem; background: #111; padding:24px; border-radius:8px; box-shadow: inset 0 10px 20px rgba(0,0,0,0.8); border: 2px solid #222;}
-.mixer-labels { display: flex; justify-content: space-between; font-family:'Space Mono',monospace; font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 16px;}
-.mixer-track { width: 100%; height: 16px; background: #0a0a0a; border-radius: 8px; position: relative; box-shadow: inset 0 2px 8px rgba(0,0,0,1); border:1px solid #1a1a1a; }
-.mixer-fill { height: 100%; border-radius: 8px; background: linear-gradient(90deg, #c0392b, #e67e22, #27ae60); width: 0%; transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 0 15px rgba(230, 126, 34, 0.4); }
-.mixer-knob { width: 32px; height: 56px; background: linear-gradient(to bottom, #d4d4d4, #7a7a7a); border: 2px solid #000; border-radius: 4px; position: absolute; top: -20px; left: 0%; transform: translateX(-50%); transition: left 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 8px 16px rgba(0,0,0,0.8), inset 0 2px 0 rgba(255,255,255,0.9), inset 0 -2px 0 rgba(0,0,0,0.5); cursor: grab;}
-.mixer-knob::after { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:80%; height:4px; background:#111; box-shadow: 0 8px 0 #111, 0 -8px 0 #111;}
+.mixer-container { 
+  margin-bottom: 4rem; 
+  background: rgba(255, 255, 255, 0.6); 
+  backdrop-filter: blur(8px);
+  padding: 32px 40px; 
+  border-radius: 1.5rem; 
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.02), 0 10px 30px rgba(0,0,0,0.05); 
+  border: 1px solid rgba(255,255,255,0.8);
+}
+.mixer-labels { display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px;}
+.mixer-track { width: 100%; height: 8px; background: #E2DCD2; border-radius: 4px; position: relative; }
+.mixer-fill { height: 100%; border-radius: 4px; background: var(--secondary); width: 0%; transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); }
+.mixer-knob { width: 24px; height: 24px; background: #fff; border: 2px solid var(--secondary); border-radius: 50%; position: absolute; top: -8px; left: 0%; transform: translateX(-50%); transition: left 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 4px 8px rgba(0,0,0,0.1); cursor: pointer;}
 
 .a-step { display: none; }
-.a-step.active { display: block; animation: aFadeUp 0.4s ease forwards; }
+.a-step.active { display: block; animation: aFadeUp 0.5s ease forwards; }
 
-.a-question{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(24px,3vw,32px);font-weight:600; font-style: italic; color:var(--surface);line-height:1.3;margin-bottom:2rem}
+.a-question{
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(26px, 3.5vw, 36px);
+  font-weight: 500; 
+  letter-spacing: -0.02em;
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 2.5rem;
+}
 .a-options{display:flex;flex-direction:column;gap:16px}
-.a-opt{background: rgba(20, 20, 20, 0.8); border:1px solid #444; border-radius: 8px; padding:1.25rem 1.5rem; text-align:left; cursor:pointer; font-family:'Outfit',sans-serif; font-size:clamp(16px,1.8vw,18px); color:#ccc; line-height:1.6; transition:all 0.2s;}
-.a-opt:hover{border-color: var(--secondary); background: #222; color: #fff; transform:translateX(4px); box-shadow: -4px 0px 0px var(--secondary);}
-.a-opt.chosen{border-color: var(--secondary); background: #222; color: #fff; box-shadow: -4px 0px 0px var(--secondary), 0 0 20px rgba(230, 179, 37, 0.15);}
+.a-opt {
+  background: rgba(255, 255, 255, 0.8); 
+  border: 1px solid rgba(0,0,0,0.05); 
+  border-radius: 1.5rem; 
+  padding: 1.5rem 2rem; 
+  text-align: left; 
+  cursor: pointer; 
+  font-family: 'Inter', sans-serif; 
+  font-size: clamp(16px, 1.8vw, 18px); 
+  color: var(--body); 
+  line-height: 1.6; 
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+.a-opt:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.05);}
+.a-opt.chosen { border-color: var(--secondary); background: #fff; box-shadow: 0 0 0 2px var(--secondary);}
 
 .a-result { display: none; }
-.a-result.active { display: block; animation: aFadeUp 0.45s ease forwards; background: linear-gradient(rgba(15,15,15,0.62), rgba(15,15,15,0.8)), url('4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg') center/cover; border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 2rem; }
+.a-result.active { display: block; animation: aFadeUp 0.5s ease forwards; }
 
-.result-badge{display:inline-block;padding:8px 16px;font-family:'Space Mono',monospace; font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.5rem; background:var(--secondary);color:var(--dark); border-radius: 4px; box-shadow: 0 0 15px rgba(230, 179, 37, 0.4);}
-.result-head{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(32px,4vw,42px);font-weight:700;color:var(--surface);line-height:1.1;margin-bottom:1rem}
-.result-body{font-size:clamp(18px,2vw,20px);color:#aaa;line-height:1.8;margin-bottom:2.5rem}
+.result-badge{display:inline-block;padding:8px 16px;font-family: 'Space Mono', monospace; font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.5rem; background: var(--secondary);color: var(--dark); border-radius: 50px; }
+.result-head{font-family: 'Space Grotesk', sans-serif;font-size:clamp(32px,4.5vw,46px);font-weight:600;letter-spacing: -0.02em;color:var(--dark);line-height:1.1;margin-bottom:1.5rem;}
+.result-body{font-family: 'Inter', sans-serif;font-size:clamp(18px,2vw,20px);color: var(--body);line-height:1.8;margin-bottom:3rem;font-weight: 300;}
+.result-actions { display: flex; gap: 1.5rem; align-items: center; }
+.restart-btn { background: transparent; border: none; color: var(--muted); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; text-decoration: underline; cursor: pointer; transition: all 0.2s;}
+.restart-btn:hover { color: var(--dark); }
 
-.result-cta{background:var(--primary);color:var(--surface);border:none; border-radius: 50px; padding:12px 28px;text-decoration:none;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.3s;display:inline-block; cursor:pointer; box-shadow: 0 10px 20px rgba(194, 77, 44, 0.3);}
-.result-cta:hover{transform:translateY(-4px); box-shadow: 0 15px 25px rgba(194, 77, 44, 0.5); background: #d65531;}
-
-.restart-btn{background:transparent;border:none;color:var(--muted);font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer; padding:10px 15px; transition:all 0.2s;}
-.restart-btn:hover{color:var(--surface);}
-
-/* ==========================================================================
-   AGENCY CONSOLE: THE TURNTABLE (The Desk Environment)
-   ========================================================================== */
 #phases {
   padding-top: 6rem;
   padding-bottom: 6rem;
   position: relative;
-  background-color: #E8E2D5;
-  background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+  background-color: var(--bg-color);
+  background-image: linear-gradient(rgba(252, 249, 244, 0.85), rgba(252, 249, 244, 0.95)), url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg');
+  background-size: cover;
+  background-attachment: fixed;
   z-index: 2;
   overflow: hidden;
 }
 
-.eyebrow{font-family:'Space Mono',monospace; font-size:13px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--dark);margin-bottom:2rem; text-align: center; background: rgba(255,255,255,0.5); display: inline-block; padding: 6px 16px; border: 1px solid var(--dark); border-radius: 50px; position: relative; left: 50%; transform: translateX(-50%); backdrop-filter: blur(4px);}
+.eyebrow{font-family:'Space Grotesk',sans-serif; font-size:13px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--dark);margin-bottom:2rem; text-align: center; background: rgba(255,255,255,0.8); display: inline-block; padding: 6px 16px; border: 1px solid rgba(0,0,0,0.05); border-radius: 50px; position: relative; left: 50%; transform: translateX(-50%); backdrop-filter: blur(8px);}
 
 .agency-console {
-  background: var(--bg-color);
-  border: 3px solid var(--dark);
-  border-radius: 12px;
-  box-shadow: 20px 25px 40px rgba(0,0,0,0.2), inset 0 0 20px rgba(0,0,0,0.05);
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 2.5rem;
+  box-shadow: var(--shadow-soft);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
@@ -625,446 +794,109 @@ body{
   z-index: 5;
 }
 
-.deck-panel {
-  padding: 4rem 3rem;
-  background: #DFD9C9;
-  border-right: 3px solid var(--dark);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  box-shadow: inset -10px 0 20px rgba(0,0,0,0.05);
-}
-
-.turntable-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-  aspect-ratio: 1;
-  background: #F4F1EA;
-  border: 3px solid var(--dark);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: inset 5px 5px 15px rgba(0,0,0,0.1), 10px 10px 0px rgba(0,0,0,0.1);
-  margin-bottom: 3.5rem;
-}
-
-.turntable-platter {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: #111;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 6px solid #2B2624;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.4), inset 0 0 15px rgba(255,255,255,0.1);
-}
-
-.record {
-  width: 96%;
-  height: 96%;
-  border-radius: 50%;
-  background: #181818;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  transition: transform 1s ease;
-  box-shadow: 0 0 10px rgba(0,0,0,0.8);
-}
-
-.record::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: repeating-radial-gradient( #111 0px, #1a1a1a 2px, #111 4px );
-  z-index: 1;
-}
-
-.record::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: conic-gradient( from 0deg, rgba(255,255,255,0.05) 0deg, rgba(255,255,255,0) 45deg, rgba(255,255,255,0.15) 90deg, rgba(255,255,255,0) 135deg, rgba(255,255,255,0.05) 180deg, rgba(255,255,255,0) 225deg, rgba(255,255,255,0.15) 270deg, rgba(255,255,255,0) 315deg, rgba(255,255,255,0.05) 360deg );
-  z-index: 2;
-  pointer-events: none;
-}
-
+.deck-panel { padding: 4rem 3rem; background: transparent; border-right: 1px solid rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; position: relative;}
+.turntable-wrapper { position: relative; width: 100%; max-width: 360px; aspect-ratio: 1; background: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.8); border-radius: 2rem; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 3.5rem;}
+.turntable-platter { width: 100%; height: 100%; border-radius: 50%; background: #2C2C2C; position: relative; display: flex; align-items: center; justify-content: center; border: 4px solid #E2DCD2; box-shadow: 0 15px 30px rgba(0,0,0,0.2);}
+.record { width: 96%; height: 96%; border-radius: 50%; background: #181818; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: transform 1s ease; box-shadow: 0 0 10px rgba(0,0,0,0.8);}
+.record::before { content: ''; position: absolute; width: 100%; height: 100%; border-radius: 50%; background: repeating-radial-gradient( #111 0px, #1a1a1a 2px, #111 4px ); z-index: 1;}
+.record::after { content: ''; position: absolute; width: 100%; height: 100%; border-radius: 50%; background: conic-gradient( from 0deg, rgba(255,255,255,0.05) 0deg, rgba(255,255,255,0) 45deg, rgba(255,255,255,0.15) 90deg, rgba(255,255,255,0) 135deg, rgba(255,255,255,0.05) 180deg, rgba(255,255,255,0) 225deg, rgba(255,255,255,0.15) 270deg, rgba(255,255,255,0) 315deg, rgba(255,255,255,0.05) 360deg ); z-index: 2; pointer-events: none;}
 .record.spinning { animation: spinRecord 1.8s linear infinite; }
 @keyframes spinRecord { 100% { transform: rotate(360deg); } }
+.record-label { width: 35%; height: 35%; border-radius: 50%; background: var(--tertiary); position: relative; z-index: 3; display: flex; align-items: center; justify-content: center; flex-direction: column; border: none; transition: background 0.4s ease; box-shadow: inset 0 0 10px rgba(0,0,0,0.3);}
+.record-label::before { content: 'TRACK'; font-family: 'Space Mono', monospace; font-size: 8px; font-weight: 700; color: var(--surface); letter-spacing: 0.15em; opacity: 0.9; margin-bottom: 2px;}
+.record-label-text { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; color: var(--surface); line-height: 1;}
+.record-label::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; background: #FCF9F4; border-radius: 50%; z-index: 4;}
 
-.record-label {
-  width: 35%;
-  height: 35%;
-  border-radius: 50%;
-  background: var(--tertiary);
-  position: relative;
-  z-index: 3;
+.tonearm-container { position: absolute; top: 20px; right: 20px; width: 50px; height: 65%; transform-origin: 25px 25px; transform: rotate(15deg); transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; filter: drop-shadow(-6px 12px 6px rgba(0,0,0,0.3));}
+.tonearm-base { width: 50px; height: 50px; background: linear-gradient(135deg, #eee, #ddd); border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); position: absolute; top: 0; left: 0; z-index: 2; box-shadow: inset 0 2px 5px rgba(255,255,255,0.8);}
+.tonearm-base::after { content:''; position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: #888; border-radius: 50%; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);}
+.tonearm-rod { width: 8px; height: 100%; background: linear-gradient(90deg, #eee, #ffffff, #ccc); border: 1px solid rgba(0,0,0,0.1); position: absolute; top: 25px; left: 21px; border-radius: 5px;}
+.tonearm-head { width: 20px; height: 40px; background: #444; border: 1px solid rgba(0,0,0,0.2); position: absolute; bottom: -15px; left: 15px; border-radius: 4px; transform-origin: top center; transform: rotate(-25deg); box-shadow: inset 0 2px 4px rgba(255,255,255,0.2);}
+
+.console-pads { display: flex; gap: 16px; width: 100%; justify-content: center;}
+.pad-btn { flex: 1; padding: 16px 12px; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; color: var(--dark); background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.05); border-radius: 1.5rem; box-shadow: 0 8px 16px rgba(0,0,0,0.05); cursor: pointer; transition: all 0.2s; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 6px;}
+.pad-btn span { font-size: 16px; color: var(--muted);}
+.pad-btn:hover { background: #fff; transform: translateY(-2px);}
+.pad-btn.active { background: var(--secondary); color: var(--dark); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); transform: translateY(2px); border-color: var(--secondary);}
+.pad-btn.active span { color: var(--dark); }
+
+.readout-panel { padding: 4rem; display: flex; flex-direction: column; justify-content: center; position: relative;}
+.readout-tag { position: absolute; top: -16px; left: 4rem; background: var(--secondary); color: var(--dark); font-family: 'Space Mono', monospace; font-size: 12px; padding: 6px 16px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; border: none; border-radius: 50px;}
+.readout-content { animation: aFadeUp 0.4s ease forwards;}
+.readout-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(32px, 4vw, 48px); font-weight: 600; margin-bottom: 1.5rem; line-height: 1.1; transition: color 0.3s ease;}
+.readout-desc { font-size: clamp(18px, 2vw, 22px); line-height: 1.8; color: var(--body); font-weight: 300;}
+
+.sec-alt { padding-top: 6rem; padding-bottom: 6rem; background: transparent; position: relative; z-index: 3;}
+.rap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:3rem}
+.rap-col{position:relative;}
+.rap-col-head{font-family:'Space Mono',monospace; font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:2rem; display:inline-block; padding:8px 16px; background:var(--secondary); color:var(--dark); border-radius: 50px;}
+.rap-item{cursor:pointer;padding:16px;margin:-16px;transition:background 0.2s;margin-bottom:8px;outline:none; border:2px solid transparent; border-radius: 1rem;}
+.rap-item:hover{background:rgba(255,255,255,0.5); border-color:rgba(255,255,255,0.8);}
+.rap-row{display:flex;align-items:baseline;gap:16px}
+.rap-letter{font-family:'Space Grotesk',sans-serif; font-size:32px;font-weight:700;color:var(--primary);min-width:24px;flex-shrink:0;}
+.rap-term{font-family:'Space Mono',monospace; font-size:clamp(14px,1.6vw,16px);color:var(--dark);flex:1;font-weight:700; text-transform:uppercase; letter-spacing:0.05em;}
+.rap-wtag{font-size:11px;color:var(--muted);text-transform:uppercase; letter-spacing:0.2em;}
+.expand-caret{font-size:12px;color:var(--dark);transition:transform 0.3s ease;margin-left:8px}
+.rap-item.active .expand-caret{transform:rotate(180deg);color:var(--primary)}
+.rap-detail{font-size:clamp(16px,1.8vw,18px);color:var(--body);line-height:1.8;margin-top:0;padding:0 20px;background:transparent;border-left:4px solid transparent;max-height:0;overflow:hidden;opacity:0;transition:max-height 0.4s ease,opacity 0.3s ease,padding 0.4s ease,margin 0.4s ease}
+.rap-detail.open{max-height:900px;opacity:1;padding:20px 24px;margin-top:16px; margin-bottom:24px; border:1px solid rgba(255,255,255,0.6); background:var(--glass-bg); backdrop-filter:blur(8px); border-left:8px solid var(--secondary); box-shadow: var(--shadow-soft); border-radius: 1rem;}
+.rap-detail strong{color:var(--dark); font-weight:600;}
+
+.contexts-sec { padding-top: 6rem; padding-bottom: 8rem; background: var(--bg-color);}
+.ctx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:4rem}
+.ctx-card { padding: 2rem; background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.6); transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1); box-shadow: var(--shadow-soft); position: relative; border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; overflow: hidden; display: flex; flex-direction: column;}
+.ctx-card:nth-child(2) { transform: translateY(2rem); border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%;}
+.ctx-card:hover { transform: translateY(-0.5rem); background: rgba(255,255,255,0.95); box-shadow: var(--shadow-hover); border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%;}
+
+/* Image wraps inside Context Cards */
+.ctx-img-wrap { width: 100%; height: 180px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; position: relative; z-index: 1;}
+.ctx-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+.ctx-label { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; color: var(--primary); position: relative; z-index: 1;}
+.ctx-punch { font-family: 'Space Grotesk', sans-serif; font-size: clamp(24px, 3vw, 30px); font-weight: 600; color: var(--dark); line-height: 1.2; margin-bottom: 20px; position: relative; z-index: 1;}
+.ctx-body { font-size: clamp(16px, 1.8vw, 18px); color: var(--body); line-height: 1.8; font-weight: 300; position: relative; z-index: 1;}
+
+.flow-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding:3rem 0}
+.flow-node{text-align:center;padding:16px 32px; border:none; background:var(--glass-bg); backdrop-filter:blur(8px); transition:all 0.3s; box-shadow: var(--shadow-soft); border-radius: 50px;}
+.flow-node:hover{transform:translateY(-4px);box-shadow: var(--shadow-hover); background: #fff;}
+.flow-label{font-family:'Space Mono',monospace; font-size:clamp(13px,1.6vw,15px);font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--dark);}
+.flow-arrow{font-size:24px;color:var(--secondary);padding:0;flex-shrink:0; font-weight: bold;}
+
+.remix-sec {
+  padding-top: 10rem;
+  padding-bottom: 8rem;
+  background-color: var(--bg-color);
+  background-image: linear-gradient(rgba(252, 249, 244, 0.85), rgba(252, 249, 244, 0.95)), url('4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  border: 2px solid #000;
-  transition: background 0.4s ease;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-}
-
-.record-label::before {
-  content: 'TRACK';
-  font-family: 'Space Mono', monospace;
-  font-size: 8px;
-  font-weight: 700;
-  color: var(--surface);
-  letter-spacing: 0.15em;
-  opacity: 0.9;
-  margin-bottom: 2px;
-}
-
-.record-label-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--surface);
-  line-height: 1;
-}
-
-.record-label::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 12px;
-  height: 12px;
-  background: #E8E2D5;
-  border-radius: 50%;
-  border: 3px solid #000;
-  z-index: 4;
-}
-
-.tonearm-container {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 50px;
-  height: 65%;
-  transform-origin: 25px 25px;
-  transform: rotate(15deg);
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 800px; 
+  border-top-left-radius: 50% 100px;
+  border-top-right-radius: 50% 100px;
+  margin-top: -60px;
+  position: relative;
   z-index: 10;
-  filter: drop-shadow(-6px 12px 6px rgba(0,0,0,0.5));
-}
-
-.tonearm-base {
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, #eee, #999);
-  border-radius: 50%;
-  border: 2px solid var(--dark);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  box-shadow: inset 0 2px 5px rgba(255,255,255,0.8);
-}
-
-.tonearm-base::after {
-  content:'';
-  position:absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px; height: 20px;
-  background: var(--dark);
-  border-radius: 50%;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
-}
-
-.tonearm-rod {
-  width: 10px;
-  height: 100%;
-  background: linear-gradient(90deg, #d4d4d4, #ffffff, #a3a3a3);
-  border: 1px solid var(--dark);
-  position: absolute;
-  top: 25px;
-  left: 20px;
-  border-radius: 5px;
-}
-
-.tonearm-head {
-  width: 22px;
-  height: 45px;
-  background: #222;
-  border: 1px solid #000;
-  position: absolute;
-  bottom: -20px;
-  left: 14px;
-  border-radius: 4px;
-  transform-origin: top center;
-  transform: rotate(-25deg);
-  box-shadow: inset 0 2px 4px rgba(255,255,255,0.2);
-}
-
-.console-pads {
-  display: flex;
-  gap: 16px;
-  width: 100%;
-  justify-content: center;
-}
-
-.pad-btn {
-  flex: 1;
-  padding: 16px 12px;
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--dark);
-  background: var(--surface);
-  border: 3px solid var(--dark);
-  border-radius: 8px;
-  box-shadow: 0 8px 0px var(--dark);
-  cursor: pointer;
-  transition: all 0.1s;
-  text-transform: uppercase;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.pad-btn span {
-  font-size: 16px;
-  color: var(--muted);
-}
-
-.pad-btn:active {
-  transform: translateY(8px);
-  box-shadow: 0 0px 0px var(--dark);
-}
-
-.pad-btn.active {
-  background: var(--dark);
-  color: var(--surface);
-  box-shadow: 0 4px 0px var(--dark);
-  transform: translateY(4px);
-  border-color: var(--dark);
-}
-
-.pad-btn.active span {
-  color: var(--secondary); 
-}
-
-.readout-panel {
-  padding: 4rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-}
-
-.readout-tag {
-  position: absolute;
-  top: -16px;
-  left: 4rem;
-  background: var(--dark);
-  color: var(--secondary); 
-  font-family: 'Space Mono', monospace;
-  font-size: 12px;
-  padding: 6px 16px;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  border: 2px solid var(--dark);
-  border-radius: 50px;
-}
-
-.readout-content {
-  animation: consoleFade 0.4s ease forwards;
-}
-
-.readout-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 700;
-  color: var(--tertiary);
-  margin-bottom: 1.5rem;
-  line-height: 1.1;
-  transition: color 0.3s ease;
-}
-
-.readout-desc {
-  font-size: clamp(18px, 2vw, 22px);
-  line-height: 1.8;
-  color: var(--body);
-}
-
-/* ==========================================================================
-   LINER NOTES (The Breakdown)
-   ========================================================================== */
-.sec-alt {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-  background:
-    linear-gradient(180deg, #f8f3e9 0%, #f2eadc 100%);
-  position: relative;
-  z-index: 3;
   box-shadow: 0 -20px 40px rgba(0,0,0,0.05);
 }
 
-.rap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:2.5rem}
-.rap-col{position:relative;background:#fffef9;border:2px solid #231f1d;border-radius:14px;padding:1.2rem 1.1rem 1.3rem;box-shadow:0 18px 30px rgba(0,0,0,0.1)}
-.rap-col-head{font-family:'Space Mono',monospace; font-size:12px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:1rem; display:inline-block; padding:8px 14px; background:var(--dark); color:#f8f6f0; border-radius: 999px;}
-
-.phase-art {
+.remix-glass-stage {
   width: 100%;
-  height: 190px;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 2px solid #2a2523;
-  margin-bottom: 0.9rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(26, 26, 26, 0.85); 
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3rem;
+  padding: 6rem 2rem;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05);
   position: relative;
-}
-.phase-art img{width:100%;height:100%;object-fit:cover;display:block}
-.phase-art.two-up{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.phase-art.two-up img{border-right:1px solid rgba(0,0,0,0.4)}
-.phase-art.two-up img:last-child{border-right:none}
-
-.rap-item{cursor:pointer;padding:14px;margin:0 0 7px;transition:background 0.2s;border:2px solid transparent; border-radius: 8px;background:#f8f4ea}
-.rap-item:hover{background:#efe8d9; border-color:#d6cbb6;}
-.rap-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.rap-letter{font-family:'Cormorant Garamond',Georgia,serif; font-size:30px;font-weight:700;color:var(--primary);min-width:20px;flex-shrink:0; font-style:italic;}
-.rap-term{font-family:'Space Mono',monospace; font-size:clamp(13px,1.4vw,14px);color:var(--dark);flex:1;font-weight:700; text-transform:uppercase; letter-spacing:0.05em;}
-.rap-wtag{font-size:10px;color:var(--muted);text-transform:uppercase; letter-spacing:0.2em;}
-.expand-caret{font-size:12px;color:var(--dark);transition:transform 0.3s ease;margin-left:4px}
-.rap-item.active .expand-caret{transform:rotate(180deg);color:var(--primary)}
-.rap-detail{font-size:clamp(15px,1.6vw,17px);color:#1f1f1f;line-height:1.75;margin-top:0;padding:0 14px;background:#fffef8;border-left:4px solid var(--primary);max-height:0;overflow:hidden;opacity:0;transition:max-height 0.4s ease,opacity 0.3s ease,padding 0.4s ease,margin 0.4s ease;border-radius:8px}
-.rap-detail.open{max-height:900px;opacity:1;padding:16px 18px;margin-top:10px; margin-bottom:15px; border:2px solid #1c1c1c; border-left:8px solid var(--primary); box-shadow: 4px 8px 0px rgba(0,0,0,0.08);}
-.rap-detail strong{color:var(--dark); font-weight:700;}
-/* ==========================================================================
-   CONTEXTS (The Crates - Vinyl Sleeves)
-   ========================================================================== */
-.contexts-sec {
-  padding-top: 6rem;
-  padding-bottom: 8rem;
-  background: var(--bg-color);
-}
-
-.ctx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:4rem}
-
-/* Vinyl Sleeve Design */
-.ctx-card {
-  padding: 3rem 2rem;
-  background: var(--surface); 
-  border: 2px solid var(--dark);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
-  box-shadow: 10px 10px 0px var(--shadow-color);
-  position: relative;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-/* Vinyl Record peaking out of sleeve */
-.ctx-card::before {
-  content: '';
-  position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 120px;
-  height: 120px;
-  background: #111;
-  border-radius: 50%;
-  border: 1px solid #333;
-  box-shadow: inset 0 0 10px rgba(255,255,255,0.2);
-  transition: transform 0.4s ease;
-  z-index: 0;
-}
-
-.ctx-card:hover {
-  transform: translateY(-8px) rotate(-1deg);
-  box-shadow: 15px 20px 0px var(--shadow-color);
-}
-
-.ctx-card:hover::before {
-  transform: translate(-10px, 10px) rotate(45deg);
-}
-
-.ctx1{border-top:8px solid var(--tertiary)}
-.ctx2{border-top:8px solid var(--primary)}
-.ctx3{border-top:8px solid var(--secondary)}
-
-.ctx-label {
-  font-family: 'Space Mono', monospace; 
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 16px; 
-  color: var(--dark);
-  position: relative;
-  z-index: 1;
-}
-
-.ctx-punch {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(24px, 3vw, 30px);
-  font-weight: 700;
-  font-style: italic; 
-  color: var(--dark);
-  line-height: 1.2;
-  margin-bottom: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.ctx-body {
-  font-size: clamp(16px, 1.8vw, 18px);
-  color: var(--body);
-  line-height: 1.8;
-  position: relative;
-  z-index: 1;
-}
-
-/* FLOW */
-.flow-row{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding:3rem 0}
-.flow-node{text-align:center;padding:16px 32px; border:2px solid var(--dark); background:var(--surface); transition:all 0.2s; box-shadow: 6px 6px 0px var(--shadow-color); border-radius: 50px;}
-.flow-node:hover{transform:translate(-2px,-2px);box-shadow: 8px 8px 0px var(--shadow-color); background: var(--secondary);}
-.flow-label{font-family:'Space Mono',monospace; font-size:clamp(13px,1.6vw,15px);font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--dark);}
-.flow-arrow{font-size:24px;color:var(--primary);padding:0;flex-shrink:0; font-weight: bold;}
-
-/* ==========================================================================
-   R.A.P. REMIX SECTION (The Cypher / PLURAL)
-   ========================================================================== */
-.remix-sec {
-  padding-top: 8rem;
-  padding-bottom: 8rem;
-  background:
-    linear-gradient(180deg, rgba(20, 30, 36, 0.52) 0%, rgba(26, 26, 26, 0.78) 80%),
-    url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg') center/cover no-repeat;
+  z-index: 2;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 700px;
-  color: var(--surface);
-  border-top: 4px solid var(--secondary);
-  box-shadow: 0 -20px 40px rgba(0,0,0,0.22);
-  position: relative;
 }
-.remix-sec::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background: radial-gradient(circle at 50% 25%, rgba(230, 179, 37, 0.22), rgba(230,179,37,0) 52%);
-  pointer-events:none;
-}
-.remix-sec > *{position:relative; z-index:1;}
 
 .remix-eyebrow{font-family:'Space Mono',monospace; font-size:12px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--secondary);margin-bottom:3rem}
 .remix-phase{display:none;width:100%}
@@ -1072,252 +904,528 @@ body{
 .p0-plural-space{height:clamp(80px,14vw,120px);display:flex;align-items:flex-end;justify-content:center;margin-bottom:0}
 .p0-plural-row{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);display:flex;justify-content:center;align-items:flex-end;gap:clamp(8px, 1.2vw, 18px);opacity:0;transition:opacity 0.7s ease, bottom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);line-height:1;z-index:10;width:max-content}
 .p0-plural-row.show{opacity:1;bottom:88%}
-.p0-pl{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(48px,8vw,80px);font-weight:700;color:var(--bg-color);line-height:1;display:inline-block;letter-spacing:0.05em}
+
+.p0-pl{font-family:'Space Grotesk',sans-serif;font-size:clamp(48px,8vw,80px);font-weight:700;color:var(--bg-color);line-height:1;display:inline-block;letter-spacing:0.05em}
 .p0-word{display:flex;align-items:baseline;justify-content:center;margin-bottom:2rem}
 .p0-left-wrap{display:inline-flex;align-items:baseline;transition:opacity 0.65s ease}
-.p0-self-txt{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(40px,7vw,70px);font-weight:400;color:#888;line-height:0.88; font-style:italic;}
-.p0-cen-txt{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(40px,7vw,70px);font-weight:400;color:#888;line-height:0.88;display:inline-block;overflow:hidden;max-width:0;opacity:0;white-space:nowrap;transition:max-width 0.5s ease,opacity 0.5s ease; font-style:italic;}
+.p0-self-txt{font-family:'Space Grotesk',sans-serif;font-size:clamp(40px,7vw,70px);font-weight:300;color:#888;line-height:0.88;}
+.p0-cen-txt{font-family:'Space Grotesk',sans-serif;font-size:clamp(40px,7vw,70px);font-weight:300;color:#888;line-height:0.88;display:inline-block;overflow:hidden;max-width:0;opacity:0;white-space:nowrap;transition:max-width 0.5s ease,opacity 0.5s ease;}
 .p0-cen-txt.show{max-width:180px;opacity:1}
 .p0-letter-wrap{position:relative;display:inline-block;line-height:0.88}
-.p0-i{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(110px,20vw,200px);font-weight:700;color:var(--primary);line-height:0.88;display:inline-block;transition:color 0.5s ease,opacity 0.6s ease}
+.p0-i{font-family:'Space Grotesk',sans-serif;font-size:clamp(110px,20vw,200px);font-weight:700;color:var(--primary);line-height:0.88;display:inline-block;transition:color 0.5s ease,opacity 0.6s ease}
 .p0-i.to-teal{color:var(--secondary)}
 .p0-i.fade-out{opacity:0}
 
-.p0-t-overlay{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(110px,20vw,200px);font-weight:700;color:var(--secondary);line-height:0.88;position:absolute;top:0;left:50%;opacity:0;transition:opacity 0.6s ease,text-shadow 0.5s ease,transform 0.5s ease;text-shadow:0 0 30px rgba(230,179,37,0.2);transform:translateX(-50%) scale(1);white-space:nowrap; z-index: 2;}
+.p0-t-overlay{font-family:'Space Grotesk',sans-serif;font-size:clamp(110px,20vw,200px);font-weight:700;color:var(--secondary);line-height:0.88;position:absolute;top:0;left:50%;opacity:0;transition:opacity 0.6s ease,text-shadow 0.5s ease,transform 0.5s ease;text-shadow:0 0 30px rgba(212, 175, 55, 0.2);transform:translateX(-50%) scale(1);white-space:nowrap; z-index: 2;}
 .p0-t-overlay.show{opacity:1}
-.p0-t-overlay.loaded{text-shadow:0 0 50px rgba(230,179,37,0.5);transform:translateX(-50%) scale(1.05)}
+.p0-t-overlay.loaded{text-shadow:0 0 50px rgba(212, 175, 55, 0.5);transform:translateX(-50%) scale(1.05)}
 .p0-t-overlay.fade-out{opacity:0!important;transition:opacity 0.8s ease!important}
 
-.p0-t-beam {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 900;
-  font-size: clamp(110px,20vw,200px);
-  color: #D4A373;
-  line-height: 0.88;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  opacity: 0;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  transform: translateX(-50%) scale(1);
-  text-shadow: 
-    0px -2px 0px #Fae5cd,
-    -3px 0px 0px #b08151,
-    3px 0px 0px #b08151,
-    0px 5px 0px #7d5731,
-    0px 15px 30px rgba(0,0,0,0.8);
-  z-index: 1;
-}
+.p0-t-beam { font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: clamp(110px,20vw,200px); color: #D4A373; line-height: 0.88; position: absolute; top: 0; left: 50%; opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease; transform: translateX(-50%) scale(1); text-shadow: 0px -2px 0px #Fae5cd, -3px 0px 0px #b08151, 3px 0px 0px #b08151, 0px 5px 0px #7d5731, 0px 15px 30px rgba(0,0,0,0.8); z-index: 1;}
 .p0-t-beam.show { opacity: 1; transform: translateX(-50%) scale(1.05); }
 .p0-t-beam.fade-out { opacity: 0 !important; transition: opacity 0.8s ease !important; }
 
 .p0-right-wrap{position:relative;display:inline-block;line-height:0.88;transition:opacity 0.65s ease}
-.p0-sh-txt{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(40px,7vw,70px);font-weight:400;color:#888;line-height:0.88;display:inline-block;transition:opacity 0.4s ease; font-style:italic;}
+.p0-sh-txt{font-family:'Space Grotesk',sans-serif;font-size:clamp(40px,7vw,70px);font-weight:300;color:#888;line-height:0.88;display:inline-block;transition:opacity 0.4s ease;}
 .p0-sh-txt.fade-out{opacity:0}
-.p0-er-txt{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(40px,7vw,70px);font-weight:400;color:#888;line-height:0.88;position:absolute;left:0;top:0;opacity:0;transition:opacity 0.4s ease;white-space:nowrap; font-style:italic;}
+.p0-er-txt{font-family:'Space Grotesk',sans-serif;font-size:clamp(40px,7vw,70px);font-weight:300;color:#888;line-height:0.88;position:absolute;left:0;top:0;opacity:0;transition:opacity 0.4s ease;white-space:nowrap;}
 .p0-er-txt.show{opacity:1}
 
-.p0-desc{font-size:clamp(16px,2vw,20px);color:#aaa;line-height:1.8;margin-bottom:0;transition:opacity 0.4s ease}
+.p0-desc{font-size:clamp(16px,2vw,20px);color:#aaa;line-height:1.8;font-weight:300;margin-bottom:0;transition:opacity 0.4s ease}
 
-.remix-btn{background:var(--primary);color:var(--surface);border:none; border-radius: 50px; padding:1.25rem 3rem;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all 0.3s; display:inline-flex; align-items:center; gap:12px; box-shadow: 0 10px 20px rgba(194, 77, 44, 0.4);}
-.remix-btn:hover{transform:translateY(-4px); box-shadow: 0 15px 30px rgba(194, 77, 44, 0.6); background:#d65531;}
+.remix-btn{background:var(--primary);color:var(--surface);border:none; border-radius: 50px; padding:1.25rem 3rem;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all 0.3s; display:inline-flex; align-items:center; gap:12px; box-shadow: 0 10px 20px rgba(139, 44, 45, 0.4);}
+.remix-btn:hover{transform:translateY(-4px); box-shadow: 0 15px 30px rgba(139, 44, 45, 0.6); background:#7a2627;}
 
-.plural-eyebrow-line{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(24px,3vw,32px);font-style:italic;color:var(--secondary);margin-bottom:4rem;opacity:0;transition:opacity 0.6s ease}
+.plural-eyebrow-line{font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,3vw,32px);color:var(--secondary);margin-bottom:4rem;opacity:0;transition:opacity 0.6s ease}
 .plural-eyebrow-line.show{opacity:1}
 .plural-full{display:flex;justify-content:space-between;align-items:flex-start;width:100%;margin-bottom:5rem; position: relative; z-index: 5;}
 .pf-item{display:flex;flex-direction:column;align-items:center;flex:1;opacity:0;transform:translateY(12px);transition:opacity 0.5s ease,transform 0.5s ease;padding:0 10px}
 .pf-item.show{opacity:1;transform:translateY(0)}
-.pf-letter{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(52px,9vw,90px);font-weight:700;color:var(--surface);line-height:1;display:block; margin-bottom:12px; text-shadow: 0 0 15px rgba(255,255,255,0.2);}
-.pf-meaning{font-family:'Space Mono',monospace; font-size:clamp(9px,1.2vw,12px);letter-spacing:0.1em;text-transform:uppercase;color:#aaa;display:block;opacity:0;transition:opacity 0.5s ease 0.35s;line-height:1.6;max-width:140px}
+.pf-letter{font-family:'Space Grotesk',sans-serif;font-size:clamp(52px,9vw,90px);font-weight:700;color:var(--surface);line-height:1;display:block; margin-bottom:12px; text-shadow: 0 0 15px rgba(255,255,255,0.2);}
+.pf-meaning{font-family:'Space Mono',monospace; font-size:clamp(9px,1.2vw,12px);letter-spacing:0.1em;text-transform:uppercase;color:#aaa;font-weight:500;display:block;opacity:0;transition:opacity 0.5s ease 0.35s;line-height:1.6;max-width:140px}
 .pf-item.show .pf-meaning{opacity:1}
 
-.remix-statement{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,4vw,40px);font-weight:600;color:var(--surface);line-height:1.5;max-width:800px;margin:0 auto 4rem;font-style:italic;}
+.remix-statement{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,4vw,40px);font-weight:500;color:var(--surface);line-height:1.5;max-width:800px;margin:0 auto 4rem;}
 .rs-w { opacity: 0; display: inline-block; transform: translateY(12px); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); margin-right: 6px; }
 .rs-w.show { opacity: 1; transform: translateY(0); }
 .rs-glow-text { color: var(--secondary); transition: text-shadow 1.5s ease, color 1.5s ease; display: inline-block;}
-.rs-glow-text.full-glow { color: #fff8d1; text-shadow: 0 0 20px rgba(230, 179, 37, 0.95), 0 0 45px rgba(230, 179, 37, 0.55), 0 0 80px rgba(230, 179, 37, 0.35); }
+.rs-glow-text.full-glow { color: #FFF; text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(212, 175, 55, 0.4), 0 0 60px rgba(212, 175, 55, 0.2); }
 
 .rtb-btn{background:transparent;color:var(--surface);border:2px solid var(--surface); border-radius: 50px; padding:1rem 2.5rem;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;opacity:0;transition:all 0.4s; display:inline-flex; align-items:center; gap:10px;}
 .rtb-btn.show{opacity:1}
 .rtb-btn:hover{background:var(--surface);color:var(--dark);}
 
-/* FOOTER */
-.footer{padding-top:3rem;padding-bottom:3rem;border-top:2px solid var(--dark);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px;background:var(--bg-color)}
-.footer-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:700;color:var(--dark); font-style:italic;}
+/* ABOUT THE COACH SECTION */
+.about-sec {
+  padding-top: 8rem;
+  padding-bottom: 6rem;
+  background-color: var(--bg-color);
+  position: relative;
+  z-index: 10;
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-bio h2 {
+  font-size: clamp(36px, 4vw, 56px);
+  margin-bottom: 1.5rem;
+}
+
+.about-bio p {
+  font-size: 18px;
+  color: var(--body);
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.about-visuals {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* Background scattered polaroids */
+.floating-pic {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 8px solid #fff;
+  box-shadow: var(--shadow-hover);
+  z-index: 1;
+  transition: transform 0.4s ease;
+}
+
+.floating-pic.pic-1 {
+  top: 10%;
+  left: 0;
+  transform: rotate(-8deg);
+}
+
+.floating-pic.pic-2 {
+  top: 25%;
+  right: 0;
+  transform: rotate(12deg);
+}
+
+.floating-pic:hover {
+  z-index: 10;
+  transform: scale(1.05) rotate(0deg);
+}
+
+/* Foreground Cutout Styled as a Perfect Circle */
+.coach-cutout {
+  position: relative;
+  z-index: 5;
+  width: 350px;
+  height: 350px;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 8px solid white;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2));
+  margin-bottom: 2rem;
+}
+
+/* TESTIMONIALS (LINER NOTES) SECTION */
+.testimonials-sec {
+  padding-top: 4rem;
+  padding-bottom: 8rem;
+  background-color: var(--bg-color);
+  position: relative;
+  z-index: 10;
+}
+
+.test-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.test-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.6);
+  padding: 3rem 2.5rem;
+  border-radius: 2rem;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.test-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.quote-mark {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 80px;
+  color: rgba(212, 175, 55, 0.2);
+  line-height: 0;
+  position: absolute;
+  top: 40px;
+  left: 20px;
+}
+
+.test-quote {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--body);
+  font-weight: 400;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
+  font-style: italic;
+}
+
+.test-author {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  color: var(--dark);
+  font-size: 16px;
+}
+
+.test-context {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-top: 4px;
+}
+
+
+/* CTA / CONTACT SECTION */
+.cta-sec {
+  padding-top: 4rem;
+  padding-bottom: 8rem;
+  background-color: var(--bg-color);
+  position: relative;
+  z-index: 10;
+}
+
+.cta-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 2.5rem;
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+
+.cta-info {
+  padding: 4rem;
+  background: linear-gradient(135deg, rgba(139, 44, 45, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cta-info h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 4vw, 48px);
+  margin-bottom: 1rem;
+}
+
+.cta-info p {
+  font-size: 18px;
+  color: var(--body);
+  margin-bottom: 2rem;
+}
+
+.contact-form {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dark);
+}
+
+.form-control {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.5);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: var(--dark);
+  transition: all 0.3s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--secondary);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.footer{padding-top:3rem;padding-bottom:3rem;border-top:1px solid rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px;background:var(--bg-color)}
+.footer-name{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:600;color:var(--dark);}
 .footer-sub{font-family:'Space Mono',monospace; font-size:12px;color:var(--muted);letter-spacing:0.2em; text-transform:uppercase;}
 
 /* RESPONSIVE */
 @media(max-width:1000px){
   .agency-console { grid-template-columns: 1fr; }
-  .deck-panel { border-right: none; border-bottom: 3px solid var(--dark); padding: 3rem 2rem; }
+  .deck-panel { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 3rem 2rem; }
   .readout-panel { padding: 3rem 2rem; }
   .readout-tag { left: 2rem; }
-}
-@media(max-width:768px){
-  .sec,.sec-alt,.contexts-sec,.assessment-sec,.scenario-sec,.remix-sec,.footer {padding-left:1.5rem;padding-right:1.5rem}
-  .rap-grid,.ctx-grid{grid-template-columns:1fr}
-  .sc-categories{grid-template-columns:repeat(2,minmax(120px,1fr));}
-  .flow-row{flex-direction:column;gap:16px}
-  .flow-arrow{transform:rotate(90deg);font-size:20px}
-  .result-actions{flex-direction:column;align-items:flex-start}
   
-  .c-video-prop {
-    position: relative;
-    top: 0; right: 0; margin: 2rem auto;
-    width: 90%; max-width: 320px;
-    transform: rotate(1deg); z-index: 10;
+  .about-container { grid-template-columns: 1fr; gap: 2rem; }
+  .about-visuals { height: 450px; }
+  .floating-pic { width: 150px; height: 150px; }
+  .test-grid { grid-template-columns: 1fr 1fr; }
+  
+  .cta-container { grid-template-columns: 1fr; }
+  .cta-info, .contact-form { padding: 3rem 2rem; }
+}
+
+@media(max-width:768px){
+  /* Mobile Menu Activation */
+  .menu-toggle { display: flex; }
+  
+  .menu-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    z-index: 999;
   }
+  .menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: rgba(252, 249, 244, 0.98);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 6rem 2.5rem 2rem;
+    gap: 2rem;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+  }
+  .nav-links.open { right: 0; }
+  .nav-links a { 
+    font-size: 1.3rem; 
+    font-weight: 600;
+    border-bottom: 1px solid rgba(0,0,0,0.05); 
+    padding-bottom: 15px; 
+    width: 100%; 
+    display: block;
+  }
+  
+  .close-menu {
+    display: flex;
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    background: var(--surface);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: var(--shadow-soft);
+    font-size: 1.5rem;
+    color: var(--dark);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+  }
+
+  .sec,.sec-alt,.contexts-sec,.assessment-sec,.scenario-sec,.footer,.about-sec,.testimonials-sec,.cta-sec {padding-left:1.5rem;padding-right:1.5rem}
+  
+  .remix-sec { border-top-left-radius: 50% 50px; border-top-right-radius: 50% 50px; margin-top: -30px; padding-top: 6rem; padding-bottom: 6rem;}
+  .remix-glass-stage { padding: 4rem 1rem; border-radius: 2rem;}
   .hd-collage { padding: 4rem 1.5rem; }
   .collage-meta-top { position: relative; top: 0; left: 0; margin-bottom: 2rem; }
   .c-title-small { margin-left: 0; align-self: center; margin-bottom: 1rem; transform: rotate(0); }
   .rap-composition { flex-direction: column; margin-top: 3rem; }
   .lets-text { top: -40px; left: 0; font-size: 60px; z-index: 1; }
   
-  /* Fixed Mic container centering on mobile */
   .mic-container { position: relative; bottom: 0; right: 0; margin-top: 2rem; margin-left: auto; margin-right: auto; transform: rotate(10deg); }
-  
   .hero-catchphrase { font-size: clamp(20px, 6vw, 24px); margin-top: 3rem; }
   .collage-bottom { margin-top: 4rem; flex-direction: column; align-items: flex-start; }
   
   .plural-full { flex-wrap:wrap; gap:20px; }
   .pf-item { flex: 0 0 40%; }
-  .rap-col-images { height: 140px; }
+  
+  .test-grid { grid-template-columns: 1fr; }
 }
-
-@keyframes aFadeUp { 0% { opacity: 0; transform: translateY(16px); } 100% { opacity: 1; transform: translateY(0); } }
-@keyframes consoleFade { 0% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes pulse-red { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-/* R3 labels in scenario content */
-.r3-label { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--secondary); margin-right: 4px; }
 </style>
 </head>
 <body>
+
+<header class="header">
+  <a href="#" class="logo">R³</a>
+  
+  <button class="menu-toggle" id="mobile-menu-btn" aria-label="Open Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="menu-overlay" id="menu-overlay"></div>
+
+  <div class="nav-links" id="nav-links">
+    <button class="close-menu" id="close-menu-btn" aria-label="Close Menu">&times;</button>
+    <a href="#scenarios">In The Booth</a>
+    <a href="#assessment">Equalizer</a>
+    <a href="#phases">The Studio</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
+
 <div class="page">
 
-<!-- NEW HERO COLLAGE -->
 <div id="home-view" class="view active">
-  
   <div class="hd-collage fade-in">
-    <div class="hd-gradient-bar"></div>
-
-    <div class="collage-meta-top">
-      <div class="c-brand">AH-HA Coaching, LLC</div>
+    <div class="hero-slideshow">
+      <div class="hero-slide active" style="background-image: url('1_A_vinyl_record_spins_on_a_turn_1_20260327_123519.jpg');"></div>
+      <div class="hero-slide" style="background-image: url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg');"></div>
+      <div class="hero-slide" style="background-image: url('7_A_record_player_s_tonearm_touc_1_20260327_123609.jpg');"></div>
     </div>
+    <div class="hero-overlay"></div>
 
-    <!-- THE VIDEO POLAROID PROP (Unlisted YouTube Embed for fast loading) -->
     <div class="c-video-prop fade-in d2">
       <div class="c-video-wrapper">
-        <iframe 
-          src="https://www.youtube.com/embed/4-0FLxcjGDg?autoplay=1&mute=1&loop=1&playlist=4-0FLxcjGDg&controls=0&rel=0&modestbranding=1"
-          frameborder="0" 
-          allow="autoplay; encrypted-media; fullscreen" 
-          allowfullscreen>
-        </iframe>
+        <video src="20220509_083743.mp4" autoplay loop muted playsinline class="c-video-element"></video>
       </div>
-      <div class="c-video-caption">
-        A sequenced approach to<br>awareness, choice, and change.
-      </div>
+      <div class="c-video-caption" style="margin-top:12px;">A sequenced approach to<br>awareness, choice, and change.</div>
     </div>
 
     <div class="collage-center d1">
       <div class="c-title-small">R³ Agency Practice</div>
-      
       <div class="rap-composition">
-        <div class="lets-text">Let's</div>
-        
-        <div class="rap-mask-wrapper">
-          <div class="c-massive-mask">R.A.P.</div>
+        <div class="hero-title-stack">
+          <h1 class="hero-main-title">The R<span class="sup-3">3</span>.A.P. Method</h1>
+          <h2 class="hero-sub-title">R<span class="sup-3">3</span> AGENCY PRACTICE</h2>
+          <hr class="hero-divider">
+          <p class="hero-tagline">A framework for conscious living.</p>
         </div>
-        
-        <!-- THE SM58 MICROPHONE IMAGE PROP -->
         <div class="mic-container">
-          <img src="3_A_microphone_stand_holds_a_vin_1_20260327_123538.jpg" class="mic-image" alt="Vintage Microphone">
+          <img src="2_A_pair_of_vintage_studio_headp_1_20260327_123529.jpg" class="mic-image" alt="Vintage Headphones">
         </div>
       </div>
-
       <div class="hero-catchphrase fade-in d2">
-        "What rap did in giving voice, this framework does for you — it takes what you've been carrying and gives it structure, direction, and language."
+        What rap did in giving voice, this framework does for you — it takes what you've been carrying and gives it structure, direction, and language.
       </div>
     </div>
 
     <div class="collage-bottom d3">
-      <p class="c-premise-pull">
-        Do it on <em>purpose</em>. Not perfectly —<br><em>purposefully</em>.
-      </p>
-      
-      <a class="c-btn-record" onclick="document.getElementById('scenarios').scrollIntoView();" title="See the framework in action">
-        <span class="c-btn-text">Enter The Cypher</span>
-        <div class="c-btn-icon">↓</div>
-      </a>
+      <p class="c-premise-pull">Do it on <em>purpose</em>. Not perfectly —<br><em>purposefully</em>.</p>
+      <a class="btn-primary" onclick="document.getElementById('scenarios').scrollIntoView();" title="See the framework in action">Enter The Cypher →</a>
     </div>
   </div>
 
-  <!-- SCENARIO SECTION (The Cypher / Tape Deck) -->
   <div class="scenario-sec fade-in" id="scenarios">
-
     <div class="scenario-intro">
-      <p class="scenario-intro-label">In The Booth</p>
-      <p class="scenario-intro-head cg">Which track feels most like yours right now?</p>
-      <p class="scenario-intro-body">Choose your context and see how the R³ Model shifts the same high-stress moment from a conditioned reaction to a conscious remix.</p>
-      <p class="scenario-intro-body" style="font-size:16px;margin-top:-1.5rem;max-width:640px;">Pick a cassette, load it into the deck, and compare the Default Track to the Conscious Remix.</p>
+      <p class="scenario-intro-label">The R³ Model in Action</p>
+      <h2 class="scenario-intro-head">Which world feels most like yours right now?</h2>
+      <p class="scenario-intro-body">Choose your context and see how the R³ Model shifts the same high-stress moment from automatic reaction to conscious choice.</p>
     </div>
 
     <div class="sc-categories fade-in d1">
-      <button class="sc-cat-btn" onclick="selectCategory('classroom', this)">Tape A · Classroom</button>
-      <button class="sc-cat-btn" onclick="selectCategory('caregiving', this)">Tape B · Caregiving</button>
-      <button class="sc-cat-btn" onclick="selectCategory('workplace', this)">Tape C · Workplace</button>
-      <button class="sc-cat-btn" onclick="selectCategory('relationships', this)">Tape D · Relationships</button>
+      <button class="sc-cat-btn" onclick="selectCategory('classroom', this)">In the Classroom</button>
+      <button class="sc-cat-btn" onclick="selectCategory('caregiving', this)">In Caregiving</button>
+      <button class="sc-cat-btn" onclick="selectCategory('workplace', this)">In the Workplace</button>
+      <button class="sc-cat-btn" onclick="selectCategory('relationships', this)">In Relationships</button>
     </div>
 
     <div id="sc-prompt-wrap">
-      <p class="sc-prompt">Select a tape above to load the track.</p>
+      <p class="sc-prompt">Select a category above to see scenarios that speak to your life.</p>
     </div>
 
     <div class="scenario-card" id="scenario-card" style="display:none; opacity:1;">
-      
-      <!-- BOOMBOX VISUAL ANCHOR -->
       <div class="boombox-anchor">
-        <img src="6_A_classic_silver_boombox_sits_1_20260327_123602.jpg" alt="Silver Boombox Deck">
+        <img src="9_An_overhead_view_of_a_circle_o_1_20260327_123628.jpg" alt="Cassettes in a circle">
       </div>
 
-      <div class="scenario-nav">
-        <button onclick="prevScenario()" aria-label="Previous scenario">
-           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
-        </button>
-        <span class="scenario-counter" id="sc-counter">Track 1 of 5</span>
-        <button onclick="nextScenario()" aria-label="Next scenario">
-           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-        </button>
-      </div>
-      
       <div class="scenario-trigger" id="sc-trigger"></div>
       
       <div class="sc-toggle">
-        <button class="sc-btn active" id="sc-btn-conditioned" onclick="switchSc('conditioned')">
-          <svg viewBox="0 0 24 24"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg> The Default Track
-        </button>
-        <button class="sc-btn" id="sc-btn-conscious" onclick="switchSc('conscious')">
-          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> The Remix (With R³)
-        </button>
+        <button class="sc-btn active" id="sc-btn-conditioned" onclick="switchSc('conditioned')">Without R³&nbsp; <small style="font-weight:400;opacity:0.75">(Conditioned)</small></button>
+        <button class="sc-btn" id="sc-btn-conscious" onclick="switchSc('conscious')">With R³&nbsp; <small style="font-weight:400;opacity:0.75">(Conscious)</small></button>
       </div>
       
       <div class="sc-content conditioned active" id="sc-conditioned"></div>
       <div class="sc-content conscious" id="sc-conscious"></div>
+      
+      <div class="scenario-nav">
+        <button onclick="prevScenario()" aria-label="Previous scenario">
+           <svg viewBox="0 0 24 24"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg>
+        </button>
+        <span class="scenario-counter" id="sc-counter">Scenario 1 of 5</span>
+        <button onclick="nextScenario()" aria-label="Next scenario">
+           <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- EQUALIZER BOARD -->
   <div class="assessment-sec fade-in" id="assessment">
-    <div class="assessment-intro">
+    <div class="assessment-intro text-center max-w-3xl mx-auto mb-16">
       <p class="assessment-intro-label">Find Your Levels</p>
-      <p class="assessment-intro-head cg">Where are you on the Equalizer Board right now?</p>
-      <p class="assessment-intro-body">Take 60 seconds to find your entry point. Your answers shape how the R³ Model isolates your specific frequency.</p>
+      <h2 class="assessment-intro-head text-center">Where are you on the Equalizer Board right now?</h2>
+      <p class="assessment-intro-body mx-auto text-center">Take 60 seconds to find your entry point. Your answers shape how the R³ Model isolates your specific frequency.</p>
     </div>
 
-    <div class="assessment-card fade-in d1">
-      
-      <!-- FADER UI -->
+    <div class="assessment-card fade-in d1 max-w-4xl mx-auto">
       <div class="mixer-container">
         <div class="mixer-labels">
             <span>Input</span>
@@ -1331,7 +1439,7 @@ body{
       </div>
 
       <div class="a-step active" id="step-0">
-        <p class="a-question cg">Which of these feels most like your truth right now?</p>
+        <p class="a-question">Which of these feels most like your truth right now?</p>
         <div class="a-options">
           <button class="a-opt" onclick="pickAnswer(0,'reflection',this)">I keep responding the same way — I hear the scratched record playing, but I can't stop it.</button>
           <button class="a-opt" onclick="pickAnswer(0,'resistance',this)">I understand my patterns. What I'm missing is the ability to hit pause when the moment arrives.</button>
@@ -1340,7 +1448,7 @@ body{
       </div>
 
       <div class="a-step" id="step-1">
-        <p class="a-question cg">When something difficult happens, what does your body do?</p>
+        <p class="a-question">When something difficult happens, what does your body do?</p>
         <div class="a-options">
           <button class="a-opt" onclick="pickAnswer(1,null,this)">I go quiet and numb — I shut down completely.</button>
           <button class="a-opt" onclick="pickAnswer(1,null,this)">I escalate — louder, sharper, faster than I mean to.</button>
@@ -1349,7 +1457,7 @@ body{
       </div>
 
       <div class="a-step" id="step-2">
-        <p class="a-question cg">After the moment passes, what do you usually feel?</p>
+        <p class="a-question">After the moment passes, what do you usually feel?</p>
         <div class="a-options">
           <button class="a-opt" onclick="finishAssessment(this)">Frustrated — I knew better, but I still played the same track.</button>
           <button class="a-opt" onclick="finishAssessment(this)">Resigned — like my rhythm will never actually change.</button>
@@ -1357,47 +1465,41 @@ body{
         </div>
       </div>
 
-      <!-- RESULTS -->
       <div class="a-result" id="result-reflection">
         <span class="result-badge">Phase 1: Reflection (Hearing the Beat)</span>
-        <p class="result-head cg">The R³ Model begins exactly where you are.</p>
+        <h3 class="result-head">The R³ Model begins exactly where you are.</h3>
         <p class="result-body">Reflection is the practice of seeing clearly what's happening beneath the automatic response. Like a producer isolating an audio track, it’s about separating the raw truth from the emotional noise — while it's happening. This is where your work begins.</p>
         <div class="result-actions">
-          <button class="result-cta" onclick="document.getElementById('phases').scrollIntoView(); setTimeout(()=>playTrack(1), 500);">Load Track 1 →</button>
+          <button class="btn-primary" onclick="document.getElementById('phases').scrollIntoView();">Load Track 1 →</button>
           <button class="restart-btn" onclick="resetAssessment()">Reset Fader</button>
         </div>
       </div>
 
       <div class="a-result" id="result-resistance">
         <span class="result-badge">Phase 2: Resistance (Hitting Pause)</span>
-        <p class="result-head cg">You've done the listening. Now comes the pause.</p>
+        <h3 class="result-head">You've done the listening. Now comes the pause.</h3>
         <p class="result-body">Resistance is where automaticity—the conditioned reflex that skips like a scratched record—gets interrupted. By hitting pause on the track, conscious choice becomes possible. The R³ Model gives you a structure for exactly this space.</p>
         <div class="result-actions">
-          <button class="result-cta" onclick="document.getElementById('phases').scrollIntoView(); setTimeout(()=>playTrack(2), 500);">Load Track 2 →</button>
+          <button class="btn-primary" onclick="document.getElementById('phases').scrollIntoView();">Load Track 2 →</button>
           <button class="restart-btn" onclick="resetAssessment()">Reset Fader</button>
         </div>
       </div>
 
       <div class="a-result" id="result-revelation">
         <span class="result-badge">Phase 3: Revelation (Flipping the Sample)</span>
-        <p class="result-head cg">You've found the sample. Now make it your default.</p>
+        <h3 class="result-head">You've found the sample. Now make it your default.</h3>
         <p class="result-body">Purposeful Practicing — applying insight consistently — is how neuroplasticity works. You have to play the new beat repeatedly until the nervous system updates its default rhythm. That's what Phase 3 builds toward.</p>
         <div class="result-actions">
-          <button class="result-cta" onclick="document.getElementById('phases').scrollIntoView(); setTimeout(()=>playTrack(3), 500);">Load Track 3 →</button>
+          <button class="btn-primary" onclick="document.getElementById('phases').scrollIntoView();">Load Track 3 →</button>
           <button class="restart-btn" onclick="resetAssessment()">Reset Fader</button>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- AGENCY CONSOLE (THE DESK METAPHOR) -->
   <div class="sec fade-in" id="phases">
     <p class="eyebrow fade-in">The Studio Desk</p>
-    
     <div class="agency-console fade-in d1">
-      
-      <!-- Deck / Controls -->
       <div class="deck-panel">
         <div class="turntable-wrapper">
           <div class="turntable-platter">
@@ -1421,32 +1523,17 @@ body{
         </div>
       </div>
 
-      <!-- Readout Screen / Liner Notes -->
       <div class="readout-panel">
         <div class="readout-tag">Track Info</div>
-        <div id="readout-content" class="readout-content">
-            <!-- Populated via JS -->
-        </div>
+        <div id="readout-content" class="readout-content"></div>
       </div>
-      
     </div>
   </div>
 
-  <!-- RAP ARCHITECTURE (LINER NOTES) -->
   <div class="sec-alt fade-in">
-    <div class="liner-notes-header">
-      <p class="liner-title cg" style="font-style: italic;">Liner Notes</p>
-      <p class="liner-sub">The Three Phases of R.A.P.</p>
-    </div>
     <div class="rap-grid fade-in d1">
-
-      <!-- Phase 1 -->
       <div class="rap-col rc1">
         <p class="rap-col-head">Phase 1: Reflection</p>
-        <div class="phase-art two-up">
-          <img src="1_A_vinyl_record_spins_on_a_turn_1_20260327_123519.jpg" alt="Spinning vinyl record">
-          <img src="2_A_pair_of_vintage_studio_headp_1_20260327_123529.jpg" alt="Headphones over lyric sheets">
-        </div>
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r1')">
           <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reflect</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
         </div>
@@ -1455,32 +1542,16 @@ body{
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r2')">
           <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Aware &amp; Attentive</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
         </div>
-        <div class="rap-col-content">
-          <p class="rap-col-head">Phase 1: Reflection</p>
-          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r1')">
-            <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reflect</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
-          </div>
-          <div class="rap-detail" id="r1">Reflection is not about reliving or judging the moment. It is about looking at it clearly enough to understand what it is showing you. You can't remix a song if you don't listen to the original sample first.</div>
-
-          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r2')">
-            <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Aware &amp; Attentive</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
-          </div>
-          <div class="rap-detail" id="r2">Aware and Attentive are the two points of analysis.<br><br><strong>Aware</strong> — What emotional or physical load did you bring into this moment? You are naming the background noise that was already playing.<br><br><strong>Attentive</strong> — What is your body doing right now? Jaw tight. Shoulders elevated. The body registers the threat before the mind names it. This is your rhythm section telling you something is off.</div>
-
-          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r3')">
-            <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Pondering</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
-          </div>
-          <div class="rap-detail" id="r3">Purposeful Pondering asks: what is this moment actually showing me, and what does that make possible? This is not spiraling into always and never thinking. It is active inquiry—transforming observation into direction so you can write a better verse.</div>
+        <div class="rap-detail" id="r2">Aware and Attentive are the two points of analysis.<br><br><strong>Aware</strong> — What emotional or physical load did you bring into this moment? You are naming the background noise that was already playing.<br><br><strong>Attentive</strong> — What is your body doing right now? Jaw tight. Shoulders elevated. The body registers the threat before the mind names it. This is your rhythm section telling you something is off.</div>
+        
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r3')">
+          <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Pondering</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
         </div>
+        <div class="rap-detail" id="r3">Purposeful Pondering asks: what is this moment actually showing me, and what does that make possible? This is not spiraling into always and never thinking. It is active inquiry—transforming observation into direction so you can write a better verse.</div>
       </div>
 
-      <!-- Phase 2 -->
       <div class="rap-col rc2">
         <p class="rap-col-head">Phase 2: Resistance</p>
-        <div class="phase-art two-up">
-          <img src="4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg" alt="Chrome cassette tape">
-          <img src="3_A_microphone_stand_holds_a_vin_1_20260327_123538.jpg" alt="Glowing vintage microphone">
-        </div>
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r4')">
           <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Resist</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
         </div>
@@ -1489,32 +1560,16 @@ body{
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r5')">
           <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Act</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
         </div>
-        <div class="rap-col-content">
-          <p class="rap-col-head">Phase 2: Resistance</p>
-          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r4')">
-            <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Resist</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
-          </div>
-          <div class="rap-detail" id="r4">The intentional interruption of the conditioned response (inhibitory control)—like catching the needle before it drops on a bad track. Resistance is the practice of hitting pause long enough to choose whether to press forward or change direction based on consciousness, not habit.</div>
-
-          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r5')">
-            <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Act</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
-          </div>
-          <div class="rap-detail" id="r5">Remaining present creates conditions for intentional action. Act moves through three layers:<br><br><strong>Pattern Recognition</strong> — Am I playing the default track or making a choice?<br><br><strong>Alignment Check</strong> — Does this align with my values and what I am trying to preserve?<br><br><strong>Consequence Awareness</strong> — What does my action produce? What is the cost of this verse?</div>
-
-          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r6')">
-            <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Pressing</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
-          </div>
-          <div class="rap-detail" id="r6">When direction is informed by concrete actions rather than habit, choice becomes the new evidence the nervous system needs. You practice it until the intentional response replaces the scratched record, leading to lasting growth.</div>
+        <div class="rap-detail" id="r5">Remaining present creates conditions for intentional action. Act moves through three layers:<br><br><strong>Pattern Recognition</strong> — Am I playing the default track or making a choice?<br><br><strong>Alignment Check</strong> — Does this align with my values and what I am trying to preserve?<br><br><strong>Consequence Awareness</strong> — What does my action produce? What is the cost of this verse?</div>
+        
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r6')">
+          <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Pressing</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
         </div>
+        <div class="rap-detail" id="r6">When direction is informed by concrete actions rather than habit, choice becomes the new evidence the nervous system needs. You practice it until the intentional response replaces the scratched record, leading to lasting growth.</div>
       </div>
 
-      <!-- Phase 3 -->
       <div class="rap-col rc3">
         <p class="rap-col-head">Phase 3: Revelation</p>
-        <div class="phase-art two-up">
-          <img src="7_A_record_player_s_tonearm_touc_1_20260327_123609.jpg" alt="DJ hands on turntable">
-          <img src="8_A_Black_woman_sits_cross_legge_1_20260327_123619.jpg" alt="Meditating Black woman">
-        </div>
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r7')">
           <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reveal</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
         </div>
@@ -1523,53 +1578,42 @@ body{
         <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r8')">
           <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Accept</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
         </div>
-        <div class="rap-col-content">
-          <p class="rap-col-head" style="background: var(--tertiary);">Phase 3: Revelation</p>
-          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r7')">
-            <div class="rap-row"><span class="rap-letter">R</span><span class="rap-term">Reveal</span><span class="rap-wtag">What</span><span class="expand-caret">▾</span></div>
-          </div>
-          <div class="rap-detail" id="r7">Revelation is the AH-HA moment: the point at which objective awareness and conscious choice combine to generate truth about yourself. Revelation is not another round of inward examination—it is flipping the sample to find the gold.</div>
-
-          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r8')">
-            <div class="rap-row"><span class="rap-letter">A</span><span class="rap-term">Accept</span><span class="rap-wtag">How</span><span class="expand-caret">▾</span></div>
-          </div>
-          <div class="rap-detail" id="r8">The practice of receiving the truth and integrating it.<br><br><strong>Receive the insight</strong> — Name the pattern recognized, not just the feeling.<br><br><strong>Integrate without judgment</strong> — Holding the truth without shame or deflection. The AH-HA is not the end of the process. It is the moment the process becomes productive.</div>
-
-          <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r9')">
-            <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Practicing</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
-          </div>
-          <div class="rap-detail" id="r9">The truth compounds through consistent application. The nervous system does not update on insight alone (neuroplasticity requires repetition). Purposeful Practicing is the commitment to playing the new beat continuously, generating new evidence with each cycle until you've permanently changed your rhythm.</div>
+        <div class="rap-detail" id="r8">The practice of receiving the truth and integrating it.<br><br><strong>Receive the insight</strong> — Name the pattern recognized, not just the feeling.<br><br><strong>Integrate without judgment</strong> — Holding the truth without shame or deflection. The AH-HA is not the end of the process. It is the moment the process becomes productive.</div>
+        
+        <div class="rap-item" role="button" tabindex="0" onclick="toggleRap(this,'r9')">
+          <div class="rap-row"><span class="rap-letter">P</span><span class="rap-term">Purposeful Practicing</span><span class="rap-wtag">Why</span><span class="expand-caret">▾</span></div>
         </div>
+        <div class="rap-detail" id="r9">The truth compounds through consistent application. The nervous system does not update on insight alone (neuroplasticity requires repetition). Purposeful Practicing is the commitment to playing the new beat continuously, generating new evidence with each cycle until you've permanently changed your rhythm.</div>
       </div>
     </div>
   </div>
 
-  <!-- CONTEXTS (The Crates) -->
   <div class="contexts-sec fade-in">
     <div style="text-align: center;">
-      <p class="fade-in d1" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(32px,4vw,42px);font-weight:700;color:var(--dark);line-height:1.2;margin-bottom:1rem;">The environment changes.<br><span style="color:var(--primary); font-style:italic;">What the model targets does not.</span></p>
+      <p class="fade-in d1" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4vw,42px);font-weight:600;color:var(--dark);line-height:1.2;margin-bottom:1rem;">The environment changes.<br><span style="color:var(--primary); font-style:italic;">What the model targets does not.</span></p>
     </div>
     
     <div class="ctx-grid fade-in d2">
-      <!-- Vinyl Sleeves -->
       <div class="ctx-card ctx1">
+        <div class="ctx-img-wrap"><img src="8_A_Black_woman_sits_cross_legge_1_20260327_123619.jpg" alt="Personal Growth"></div>
         <p class="ctx-label">Personal</p>
         <p class="ctx-punch">Without requiring the full origin story.</p>
         <p class="ctx-body">The nervous system carries the imprint of past harm, and present triggers can activate survival responses (like an old track firing up). The R³ Model interrupts those patterns, building capacity to ground your response in current reality.</p>
       </div>
       <div class="ctx-card ctx2">
+        <div class="ctx-img-wrap"><img src="VideoCapture_20220502-185056.jpg" alt="Educator Connection"></div>
         <p class="ctx-label">Educator</p>
         <p class="ctx-punch">Your reaction travels across the room.</p>
         <p class="ctx-body">Educators are rarely given tools to interrupt their own conditioned responses under pressure. The R³ Model restores intentional response, giving educators a process for navigating stress with clarity rather than conditioning.</p>
       </div>
       <div class="ctx-card ctx3">
+        <div class="ctx-img-wrap"><img src="IMG_2199.jpg" alt="Culture Change"></div>
         <p class="ctx-label">Culture Change</p>
         <p class="ctx-punch">This is a precision intervention.</p>
         <p class="ctx-body">Organizational culture isn't built by values statements. It's built by what people do in high-stress moments. When people develop the capacity to interrupt automatic patterns, culture shifts from the inside out.</p>
       </div>
     </div>
 
-    <!-- FLOW -->
     <div class="flow-row fade-in d3">
       <div class="flow-node fn1"><span class="flow-label">Self-awareness</span></div>
       <span class="flow-arrow">→</span>
@@ -1581,123 +1625,302 @@ body{
     </div>
   </div>
 
-  <!-- R.A.P. REMIX SECTION (The Cypher / PLURAL) -->
-  <div class="remix-sec fade-in">
-    <div class="remix-phase active" id="remix-p0">
-      <p class="remix-eyebrow">The Mastered Flow</p>
-      <div class="p0-plural-space"></div>
-      <div class="p0-word">
-        <span class="p0-left-wrap" id="p0-left-wrap">
-          <span class="p0-self-txt">self</span><span class="p0-cen-txt" id="p0-cen">cen</span>
-        </span>
-        <span class="p0-letter-wrap">
-          <span class="p0-plural-row" id="p0-plural-row">
-            <span class="p0-pl">P</span><span class="p0-pl">L</span><span class="p0-pl">U</span><span class="p0-pl">R</span><span class="p0-pl">A</span><span class="p0-pl">L</span>
+  <div class="remix-sec fade-in" id="remix">
+    <div class="remix-glass-stage">
+      <div class="remix-phase active" id="remix-p0">
+        <p class="remix-eyebrow">The Mastered Flow</p>
+        <div class="p0-plural-space"></div>
+        <div class="p0-word">
+          <span class="p0-left-wrap" id="p0-left-wrap">
+            <span class="p0-self-txt">self</span><span class="p0-cen-txt" id="p0-cen">cen</span>
           </span>
-          <span class="p0-i" id="p0-i">I</span>
-          
-          <span class="p0-t-overlay" id="p0-t">T</span>
-          <span class="p0-t-beam" id="p0-t-beam">T</span>
-
-        </span>
-        <span class="p0-right-wrap" id="p0-right-wrap">
-          <span class="p0-sh-txt" id="p0-sh">sh</span><span class="p0-er-txt" id="p0-er">er</span>
-        </span>
-      </div>
-      
-      <div class="narrative-box" style="height: 64px; display: flex; align-items: center; justify-content: center; margin-bottom: 3.5rem;">
-        <div class="p0-desc" id="p0-desc" style="transition: opacity 0.4s ease; width: 100%;">
-          <p>Singular focus. Immediate. The Default Track.</p>
-          <p>Driven by impulse rather than awareness.</p>
+          <span class="p0-letter-wrap">
+            <span class="p0-plural-row" id="p0-plural-row">
+              <span class="p0-pl">P</span><span class="p0-pl">L</span><span class="p0-pl">U</span><span class="p0-pl">R</span><span class="p0-pl">A</span><span class="p0-pl">L</span>
+            </span>
+            <span class="p0-i" id="p0-i">I</span>
+            <span class="p0-t-overlay" id="p0-t">T</span>
+            <span class="p0-t-beam" id="p0-t-beam">T</span>
+          </span>
+          <span class="p0-right-wrap" id="p0-right-wrap">
+            <span class="p0-sh-txt" id="p0-sh">sh</span><span class="p0-er-txt" id="p0-er">er</span>
+          </span>
         </div>
-      </div>
-      
-      <button class="remix-btn" id="remix-btn" onclick="startRemix()">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg> 
-        Drop The Remix
-      </button>
-    </div>
-
-    <div class="remix-phase" id="remix-p2">
-      <p class="plural-eyebrow-line cg" id="plural-eyebrow-line">Whole enough to grow. Present enough to notice.</p>
-      <div class="plural-full">
-        <div class="pf-item" id="pf-P"><span class="pf-letter">P</span><span class="pf-meaning">A nervous system that finally knows it's safe</span></div>
-        <div class="pf-item" id="pf-L"><span class="pf-letter">L</span><span class="pf-meaning">Relationships that don't require you to disappear</span></div>
-        <div class="pf-item" id="pf-U"><span class="pf-letter">U</span><span class="pf-meaning">Seeing your own patterns without shame</span></div>
-        <div class="pf-item" id="pf-R"><span class="pf-letter">R</span><span class="pf-meaning">Being treated the way you've always deserved</span></div>
-        <div class="pf-item" id="pf-A"><span class="pf-letter">A</span><span class="pf-meaning">Making peace with what was — without excusing it</span></div>
-        <div class="pf-item" id="pf-L2"><span class="pf-letter">L</span><span class="pf-meaning">Turning every hard season into something you carry forward</span></div>
-      </div>
-      
-      <div class="remix-statement cg" id="remix-statement">
-        <span class="rs-w">This</span> <span class="rs-w">is</span> <span class="rs-w">what</span> <span class="rs-w">you're</span> <span class="rs-w">building</span> <span class="rs-w">toward.</span><br>
-        <span class="rs-w">A</span> <span class="rs-w">life</span> <span class="rs-w">where</span>
-        <span class="rs-glow-text" id="rs-glow-container">
-          <span class="rs-w">you</span> <span class="rs-w">are</span> <span class="rs-w">enough</span> <span class="rs-w">—</span> <span class="rs-w">and</span> <span class="rs-w">still</span> <span class="rs-w">becoming.</span>
-        </span>
+        
+        <div class="narrative-box" style="height: 64px; display: flex; align-items: center; justify-content: center; margin-bottom: 3.5rem;">
+          <div class="p0-desc" id="p0-desc" style="transition: opacity 0.4s ease; width: 100%;">
+            <p>Singular focus. Immediate. The Default Track.</p>
+            <p>Driven by impulse rather than awareness.</p>
+          </div>
+        </div>
+        
+        <button class="remix-btn" id="remix-btn" onclick="startRemix()">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg> 
+          Drop The Remix
+        </button>
       </div>
 
-      <button class="rtb-btn" id="rtb-btn" onclick="resetRemix()">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
-        Run That Back
-      </button>
+      <div class="remix-phase" id="remix-p2">
+        <p class="plural-eyebrow-line cg" id="plural-eyebrow-line">Whole enough to grow. Present enough to notice.</p>
+        <div class="plural-full">
+          <div class="pf-item" id="pf-P"><span class="pf-letter">P</span><span class="pf-meaning">A nervous system that finally knows it's safe</span></div>
+          <div class="pf-item" id="pf-L"><span class="pf-letter">L</span><span class="pf-meaning">Relationships that don't require you to disappear</span></div>
+          <div class="pf-item" id="pf-U"><span class="pf-letter">U</span><span class="pf-meaning">Seeing your own patterns without shame</span></div>
+          <div class="pf-item" id="pf-R"><span class="pf-letter">R</span><span class="pf-meaning">Being treated the way you've always deserved</span></div>
+          <div class="pf-item" id="pf-A"><span class="pf-letter">A</span><span class="pf-meaning">Making peace with what was — without excusing it</span></div>
+          <div class="pf-item" id="pf-L2"><span class="pf-letter">L</span><span class="pf-meaning">Turning every hard season into something you carry forward</span></div>
+        </div>
+        
+        <div class="remix-statement cg" id="remix-statement">
+          <span class="rs-w">This</span> <span class="rs-w">is</span> <span class="rs-w">what</span> <span class="rs-w">you're</span> <span class="rs-w">building</span> <span class="rs-w">toward.</span><br>
+          <span class="rs-w">A</span> <span class="rs-w">life</span> <span class="rs-w">where</span>
+          <span class="rs-glow-text" id="rs-glow-container">
+            <span class="rs-w">you</span> <span class="rs-w">are</span> <span class="rs-w">enough</span> <span class="rs-w">—</span> <span class="rs-w">and</span> <span class="rs-w">still</span> <span class="rs-w">becoming.</span>
+          </span>
+        </div>
+
+        <button class="rtb-btn" id="rtb-btn" onclick="resetRemix()">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+          Run That Back
+        </button>
+      </div>
     </div>
   </div>
-</div> <!-- END HOME VIEW -->
 
-<!-- SHARED FOOTER -->
+  <div class="about-sec fade-in" id="about">
+    <div class="about-container">
+      <div class="about-bio">
+        <p class="scenario-intro-label" style="margin-bottom: 1rem;">The Producer</p>
+        <h2>Meet the Coach</h2>
+        <p>This is where you tell your story. Talk about your experience, why you built the R³ Agency Practice, and what qualifies you to help others remix their conditioned responses.</p>
+        <p>I specialize in helping educators, caregivers, and professionals shift from exhaustion to intentionality. We don't just talk about the stress—we locate the pattern, hit pause, and write a new track together.</p>
+        <br>
+        <p class="handwritten" style="color: var(--dark);">Your Signature Here</p>
+      </div>
+      <div class="about-visuals">
+        <img src="13_A_Black_woman_stands_behind_a_1_20260328_182847.jpg" class="floating-pic pic-1" alt="Speaking or coaching photo">
+        <img src="20211210_193049_capture(0).jpg" class="floating-pic pic-2" alt="Consulting or candid photo">
+        
+        <img src="20220412_131949.jpg" class="coach-cutout" alt="Coach Portrait">
+      </div>
+    </div>
+  </div>
+
+  <div class="testimonials-sec fade-in">
+    <div style="text-align: center; margin-bottom: 4rem;">
+      <p class="scenario-intro-label">Liner Notes</p>
+      <h2 class="scenario-intro-head">What People Are Saying</h2>
+    </div>
+    
+    <div class="test-grid">
+      <div class="test-card">
+        <span class="quote-mark">"</span>
+        <p class="test-quote">The R³ model completely changed how I manage my classroom. I learned how to stop matching my students' chaos and start grounding the room.</p>
+        <p class="test-author">Sarah Jenkins</p>
+        <span class="test-context">Educator</span>
+      </div>
+      <div class="test-card">
+        <span class="quote-mark">"</span>
+        <p class="test-quote">I didn't realize how much of my identity was tied up in being a caretaker. This coaching gave me permission to exist outside of the role again.</p>
+        <p class="test-author">Marcus T.</p>
+        <span class="test-context">Family Caregiver</span>
+      </div>
+      <div class="test-card">
+        <span class="quote-mark">"</span>
+        <p class="test-quote">Brilliant framework. We ran our executive leadership team through this and it immediately changed how we navigate conflict and high-stress decisions.</p>
+        <p class="test-author">Elena R.</p>
+        <span class="test-context">VP of Operations</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-sec fade-in" id="contact">
+    <div class="cta-container">
+      <div class="cta-info">
+        <p class="scenario-intro-label" style="margin-bottom: 1rem;">Work With Us</p>
+        <h2>Ready to Change Your Track?</h2>
+        <p>Whether you are a caregiver seeking support, an educator navigating classroom stress, or an organization looking to shift its culture, the R³ framework offers a path forward.</p>
+        <p><strong>Reach out today to discuss coaching, workshops, or speaking engagements.</strong></p>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('In a live environment, this would submit to your email or CRM system!');">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" class="form-control" placeholder="Jane Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" class="form-control" placeholder="jane@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="context">Your Context</label>
+          <select id="context" class="form-control">
+            <option value="caregiving">Caregiving</option>
+            <option value="education">Education</option>
+            <option value="corporate">Corporate / Workplace</option>
+            <option value="personal">Personal Development</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">What track are you currently stuck on?</label>
+          <textarea id="message" class="form-control" placeholder="Tell me a little about your situation..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="margin-top: 1rem;">Send Message →</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
 <div class="footer">
   <div class="footer-left">
-    <span class="footer-name cg">AH-HA Coaching, LLC</span>
+    <span class="footer-name">AH-HA Coaching, LLC</span>
   </div>
   <span class="footer-sub">ahhacoaching.com</span>
 </div>
 
-</div><!-- end .page -->
+</div>
 
 <script>
+let heroSlides = document.querySelectorAll('.hero-slide');
+let currentHeroSlide = 0;
+
+function nextHeroSlide() {
+  if(heroSlides.length === 0) return;
+  heroSlides[currentHeroSlide].classList.remove('active');
+  currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+  heroSlides[currentHeroSlide].classList.add('active');
+}
+if (heroSlides.length > 0) setInterval(nextHeroSlide, 5000);
+
 /* ══════════════════════════════════════════════
-   SCENARIO LOGIC
+   SCENARIO — 4 categories, 5 scenarios each
    ══════════════════════════════════════════════ */
 const categoryScenarios = {
 classroom: [
     {
       trigger: '"A student erupts in anger, shouting across the room during independent work."',
-      conditioned: `<p><strong>The Default Track:</strong> Your heart pounds. Feeling disrespected and already carrying the weight of a difficult day, you respond immediately — your voice sharp, your command loud enough for everyone to hear.</p><p><strong>The Result:</strong> The student doubles down. The class freezes in a different kind of silence — not calm, but afraid. The relational thread you need begins to fray.</p>`,
-      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You walked in carrying a difficult morning. <span class="r3-label">Attentive:</span> You feel your jaw lock and a surge of heat move up your chest — your system moving into defense before you've consciously chosen a response.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to match their volume is a conditioned response — playing the old track that authority must be loud to be real. You pause the track.</p><p><strong>Revelation:</strong> You see that your need to respond with force comes from a conditioned belief that your authority is only real when it's visible. Recognizing it is what makes a different choice possible. You lower your voice instead of raising it: <em>"We're going to figure this out — but not like this. Take a breath. I'll check in with you in five minutes."</em></p>`
+      conditioned: `<p><strong>The Automatic Reaction:</strong> Your heart pounds. Feeling disrespected and already carrying the weight of a difficult day, you respond immediately — your voice sharp, your command loud enough for everyone to hear.</p><p><strong>The Result:</strong> The student doubles down. The class freezes in a different kind of silence — not calm, but afraid. The relational thread you need for the rest of the year begins to fray.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You walked in carrying a difficult morning — an unresolved meeting, an unanswered email, a body that hasn't fully recovered from yesterday. <span class="r3-label">Attentive:</span> You feel your jaw lock and a surge of heat move up your chest — your system moving into defense before you've consciously chosen a response.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to match their volume is a conditioned Press pattern — you've learned that authority must be loud to be real. <span class="r3-label">Alignment Check:</span> Does a public confrontation align with your belief that learning requires safety? No. <span class="r3-label">Consequence Awareness:</span> Escalating shuts down not just this student, but the entire room's sense of safety. You pause.</p><p><strong>Revelation — Beat 1:</strong> You see that your need to respond with force comes from a conditioned belief that your authority is only real when it\'s visible — and that any challenge to it is a personal threat. That belief is older than this classroom. Recognizing it is what makes a different choice possible.</p><p><strong>Revelation — Beat 2:</strong> From that clarity, you lower your voice instead of raising it. You turn your body slightly away to remove the pressure of direct confrontation, and say calmly: <em>"I hear that something is really wrong right now. We\'re going to figure this out — but not like this. Take a breath. I\'ll check in with you in five minutes."</em> Then you resume teaching. You hold the room without holding the student hostage to your ego.</p>`
+    },
+    {
+      trigger: '"A student stares at you and keeps scrolling their phone after your third reminder."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> The defiance feels personal. You march toward them, demand the phone, and announce the consequence loudly — ensuring the class knows what's happening.</p><p><strong>The Result:</strong> The student refuses. The class watches a standoff develop. Instructional time collapses into a power struggle no one needed.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You've already given three reminders — your frustration has been building since the first one, and each pass has added weight to this moment. <span class="r3-label">Attentive:</span> You notice your pace quickening toward their desk and your hands tensing — your body already escalating before your words have.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to escalate publicly is a conditioned Press pattern — you've learned that backing down in front of the class equals losing. <span class="r3-label">Alignment Check:</span> Does a public confrontation serve your goal of a productive classroom? No. <span class="r3-label">Consequence Awareness:</span> Forcing a standoff hands the student an audience and a reason to hold their ground. You stop walking toward them.</p><p><strong>Revelation — Beat 1:</strong> You recognize that your reaction is driven by a conditioned belief that compliance equals respect — and that being ignored in front of others means you don\'t matter. That belief, not the phone, is what\'s running this moment. Seeing it is what lets you choose differently.</p><p><strong>Revelation — Beat 2:</strong> You walk to a spot near their desk — not over them — and crouch to approximate their eye level. You say quietly enough for only them to hear: <em>"I\'m not going to make this a bigger deal than it needs to be. Phone in your bag or on my desk — your call. I\'ll check back in one minute."</em> Then you stand and walk away. You give them the space to choose without an audience.</p>`
+    },
+    {
+      trigger: '"A parent sends a lengthy critical email at 8pm, copying your principal."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You feel ambushed. You draft a detailed reply defending your position and send it immediately — the need to correct the record overriding everything else.</p><p><strong>The Result:</strong> The parent escalates. Your principal is now drawn into a conflict that a single night of waiting could have prevented.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You finished a draining day and were finally unwinding when the notification arrived. You are not at your steadiest. <span class="r3-label">Attentive:</span> You notice your chest tightening and your thoughts immediately moving to counter, correct, and defend — before you've even finished reading.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to reply immediately is a conditioned Press pattern — you've learned that staying silent when accused means you're guilty. <span class="r3-label">Alignment Check:</span> Does responding from depletion and defensiveness serve your professional relationships or your own integrity? No. <span class="r3-label">Consequence Awareness:</span> A reactive reply at 8pm is rarely the version of yourself you want on record. You close the laptop.</p><p><strong>Revelation — Beat 1:</strong> You see that your need to respond immediately comes from a conditioned belief that your worth as an educator is always on trial — and that criticism left unanswered becomes truth. That belief is what makes an 8pm email feel like an emergency.</p><p><strong>Revelation — Beat 2:</strong> The next morning, rested and steady, you reply briefly: <em>"Thank you for sharing your concerns. I want to make sure we\'re aligned on [student\'s] experience. Could we schedule a 10-minute call this week? I\'d like to hear more from you directly."</em> You don\'t address the tone of the original email. You don\'t defend yourself. You open a door — from a position of composure, not defensiveness.</p>`
+    },
+    {
+      trigger: '"A usually engaged student has had their head down and hasn\'t responded to anything for 20 minutes."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You're frustrated by the passivity. You tap their desk sharply and tell them to sit up — your tone carrying more edge than you intended.</p><p><strong>The Result:</strong> The student flinches, goes further inward, and doesn't participate for the rest of the week. What might have been a connection point became a rupture.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You've been running on little sleep and less patience than usual — your threshold for absorbing others' disengagement is lower today. <span class="r3-label">Attentive:</span> You notice an edge of irritation rising and the automatic impulse to correct what looks like defiance.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to correct the behavior publicly is a conditioned Press pattern — you've learned that disengagement requires a visible intervention. <span class="r3-label">Alignment Check:</span> Does that response serve this student's actual need right now? No. <span class="r3-label">Consequence Awareness:</span> Pressing a student who is already withdrawn often deepens their retreat. You soften your approach.</p><p><strong>Revelation — Beat 1:</strong> You recognize that your impulse to correct passivity quickly comes from a conditioned belief that disengagement is a personal reflection of your teaching — that if they\'re not participating, you\'ve failed. That belief is making this about you when it needs to be about them.</p><p><strong>Revelation — Beat 2:</strong> You move through the room naturally. When you pass their desk, you crouch briefly and say just above a whisper: <em>"I notice you\'re not yourself today. You don\'t have to perform right now — just stay present with us. I\'ll check back in."</em> Then you stand and move on without drawing attention. You give them presence without pressure.</p>`
+    },
+    {
+      trigger: '"You see a student with an unauthorized device open beneath their desk during a major assessment."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You feel betrayed. You stop the class, announce what you found, and make a public example of it — consequences delivered where everyone can hear.</p><p><strong>The Result:</strong> The student is humiliated. The trust between you collapses. The rest of the class completes the assessment in a different kind of silence — anxious, not focused.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You put significant time into creating this assessment — its integrity matters to you, and a violation of it feels like a violation of your effort. <span class="r3-label">Attentive:</span> You feel a flash of hot anger and the impulse to stop everything and make it visible.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to make the consequences public is a conditioned Press pattern — you've learned that cheating is an attack on your classroom that requires a visible response. <span class="r3-label">Alignment Check:</span> Does public humiliation serve your actual goal of integrity and learning? No. <span class="r3-label">Consequence Awareness:</span> A public confrontation closes every door for understanding what drove this moment. You move quietly to their desk.</p><p><strong>Revelation — Beat 1:</strong> You see that your reaction is rooted in a conditioned belief that cheating is a personal act of disrespect toward you — when it almost always reflects unmanaged pressure, fear of failure, or a student who didn\'t know how to ask for help. The anger belongs to the belief, not to the student.</p><p><strong>Revelation — Beat 2:</strong> You walk past their desk without breaking stride. You place a sticky note near them that reads: <em>"Put it away. We\'ll talk privately after the bell."</em> Your voice stays neutral, your movement calm. You continue proctoring. You give them a path forward instead of a corner — and you preserve the relationship you\'ll need for the conversation that comes next.</p>`
     }
   ],
   caregiving: [
     {
       trigger: '"Your care recipient refuses their medication again, insisting you\'re trying to control them."',
-      conditioned: `<p><strong>The Default Track:</strong> Exhausted and frightened, you argue back — listing consequences, pleading, raising your voice out of desperation.</p><p><strong>The Result:</strong> They become more agitated. You spend the evening managing the fallout of an argument — and the medication still wasn't taken.</p>`,
-      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You've been awake since before dawn running on fear. <span class="r3-label">Attentive:</span> You feel your voice tighten and a wave of helplessness.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to argue is a conditioned track — you've learned that if you present consequences clearly enough, they'll understand. You hit pause.</p><p><strong>Revelation:</strong> You set the medication down. You sit beside them rather than standing over them: <em>"I hear you. I'm not trying to control you. Can you tell me what's scaring you right now?"</em> The medication can wait two minutes for that.</p>`
+      conditioned: `<p><strong>The Automatic Reaction:</strong> Exhausted and frightened, you argue back — listing the consequences, pleading, then raising your voice out of desperation when nothing lands.</p><p><strong>The Result:</strong> They become more agitated and dig in further. You spend the rest of the evening managing the fallout of an argument you didn't want to have — and the medication still wasn't taken.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You've been awake since before dawn and are running on fear and caffeine. The stakes feel enormous — and that enormity is sitting in your chest before the refusal even happens. <span class="r3-label">Attentive:</span> You feel your voice tighten and a wave of helplessness moving through you — the specific desperation of caring about someone you cannot fully protect.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to argue and explain is a conditioned Press pattern — you've learned that if you present the consequences clearly enough, they'll understand. But this situation doesn't respond to logic the way you've trained yourself to use it. <span class="r3-label">Alignment Check:</span> Does escalation serve their medical safety or their emotional wellbeing in this moment? No. <span class="r3-label">Consequence Awareness:</span> Arguing increases agitation and resistance. You pause, breathe, and shift your approach.</p><p><strong>Revelation — Beat 1:</strong> You recognize that your need to convince them comes from a conditioned belief that if something goes wrong, it will be because you didn\'t try hard enough. That belief is placing the entire weight of their health on your capacity to persuade — a weight no caregiver can carry alone. Seeing that is the beginning of learning to hold responsibility without holding blame.</p><p><strong>Revelation — Beat 2:</strong> You set the medication down. You sit beside them rather than standing over them — your posture open, not pressing. You say quietly: <em>"I hear you. I\'m not trying to control you. Can you tell me what\'s scaring you right now?"</em> You stop trying to win the argument and start trying to understand what the resistance is actually about. The medication can wait two minutes for that.</p>`
+    },
+    {
+      trigger: '"In a moment of confusion, your care recipient looks at you and says something cutting about your character or your motives."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> The words land like a blow. You go silent, then leave the room. You spend the next hour replaying what they said, cycling between grief and a resentment you feel guilty for feeling.</p><p><strong>The Result:</strong> You carry the wound into the rest of your day. The distance between you grows. You begin dreading the next interaction — anticipating the next time you'll be hurt by someone you're trying to love.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You've been giving everything you have for days with almost no acknowledgment. You came into this moment already emptied. <span class="r3-label">Attentive:</span> You feel a sharp sting behind your sternum and the simultaneous impulse to defend yourself and to disappear — both at once.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to withdraw is a conditioned Pivot pattern — you've learned that when someone who was supposed to love you causes pain, the safest response is silence and distance. <span class="r3-label">Alignment Check:</span> Does withdrawal serve your own healing or the caregiving relationship right now? Neither fully. <span class="r3-label">Consequence Awareness:</span> Going silent extends the isolation that caregiving already creates. You stay in the room, give yourself space to breathe.</p><p><strong>Revelation — Beat 1:</strong> You see that those words landed so hard because a part of you still needs this person's approval — and that needing it from someone who can no longer consistently give it is a source of ongoing suffering that has nothing to do with your worth. The wound revealed a need in you, not a truth about you.</p><p><strong>Revelation — Beat 2:</strong> You stay in the room. You don\'t respond to the content of what was said — because it wasn\'t about you. You say, steadily and gently: <em>"I know things feel confusing right now. I\'m still here."</em> Then you redirect to something simple and grounding — a glass of water, a familiar object, a quiet task. You hold the relationship without absorbing the words as truth.</p>`
+    },
+    {
+      trigger: '"You\'ve reached out to family again asking for help. The response is silence, vague promises, or redirection."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> The frustration becomes resentment. You either fire off a message you'll regret or you say nothing and add another layer to the weight you're already carrying alone.</p><p><strong>The Result:</strong> The resentment compounds with each cycle. Your relationships with family members erode. And you are still, once again, alone in the caregiving.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You've been carrying this without adequate support for longer than you've admitted to yourself — and each time you ask and are met with absence, the weight gets heavier. <span class="r3-label">Attentive:</span> You notice a familiar exhaustion — not just physical, but the specific heaviness of being the only one who shows up, every time.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to either erupt or go silent is a conditioned response rooted in not knowing how to ask for what you need without feeling like a burden. <span class="r3-label">Alignment Check:</span> Does either response — anger or silence — move you closer to the support you actually need? No. <span class="r3-label">Consequence Awareness:</span> Both patterns protect others from accountability at your own expense. You choose a third option: a direct, calm, specific request.</p><p><strong>Revelation — Beat 1:</strong> You recognize that your pattern of absorbing the full load and cycling between resentment and silence is rooted in a conditioned belief that asking for help means you\'re failing — and that needing others makes you weak. That belief is older than this caregiving season. And it is not protecting you. It is costing you.</p><p><strong>Revelation — Beat 2:</strong> You send a message that names one specific, time-bound ask: <em>"I need someone to cover Saturday from 2–6pm. Can you do that?"</em> No explanation of how hard this has been. No appeal to guilt. One clear, actionable request. You make it easy to say yes — and you note, without excusing, who responds and who doesn\'t. That information matters for how you distribute your trust going forward.</p>`
+    },
+    {
+      trigger: '"You\'ve prepared notes, tracked symptoms for weeks, and described everything clearly. The doctor dismisses your concerns in under two minutes."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You feel invisible and furious. You go silent and comply — or you become increasingly insistent in a way that gets labeled as difficult and emotional.</p><p><strong>The Result:</strong> You leave without the advocacy your care recipient needed. And you carry the shame of either backing down or being dismissed as too much.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You came into this appointment already carrying weeks of unacknowledged effort — and the hope that this time, someone would finally listen. <span class="r3-label">Attentive:</span> You notice your voice becoming smaller even as your frustration rises — a familiar collapse inward at the exact moment you most need to hold your ground.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to go quiet when dismissed is a conditioned Pivot pattern — you've learned that insisting makes you difficult, and being labeled difficult means you lose access to the system entirely. <span class="r3-label">Alignment Check:</span> Does compliance serve your care recipient's health in this moment? No. <span class="r3-label">Consequence Awareness:</span> Backing down has real medical consequences. You ground yourself and speak again, clearly.</p><p><strong>Revelation — Beat 1:</strong> You see that your voice becomes small in clinical settings because you carry a conditioned belief that medical authority means your observations don\'t count — and that being believed requires credentials you don\'t have. That belief is not a fact. It is a pattern. And it has been costing your care recipient the advocacy they need.</p><p><strong>Revelation — Beat 2:</strong> You pause, breathe, and speak again — steady, not defensive: <em>"I hear that you don\'t think this is urgent. I\'ve been tracking this for [X weeks] and something has changed. I\'m asking you to document my concern in the record today, even if we disagree on the significance. Can we do that?"</em> You make your concern impossible to ignore and impossible to go unrecorded. Your posture stays open, your voice stays clear. You are not asking for permission to matter.</p>`
+    },
+    {
+      trigger: '"After a particularly hard stretch, you have one unexpectedly warm, connected moment. Two days later, the decline accelerates again."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> The drop after the good moment feels unbearable. You cycle between grief and guilt for having hoped. Quietly, you resolve to stop letting the good moments matter — it's easier not to feel them.</p><p><strong>The Result:</strong> You close yourself off. The caregiving becomes something to endure rather than navigate. The distance you've created protects you from hope — and from connection.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You allowed yourself to feel something — hope, connection, relief — and now you're paying for it with grief. The contrast between that moment and this one is almost unbearable. <span class="r3-label">Attentive:</span> You notice the familiar armor going back up — a particular exhaustion that feels like grief hardening into protection.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to stop allowing good moments to matter is a conditioned Pivot pattern — you've learned that hope is dangerous because loss always follows. <span class="r3-label">Alignment Check:</span> Does armoring against all feeling protect your long-term capacity to sustain this role? No. <span class="r3-label">Consequence Awareness:</span> Closing off accelerates burnout. It is not the same as becoming resilient. You allow yourself to grieve rather than armor.</p><p><strong>Revelation — Beat 1:</strong> You recognize that your instinct to withdraw from hope is a conditioned protection rooted in earlier experiences where allowing yourself to feel good was followed by something being taken away. The decline didn\'t happen because you hoped. The belief that joy is always followed by punishment — that is the pattern worth examining.</p><p><strong>Revelation — Beat 2:</strong> You give yourself permission to grieve today\'s drop without canceling yesterday\'s warmth. You say to yourself — or out loud to someone safe: <em>"That moment was real. This moment is also real. I am allowed to hold both."</em> You don\'t armor. You don\'t perform resilience. You rest in the truth that the good was genuine — and that your capacity to feel it is not a weakness. It is evidence that you are still here.</p>`
     }
   ],
   workplace: [
     {
-      trigger: '"You share an idea in a meeting. It\'s met with silence, a quick pivot, or a dismissive response."',
-      conditioned: `<p><strong>The Default Track:</strong> You go quiet for the rest of the meeting. Later, you replay it obsessively or resolve never to speak up again.</p><p><strong>The Result:</strong> Your contribution narrows. Resentment grows. The team loses what you were offering.</p>`,
-      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You came into this meeting already uncertain if your perspective was valued. <span class="r3-label">Attentive:</span> You feel the heat of embarrassment and the pull toward making yourself smaller.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to withdraw is a conditioned pattern. You interrupt the reflex to disappear.</p><p><strong>Revelation:</strong> You stay present in the meeting. At a pause, you say: <em>"I want to come back to the point I raised earlier — I think it connects to what we're discussing now."</em> You give it a second landing. You stop waiting for permission to be heard.</p>`
+      trigger: '"You share an idea in a meeting. It\'s met with silence, a quick pivot, or a dismissive response from leadership."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You go quiet for the rest of the meeting. Later, you replay it obsessively or resolve never to speak up again — whichever feels safer.</p><p><strong>The Result:</strong> Your contribution narrows. Your resentment grows quietly. The team loses what you were offering, and you lose another opportunity to build visibility.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You came into this meeting already uncertain whether your perspective was valued here — the dismissal confirmed something you were already afraid was true. <span class="r3-label">Attentive:</span> You feel the familiar heat of embarrassment and the immediate pull toward making yourself smaller — becoming less visible to avoid future exposure.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to withdraw is a conditioned Pivot pattern — you've learned that speaking up and being dismissed means you misread the room, and that misreading the room is shameful. <span class="r3-label">Alignment Check:</span> Does withdrawing serve your professional goals or the team? No. <span class="r3-label">Consequence Awareness:</span> Going silent after dismissal trains others to expect your silence. You stay present in the meeting.</p><p><strong>Revelation — Beat 1:</strong> You see that your response to being dismissed is driven by a conditioned belief that your value is conditional on being received well — and that one dismissal is evidence of your inadequacy. That belief, not the meeting, is what needs examining.</p><p><strong>Revelation — Beat 2:</strong> You stay present in the meeting. At an appropriate pause, you say — without apology or over-explanation: <em>"I want to come back to the point I raised earlier — I think it connects to what we\'re discussing now."</em> You name it again. You give it a second landing. If it\'s dismissed again, you follow up in writing after the meeting where it\'s documented and harder to overlook. You stop waiting for permission to be worth hearing.</p>`
+    },
+    {
+      trigger: '"A colleague presents an idea or outcome in a meeting that was substantially yours — without acknowledgment."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You feel invisible and furious. You say nothing and stew. Or you find a way to correct the record passive-aggressively after the meeting.</p><p><strong>The Result:</strong> The resentment builds. The professional relationship deteriorates. And the pattern is likely to repeat because it was never directly addressed.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> This isn't the first time you've felt unseen in this environment — and each instance has added weight to this one. <span class="r3-label">Attentive:</span> You notice your chest tightening and a familiar thought surfacing: "This always happens to me." — which tells you this moment is landing on top of older ones.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to go silent or retaliate indirectly are both conditioned responses — you've learned that direct conflict is professionally dangerous, but that silent resentment at least feels controlled. <span class="r3-label">Alignment Check:</span> Does either pattern serve your professional standing or your own integrity? No. <span class="r3-label">Consequence Awareness:</span> Both silence and passive retaliation leave the dynamic intact and you more depleted. You choose to address it directly, later and privately.</p><p><strong>Revelation — Beat 1:</strong> You recognize that your difficulty naming what happened comes from a conditioned belief that advocating for yourself is the same as being difficult — and that being perceived as difficult costs you more than the invisibility does. That calculation deserves to be reexamined.</p><p><strong>Revelation — Beat 2:</strong> After the meeting, privately, you approach them directly: <em>"I want to mention something — the approach you presented today came significantly from our conversation last week. Going forward, I\'d appreciate being acknowledged when that happens."</em> Clear. Specific. No accusation, no audience. You name what happened and what you need — and you let them respond. You make yourself visible without making them an enemy.</p>`
+    },
+    {
+      trigger: '"Under pressure, you send an email that was more blunt than you intended. You realize it immediately after sending."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You spiral into shame or over-explain in a follow-up that makes things worse. Or you avoid the person entirely and let the tension sit unaddressed.</p><p><strong>The Result:</strong> A professional relationship is strained unnecessarily. A simple acknowledgment could have resolved it — but shame made that feel impossible.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You were operating at the edge of your capacity when you wrote it — the message carried the weight of everything you hadn't had time to process. <span class="r3-label">Attentive:</span> You notice a sharp drop in your stomach and the immediate pull toward either over-explaining or disappearing — two sides of the same conditioned coin.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to over-explain or avoid is a conditioned response to making a mistake — you've learned that errors must either be erased immediately or never acknowledged. <span class="r3-label">Alignment Check:</span> Does either response serve the relationship or your own professional integrity? No. <span class="r3-label">Consequence Awareness:</span> Both reactions signal more discomfort than the original message warranted. A clean, brief acknowledgment is more effective than either. You send it.</p><p><strong>Revelation — Beat 1:</strong> You see that your reaction to your own mistakes reveals a conditioned belief that you must be flawless under pressure to be taken seriously — and that any slip is evidence of something fundamentally wrong with your judgment. That belief is what escalates a tone issue into a crisis.</p><p><strong>Revelation — Beat 2:</strong> You send a brief, clean follow-up: <em>"I want to walk back the tone of my last message — it was sharper than I intended. The substance stands, but I could have said it better. I appreciate your patience."</em> Nothing more. You don\'t over-explain, don\'t spiral into self-criticism, don\'t unravel the relationship trying to fix it. You name it, own it, and move forward — modeling the kind of accountability you\'d want to receive.</p>`
+    },
+    {
+      trigger: '"A team member misses a deadline you were counting on, affecting a deliverable you\'re accountable for."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You absorb the work silently and resent it — or you send a message that communicates your frustration more than the information they actually need.</p><p><strong>The Result:</strong> The team member feels attacked or dismissed. The work still needs doing. And you're carrying more than the situation required.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You were already stretched before this happened — this is one weight landing on top of many. <span class="r3-label">Attentive:</span> You notice an edge of exhaustion that is sharpening into something that feels closer to contempt than frustration — a signal that you are past your capacity, not just past a deadline.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to absorb it or discharge the frustration are both conditioned responses — you've learned that either you over-function or you make someone feel the consequence of failing you. <span class="r3-label">Alignment Check:</span> Does either pattern serve the project, the relationship, or your own wellbeing? No. <span class="r3-label">Consequence Awareness:</span> Over-functioning teaches the team that accountability is optional. Discharging frustration damages a relationship you need. You address it directly and factually.</p><p><strong>Revelation — Beat 1:</strong> You recognize that your first impulse — to absorb or to punish — is rooted in a conditioned belief that leadership means never needing others to come through, and that depending on people is a vulnerability. That belief is keeping you chronically overextended.</p><p><strong>Revelation — Beat 2:</strong> You reach out directly and factually: <em>"The [deliverable] was due today and I haven\'t received it — this affects [specific outcome]. Can you tell me where you are and what you need to finish it?"</em> No accusation in the tone. No absorbing it silently either. You hold them accountable in a way that leaves the door open for them to come through — and you learn something about their capacity and reliability in how they respond.</p>`
+    },
+    {
+      trigger: '"You\'re told — not asked — that you\'ll be absorbing additional responsibilities following a colleague\'s departure. No timeline. No additional support."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You nod and take it. Or you express frustration in a way that gets labeled as not being a team player — and you carry the shame of that label on top of the expanded workload.</p><p><strong>The Result:</strong> You are overextended, undervalued, and increasingly disengaged. The additional responsibilities quietly become permanent.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> This isn't the first time you've been asked to absorb more without recognition — and each time, you've complied and paid for it. <span class="r3-label">Attentive:</span> You feel a familiar mix of resignation and quiet fury — a combination you've learned to swallow because expressing it feels professionally risky.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to comply silently is a conditioned Pivot pattern — you've learned that pushing back on what's expected makes you difficult, and being difficult makes you replaceable. <span class="r3-label">Alignment Check:</span> Does silent compliance serve your long-term capacity, wellbeing, or professional standing? No. <span class="r3-label">Consequence Awareness:</span> Absorbing scope without negotiation sets a precedent that your bandwidth is infinite and your needs are secondary. You ask for a conversation about timeline and support.</p><p><strong>Revelation — Beat 1:</strong> You recognize that your default toward compliance comes from a conditioned belief that your value at work is measured by how much you can take on — and that saying no to unreasonable expectations is the same as being replaceable. That belief is not protecting you. It is depleting you.</p><p><strong>Revelation — Beat 2:</strong> You request a conversation: <em>"I want to discuss what absorbing these responsibilities realistically means for my current workload and timeline. I\'m committed to the team — I also need us to have an honest conversation about capacity and support before this becomes permanent."</em> You show up as someone who takes both the work and their own sustainability seriously. That is not a liability. That is professional maturity.</p>`
     }
   ],
   relationships: [
     {
-      trigger: '"You\'re trying to work through something important and your partner goes completely silent."',
-      conditioned: `<p><strong>The Default Track:</strong> You pursue harder — your voice rising. Or you shut down yourself, matching their silence.</p><p><strong>The Result:</strong> The original issue is buried. Both of you are further from connection.</p>`,
-      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You came into this already carrying the weight of feeling unheard. <span class="r3-label">Attentive:</span> You feel a spike of anxiety — a panic that is familiar and old.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to pursue harder is a conditioned response. You pause the track instead of escalating.</p><p><strong>Revelation:</strong> You stay in the room, lowering your posture: <em>"I'm not going anywhere. I also can't keep talking into silence. I'm going to give us both time to breathe — can we come back to this in an hour?"</em> You hold the relationship without holding them hostage.</p>`
+      trigger: '"You\'re trying to work through something important and your partner goes completely silent — withdrawn, unavailable, the conversation effectively over."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You pursue harder — your voice rising, your need for them to engage becoming urgent. Or you shut down yourself, matching their silence, and nothing gets resolved.</p><p><strong>The Result:</strong> The original issue is buried under the dynamic that replaced it. Both of you are further from connection than when you started.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You came into this conversation already carrying the weight of feeling unheard over time — this withdrawal is landing on top of everything that came before it. <span class="r3-label">Attentive:</span> You feel a spike of anxiety when they go quiet — a specific kind of panic that is familiar and old, disproportionate to this moment alone.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to pursue harder or match the withdrawal are both conditioned responses — you've learned either that silence means abandonment, or that matching it is the only protection available. <span class="r3-label">Alignment Check:</span> Does either response move you toward the connection you're seeking? No. <span class="r3-label">Consequence Awareness:</span> Pursuing escalates. Matching extends the disconnection. You name what you're experiencing, briefly and directly, without demanding a response.</p><p><strong>Revelation — Beat 1:</strong> You recognize that the panic you feel when they go quiet is not really about this conversation — it is a conditioned response rooted in earlier experiences where someone going silent meant something was permanently wrong. That old signal is running your current relationship.</p><p><strong>Revelation — Beat 2:</strong> You stay in the room. You lower your voice and your posture — sitting rather than standing, letting your body signal that you\'re not a threat. You say: <em>"I\'m not going anywhere. I also can\'t keep talking into silence. I\'m going to give us both some time to breathe — can we come back to this in an hour?"</em> You create a return point rather than letting the silence become permanent. You hold the relationship without holding them hostage to the conversation.</p>`
+    },
+    {
+      trigger: '"A family member makes a pointed comment about a choice you\'ve made — your career, your relationship, your home, your parenting."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You deflect, defend, or go quiet and carry the comment home with you — replaying it for days, alternating between anger and a quiet wondering whether they're right.</p><p><strong>The Result:</strong> The dynamic reinforces itself. You are smaller in their presence. They retain the authority to define you — because you keep responding as though their opinion requires an answer.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You arrived at this gathering already managing the low hum of anxiety this environment produces in you — your body was bracing before anything was said. <span class="r3-label">Attentive:</span> You notice a familiar tightening — a specific kind of self-consciousness that only this person or this setting activates in you.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to defend yourself is a conditioned response — you've learned that your choices require justification in this environment, and that your legitimacy must be argued for. <span class="r3-label">Alignment Check:</span> Does defending yourself to someone whose approval you've never fully received serve you? No. <span class="r3-label">Consequence Awareness:</span> Defending validates that their opinion requires a response. You absorb the comment without escalating, and return to your own ground.</p><p><strong>Revelation — Beat 1:</strong> You recognize that the sting of the comment comes from a conditioned part of you that still needs this person's approval — and that continuing to seek it from someone who consistently withholds it is a pattern that began long before today. The comment revealed your need, not your inadequacy.</p><p><strong>Revelation — Beat 2:</strong> You receive the comment without defending it. You hold brief eye contact, then say something neutral and final: <em>"I hear you."</em> Then you redirect the conversation or move on. You don\'t argue, don\'t justify, don\'t make yourself smaller. You treat their opinion as information you\'ve received — not as a verdict that requires your response. Your posture stays open. Your ground stays yours.</p>`
+    },
+    {
+      trigger: '"A close friend cancels plans at the last minute — again. You\'ve already rearranged your schedule."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You say "no worries" and mean none of it. Or you express your frustration in a way that creates distance rather than honesty — and the friendship absorbs another unresolved layer.</p><p><strong>The Result:</strong> The friendship drifts. Resentment accumulates quietly. The dynamic never changes because it never gets addressed.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> You've been swallowing this frustration across multiple cancellations because you value the friendship and don't want to be the one who makes things difficult. <span class="r3-label">Attentive:</span> You notice a quiet deflation — the specific tiredness of not being prioritized by someone you consistently make space for.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to say "no worries" is a conditioned Pivot pattern — you've learned that expressing disappointment in friendships risks being labeled needy or high-maintenance. <span class="r3-label">Alignment Check:</span> Does habitual accommodation serve this friendship or your own sense of worth? No. <span class="r3-label">Consequence Awareness:</span> Swallowing disappointment consistently doesn't protect the friendship — it erodes your investment in it. You name what you need, gently and directly.</p><p><strong>Revelation — Beat 1:</strong> You recognize that your pattern of absorbing cancellations silently is rooted in a conditioned belief that having needs in friendship is a liability — and that being easy to be around is the price of being kept around. That belief is costing you the honesty that actual intimacy requires.</p><p><strong>Revelation — Beat 2:</strong> You respond honestly but warmly: <em>"I\'m going to be real with you — this is the third time, and I\'m starting to feel like our time together isn\'t a priority. I\'m not trying to make you feel bad. I just need you to know it\'s landing that way."</em> Then you wait. You don\'t soften it further. You let them respond. You give the friendship enough respect to be honest in it — and enough self-respect to need honesty back.</p>`
+    },
+    {
+      trigger: '"You set a limit — around your time, your energy, your space. Someone pushes back or tries to negotiate it away."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You feel the pressure and fold — or you hold the limit so rigidly that it becomes a confrontation neither of you wanted.</p><p><strong>The Result:</strong> Either your limit dissolves and you resent it, or the relationship sustains unnecessary damage. The boundary was never really explained — and never really landed.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> Setting this limit took something from you — there was already internal resistance before the external pushback arrived. <span class="r3-label">Attentive:</span> You notice your conviction wavering the moment you sense their displeasure — a familiar softening, a pull toward taking it back to restore the ease.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to fold under pressure is a conditioned Pivot pattern — you've learned that disappointing people is unsafe, and that your limits are only valid if others agree with them. <span class="r3-label">Alignment Check:</span> Does folding serve your actual capacity and wellbeing? No. <span class="r3-label">Consequence Awareness:</span> Giving in under pressure teaches others that your limits are negotiable and teaches you that you are. You hold the limit with warmth, not rigidity.</p><p><strong>Revelation — Beat 1:</strong> You recognize that your limits feel fragile under pressure because you carry a conditioned belief that your needs are only valid when they're accepted without friction — and that any resistance to what you've named means you asked for too much. That belief did not begin here. And it is not a fact.</p><p><strong>Revelation — Beat 2:</strong> You hold the limit with warmth rather than rigidity. Your posture stays open, your voice stays calm: <em>"I understand this is frustrating, and I care about you. This is still what I need."</em> If they press further, you don\'t re-explain or justify — you simply repeat it more quietly: <em>"I know. This is still what I need."</em> Warmth without collapse. Firmness without contempt. The limit holds because you decided it should — not because they agreed.</p>`
+    },
+    {
+      trigger: '"After a disagreement, the other person goes completely silent — no acknowledgment, no resolution, no signal of when things will return to normal."',
+      conditioned: `<p><strong>The Automatic Reaction:</strong> You spiral. You reach out repeatedly, becoming smaller and more apologetic with each attempt. Or you match the silence with your own — and both of you wait in separate pain.</p><p><strong>The Result:</strong> The original issue is never addressed. The silence becomes its own wound. The relationship carries unresolved weight from both.</p>`,
+      conscious: `<p><strong>Reflection:</strong> <span class="r3-label">Aware:</span> Silence as a response has a specific effect on you — it activates something much older than this relationship or this disagreement. <span class="r3-label">Attentive:</span> You notice a particular quality of anxiety in your body — urgent, slightly desperate, disorienting — that doesn't quite match the size of the situation.</p><p><strong>Resistance:</strong> <span class="r3-label">Pattern Recognition:</span> The urge to pursue and over-apologize is a conditioned Press pattern — you've learned that someone's silence is your responsibility to end, and that your job is to restore peace regardless of what the original conflict was about. <span class="r3-label">Alignment Check:</span> Does pursuing resolution from a place of urgency serve the relationship or your own integrity? No. <span class="r3-label">Consequence Awareness:</span> Over-apologizing concedes accountability you may not actually owe and reinforces a dynamic that will repeat. You give it time and return when you're grounded.</p><p><strong>Revelation — Beat 1:</strong> You recognize that your response to silence is not really about this person — it is a conditioned response rooted in earlier experiences where someone going quiet meant love was being withdrawn. That signal in your nervous system is real. And it is not an accurate read of this moment.</p><p><strong>Revelation — Beat 2:</strong> You give it time — a specific, chosen pause rather than an anxious wait. When you return, you open with your own experience rather than a demand: <em>"I\'ve had some time to think, and I\'m ready to keep talking when you are. I want to understand what happened for you — I also need us to be able to come back to each other."</em> You name what you need without weaponizing the silence against them. You come back as someone who chose to return — not someone who was pulled back by panic.</p>`
     }
   ]
-};
 
-Object.keys(categoryScenarios).forEach(k => {
-  while(categoryScenarios[k].length < 5) {
-      categoryScenarios[k].push(categoryScenarios[k][0]);
-  }
-});
+};
 
 let currentCategory = null;
 let scIndex = 0;
+
+function scrollToScenarioTop() {
+  const card = document.getElementById('scenario-card');
+  const headerOffset = 80; 
+  const elementPosition = card.getBoundingClientRect().top;
+  const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+  window.scrollTo({
+       top: offsetPosition,
+       behavior: "smooth"
+  });
+}
 
 function selectCategory(cat, element) {
   currentCategory = cat;
@@ -1705,12 +1928,16 @@ function selectCategory(cat, element) {
   document.querySelectorAll('.sc-cat-btn').forEach(function(btn) {
     btn.classList.remove('active');
   });
-  if(element) element.classList.add('active');
+  if (element) {
+      element.classList.add('active');
+  } else if (event && event.target) {
+      event.target.classList.add('active');
+  }
   document.getElementById('sc-prompt-wrap').style.display = 'none';
   
   var card = document.getElementById('scenario-card');
   card.classList.remove('fade-in'); 
-  card.style.display = 'block';
+  card.style.display = 'flex';
   card.style.opacity = '1';
   
   card.style.animation = 'none';
@@ -1719,13 +1946,15 @@ function selectCategory(cat, element) {
   
   renderScenario();
   switchSc('conditioned');
+  scrollToScenarioTop();
 }
 
 function renderScenario() {
   if (!currentCategory) return;
   var scenes = categoryScenarios[currentCategory];
+  if (!scenes || scenes.length === 0) return;
   var s = scenes[scIndex];
-  document.getElementById('sc-counter').textContent = 'Track ' + (scIndex + 1) + ' of ' + scenes.length;
+  document.getElementById('sc-counter').textContent = 'Scenario ' + (scIndex + 1) + ' of ' + scenes.length;
   document.getElementById('sc-trigger').textContent = s.trigger;
   document.getElementById('sc-conditioned').innerHTML = s.conditioned;
   document.getElementById('sc-conscious').innerHTML = s.conscious;
@@ -1737,6 +1966,7 @@ function nextScenario() {
   scIndex = (scIndex + 1) % scenes.length;
   renderScenario();
   switchSc('conditioned');
+  scrollToScenarioTop();
 }
 
 function prevScenario() {
@@ -1745,6 +1975,7 @@ function prevScenario() {
   scIndex = (scIndex - 1 + scenes.length) % scenes.length;
   renderScenario();
   switchSc('conditioned');
+  scrollToScenarioTop();
 }
 
 function switchSc(type) {
@@ -1758,15 +1989,10 @@ function switchSc(type) {
 
 setTimeout(() => {
     document.querySelectorAll('.fade-in').forEach(el => {
-        if(!el.classList.contains('visible')) {
-            el.classList.add('visible');
-        }
+        if(!el.classList.contains('visible')) el.classList.add('visible');
     });
 }, 1200);
 
-/* ══════════════════════════════════════════════
-   ASSESSMENT & TURNTABLE LOGIC 
-   ══════════════════════════════════════════════ */
 let currentStep = 0;
 let assignedPhase = null;
 
@@ -1827,62 +2053,43 @@ const tracks = {
 
 function playTrack(trackId) {
     document.querySelectorAll('.pad-btn').forEach(btn => btn.classList.remove('active'));
-    document.getElementById('pad-' + trackId).classList.add('active');
+    const pad = document.getElementById('pad-' + trackId);
+    if (pad) pad.classList.add('active');
 
     const tonearm = document.getElementById('tonearm');
-    tonearm.style.transform = `rotate(${tracks[trackId].angle})`;
+    if (tonearm) tonearm.style.transform = `rotate(${tracks[trackId].angle})`;
 
     const record = document.getElementById('vinyl-record');
     const label = document.getElementById('record-label');
     
-    if (!record.classList.contains('spinning')) { record.classList.add('spinning'); }
+    if (record && !record.classList.contains('spinning')) { record.classList.add('spinning'); }
     
-    label.style.background = tracks[trackId].color;
-    label.querySelector('.record-label-text').style.color = tracks[trackId].textColor;
-    label.querySelector('.record-label-text').textContent = '0' + trackId;
-    label.style.setProperty('--pseudo-color', tracks[trackId].textColor);
+    if (label) {
+        label.style.background = tracks[trackId].color;
+        const textLabel = label.querySelector('.record-label-text');
+        if (textLabel) {
+            textLabel.style.color = tracks[trackId].textColor;
+            textLabel.textContent = '0' + trackId;
+        }
+        label.style.setProperty('--pseudo-color', tracks[trackId].textColor);
+    }
 
     const readout = document.getElementById('readout-content');
-    readout.classList.remove('fade-content');
-    void readout.offsetWidth; 
-    readout.innerHTML = `<h3 class="readout-title" style="color: ${tracks[trackId].color}">${tracks[trackId].title}</h3><p class="readout-desc">${tracks[trackId].desc}</p>`;
-    readout.classList.add('fade-content');
+    if (readout) {
+        readout.classList.remove('fade-content');
+        void readout.offsetWidth; 
+        readout.innerHTML = `<h3 class="readout-title" style="color: ${tracks[trackId].color}">${tracks[trackId].title}</h3><p class="readout-desc">${tracks[trackId].desc}</p>`;
+        readout.classList.add('fade-content');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     playTrack(1);
-    wireAssetFallbacks();
     const style = document.createElement('style');
     document.head.appendChild(style);
     style.sheet.insertRule(".record-label::before { color: var(--pseudo-color, var(--surface)); }", 0);
 });
 
-function wireAssetFallbacks() {
-  const assetMap = {
-    '4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg': 'missing-4',
-    '5_Close_up_on_a_mixing_board_wit_1_20260327_123554.jpg': 'missing-5',
-    '9_An_overhead_view_of_a_circle_o_1_20260327_123628.jpg': 'missing-9',
-    '10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg': 'missing-10'
-  };
-
-  Object.entries(assetMap).forEach(([fileName, className]) => {
-    const probe = new Image();
-    probe.onerror = () => document.body.classList.add(className);
-    probe.src = fileName;
-  });
-
-  document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('error', () => {
-      const fallbackBox = img.closest('.boombox-anchor, .mic-container, .phase-visuals');
-      if (fallbackBox) fallbackBox.classList.add('asset-missing');
-      img.style.display = 'none';
-    });
-  });
-}
-
-/* ══════════════════════════════════════════════
-   R.A.P. REMIX ANIMATION (PLURAL)
-   ══════════════════════════════════════════════ */
 function startRemix() {
   const btn  = document.getElementById('remix-btn');
   const desc = document.getElementById('p0-desc');
@@ -1890,42 +2097,75 @@ function startRemix() {
   const bigT = document.getElementById('p0-t');
   const beamT = document.getElementById('p0-t-beam');
 
-  btn.style.pointerEvents = 'none';
-  btn.style.opacity = '0.3';
-  desc.style.opacity = '0';
+  if(btn) { btn.style.pointerEvents = 'none'; btn.style.opacity = '0.3'; }
+  if(desc) desc.style.opacity = '0';
 
-  setTimeout(() => { bigI.classList.add('to-teal'); }, 300);
-  setTimeout(() => { bigT.classList.add('show'); }, 700);
-  setTimeout(() => { bigI.classList.add('fade-out'); }, 1100);
-  setTimeout(() => { document.getElementById('p0-sh').classList.add('fade-out'); document.getElementById('p0-er').classList.add('show'); }, 1300);
-  setTimeout(() => { document.getElementById('p0-cen').classList.add('show'); }, 1500);
+  setTimeout(() => { if(bigI) bigI.classList.add('to-teal'); }, 300);
+  setTimeout(() => { if(bigT) bigT.classList.add('show'); }, 700);
+  setTimeout(() => { if(bigI) bigI.classList.add('fade-out'); }, 1100);
+  setTimeout(() => { 
+      const sh = document.getElementById('p0-sh');
+      const er = document.getElementById('p0-er');
+      if(sh) sh.classList.add('fade-out'); 
+      if(er) er.classList.add('show'); 
+  }, 1300);
+  setTimeout(() => { 
+      const cen = document.getElementById('p0-cen');
+      if(cen) cen.classList.add('show'); 
+  }, 1500);
 
   setTimeout(() => {
-    desc.innerHTML = '<p style="font-family:\'Cormorant Garamond\',Georgia,serif; font-size:clamp(18px,2.2vw,22px); font-style:italic; color:var(--secondary); font-weight:600;">Hitting pause. Becoming a <span style="text-decoration:underline;">centered self</span>.</p>';
-    desc.style.opacity = '1';
+    if(desc) {
+        desc.innerHTML = '<p style="font-family:\'Space Grotesk\',sans-serif; font-size:clamp(18px,2.2vw,22px); font-style:italic; color:var(--secondary); font-weight:600;">Hitting pause. Becoming a <span style="text-decoration:underline;">centered self</span>.</p>';
+        desc.style.opacity = '1';
+    }
   }, 1700);
   
-  setTimeout(() => { desc.style.opacity = '0'; }, 4700); 
-  setTimeout(() => { document.getElementById('p0-left-wrap').style.opacity = '0'; document.getElementById('p0-right-wrap').style.opacity = '0'; }, 5000);
-  setTimeout(() => { bigT.classList.add('fade-out'); beamT.classList.add('show'); }, 5200);
-  setTimeout(() => { document.getElementById('p0-plural-row').classList.add('show'); }, 5800);
+  setTimeout(() => { if(desc) desc.style.opacity = '0'; }, 4700); 
+  setTimeout(() => { 
+      const lw = document.getElementById('p0-left-wrap');
+      const rw = document.getElementById('p0-right-wrap');
+      if(lw) lw.style.opacity = '0'; 
+      if(rw) rw.style.opacity = '0'; 
+  }, 5000);
+  setTimeout(() => { 
+      if(bigT) bigT.classList.add('fade-out'); 
+      if(beamT) beamT.classList.add('show'); 
+  }, 5200);
+  setTimeout(() => { 
+      const pr = document.getElementById('p0-plural-row');
+      if(pr) pr.classList.add('show'); 
+  }, 5800);
 
   setTimeout(() => {
-    desc.innerHTML = '<p style="font-family:\'Cormorant Garamond\',Georgia,serif; font-size:clamp(18px,2.2vw,22px); font-style:italic; color:var(--secondary); font-weight:600;">The foundation for a Plural life.</p>';
-    desc.style.opacity = '1';
+    if(desc) {
+        desc.innerHTML = '<p style="font-family:\'Space Grotesk\',sans-serif; font-size:clamp(18px,2.2vw,22px); font-style:italic; color:var(--secondary); font-weight:600;">The foundation for a Plural life.</p>';
+        desc.style.opacity = '1';
+    }
   }, 6200);
   
-  setTimeout(() => { desc.style.opacity = '0'; }, 9200);
-  setTimeout(() => { beamT.classList.add('fade-out'); document.getElementById('p0-plural-row').style.opacity = '0'; }, 9500);
+  setTimeout(() => { if(desc) desc.style.opacity = '0'; }, 9200);
+  setTimeout(() => { 
+      if(beamT) beamT.classList.add('fade-out'); 
+      const pr = document.getElementById('p0-plural-row');
+      if(pr) pr.style.opacity = '0'; 
+  }, 9500);
 
   setTimeout(() => {
-    document.getElementById('remix-p0').classList.remove('active');
-    document.getElementById('remix-p2').classList.add('active');
-    setTimeout(() => { document.getElementById('plural-eyebrow-line').classList.add('show'); }, 150);
+    const p0 = document.getElementById('remix-p0');
+    const p2 = document.getElementById('remix-p2');
+    if(p0) p0.classList.remove('active');
+    if(p2) p2.classList.add('active');
+    
+    setTimeout(() => { 
+        const eLine = document.getElementById('plural-eyebrow-line');
+        if(eLine) eLine.classList.add('show'); 
+    }, 150);
     
     setTimeout(() => {
       ['pf-P','pf-L','pf-U','pf-R','pf-A','pf-L2'].forEach(id => {
-        document.getElementById(id).classList.add('show');
+        const el = document.getElementById(id);
+        if(el) el.classList.add('show');
       });
     }, 500);
 
@@ -1936,50 +2176,115 @@ function startRemix() {
       });
     }, 1800);
 
-    setTimeout(() => { document.getElementById('rs-glow-container').classList.add('full-glow'); }, 6800);
-    setTimeout(() => { document.getElementById('rtb-btn').classList.add('show'); }, 8000);
+    setTimeout(() => { 
+        const glow = document.getElementById('rs-glow-container');
+        if(glow) glow.classList.add('full-glow'); 
+    }, 6800);
+    setTimeout(() => { 
+        const rtb = document.getElementById('rtb-btn');
+        if(rtb) rtb.classList.add('show'); 
+    }, 8000);
 
   }, 10200);
 }
 
 function resetRemix() {
-  ['pf-P','pf-L','pf-U','pf-R','pf-A','pf-L2'].forEach(id => { document.getElementById(id).classList.remove('show'); });
-  document.getElementById('plural-eyebrow-line').classList.remove('show');
-  document.getElementById('rtb-btn').classList.remove('show');
-
-  document.getElementById('p0-i').classList.remove('to-teal','fade-out');
-  document.getElementById('p0-t').classList.remove('show','loaded','fade-out');
-  document.getElementById('p0-t-beam').classList.remove('show','fade-out');
-  document.getElementById('p0-sh').classList.remove('fade-out');
-  document.getElementById('p0-er').classList.remove('show');
-  document.getElementById('p0-cen').classList.remove('show');
-  document.getElementById('p0-plural-row').classList.remove('show');
-  document.getElementById('p0-plural-row').style.opacity = ''; 
-  document.getElementById('p0-left-wrap').style.opacity = '';
-  document.getElementById('p0-right-wrap').style.opacity = '';
+  ['pf-P','pf-L','pf-U','pf-R','pf-A','pf-L2'].forEach(id => { 
+      const el = document.getElementById(id);
+      if(el) el.classList.remove('show'); 
+  });
+  const eLine = document.getElementById('plural-eyebrow-line');
+  if(eLine) eLine.classList.remove('show');
   
-  document.getElementById('rs-glow-container').classList.remove('full-glow');
+  const rtb = document.getElementById('rtb-btn');
+  if(rtb) rtb.classList.remove('show');
+
+  const bigI = document.getElementById('p0-i');
+  if(bigI) bigI.classList.remove('to-teal','fade-out');
+  
+  const bigT = document.getElementById('p0-t');
+  if(bigT) bigT.classList.remove('show','loaded','fade-out');
+  
+  const beamT = document.getElementById('p0-t-beam');
+  if(beamT) beamT.classList.remove('show','fade-out');
+  
+  const sh = document.getElementById('p0-sh');
+  if(sh) sh.classList.remove('fade-out');
+  
+  const er = document.getElementById('p0-er');
+  if(er) er.classList.remove('show');
+  
+  const cen = document.getElementById('p0-cen');
+  if(cen) cen.classList.remove('show');
+  
+  const pr = document.getElementById('p0-plural-row');
+  if(pr) { pr.classList.remove('show'); pr.style.opacity = ''; }
+  
+  const lw = document.getElementById('p0-left-wrap');
+  if(lw) lw.style.opacity = '';
+  
+  const rw = document.getElementById('p0-right-wrap');
+  if(rw) rw.style.opacity = '';
+  
+  const glow = document.getElementById('rs-glow-container');
+  if(glow) glow.classList.remove('full-glow');
+  
   document.querySelectorAll('.rs-w').forEach(w => w.classList.remove('show'));
   
-  var desc = document.getElementById('p0-desc');
-  desc.innerHTML = '<p>Singular focus. Immediate. The Default Track.</p><p>Driven by impulse rather than awareness.</p>';
-  desc.style.opacity = '1';
+  const desc = document.getElementById('p0-desc');
+  if(desc) {
+      desc.innerHTML = '<p>Singular focus. Immediate. The Default Track.</p><p>Driven by impulse rather than awareness.</p>';
+      desc.style.opacity = '1';
+  }
   
-  var btn = document.getElementById('remix-btn');
-  btn.style.opacity = '1';
-  btn.style.pointerEvents = 'auto';
+  const btn = document.getElementById('remix-btn');
+  if(btn) {
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+  }
 
-  document.getElementById('remix-p2').classList.remove('active');
-  document.getElementById('remix-p0').classList.add('active');
+  const p2 = document.getElementById('remix-p2');
+  if(p2) p2.classList.remove('active');
+  
+  const p0 = document.getElementById('remix-p0');
+  if(p0) p0.classList.add('active');
 }
 
 function toggleRap(el, id) {
   const d = document.getElementById(id);
+  if (!d) return;
   const open = d.classList.contains('open');
   d.classList.toggle('open', !open);
   el.classList.toggle('active', !open);
   el.setAttribute('aria-expanded', !open);
 }
+
+// --- MOBILE MENU LOGIC ---
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const closeMenuBtn = document.getElementById('close-menu-btn');
+const navLinks = document.getElementById('nav-links');
+const menuOverlay = document.getElementById('menu-overlay');
+
+function toggleMenu() {
+    navLinks.classList.toggle('open');
+    menuOverlay.classList.toggle('open');
+    // Prevent body scrolling when menu is open
+    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+}
+
+mobileMenuBtn.addEventListener('click', toggleMenu);
+closeMenuBtn.addEventListener('click', toggleMenu);
+menuOverlay.addEventListener('click', toggleMenu);
+
+// Close menu when a link is clicked
+navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        if(navLinks.classList.contains('open')) {
+            toggleMenu();
+        }
+    });
+});
+
 </script>
 </body>
 </html>
