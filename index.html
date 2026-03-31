@@ -173,7 +173,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
 
 .c-video-wrapper {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 9 / 16;
   background: #000;
   border-radius: 1rem;
   overflow: hidden;
@@ -183,7 +183,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
 .c-video-element {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   position: absolute;
   top: 0; left: 0;
@@ -301,10 +301,9 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
 .mic-image {
   width: clamp(160px, 22vw, 260px);
   height: auto;
-  border-radius: 8px;
+  border-radius: 12px;
   transform: rotate(-10deg);
   display: block;
-  clip-path: polygon(0% 15%, 15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%);
 }
 
 .hero-catchphrase {
@@ -368,7 +367,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
   padding-bottom: 8rem;
   position: relative;
   z-index: 10; 
-  background-image: linear-gradient(135deg, rgba(252,249,244,0.98) 0%, rgba(252,249,244,1) 100%), url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg'), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1600&q=80');
+  background-image: linear-gradient(135deg, rgba(252,249,244,0.98) 0%, rgba(252,249,244,1) 100%), url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.png'), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1600&q=80');
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
@@ -633,7 +632,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
     position: sticky;
     top: 120px;
   }
-  .boombox-anchor img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+  .boombox-anchor img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
   
   .scenario-trigger { grid-column: 2 / 3; grid-row: 1 / 2; order: unset; text-align: left; padding: 0; margin-bottom: 1.5rem;}
   .sc-toggle { grid-column: 2 / 3; grid-row: 2 / 3; order: unset; margin: 0 0 1.5rem 0; max-width:100%; }
@@ -657,7 +656,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
   background-color: var(--bg-color);
   background-image: 
     linear-gradient(rgba(252, 249, 244, 0.85), rgba(252, 249, 244, 0.95)),
-    url('5_Close_up_on_a_mixing_board_wit_1_20260327_123554.jpg'),
+    url('5_Close_up_on_a_mixing_board_wit_1_20260327_123554.png'),
     url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1600&q=80');
   background-size: cover;
   background-position: center;
@@ -771,7 +770,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
   padding-bottom: 6rem;
   position: relative;
   background-color: var(--bg-color);
-  background-image: linear-gradient(rgba(252, 249, 244, 0.85), rgba(252, 249, 244, 0.95)), url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg'), url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1600&q=80');
+  background-image: linear-gradient(rgba(252, 249, 244, 0.85), rgba(252, 249, 244, 0.95)), url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.png'), url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1600&q=80');
   background-size: cover;
   background-attachment: fixed;
   z-index: 2;
@@ -850,8 +849,8 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
 .ctx-card:hover { transform: translateY(-0.5rem); background: rgba(255,255,255,0.95); box-shadow: var(--shadow-hover); border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%;}
 
 /* Image wraps inside Context Cards */
-.ctx-img-wrap { width: 100%; height: 180px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; position: relative; z-index: 1;}
-.ctx-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.ctx-img-wrap { width: 100%; height: 240px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; position: relative; z-index: 1;}
+.ctx-img-wrap img { width: 100%; height: 100%; object-fit: contain; background: rgba(252,249,244,0.5); }
 
 .ctx-label { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; color: var(--primary); position: relative; z-index: 1;}
 .ctx-punch { font-family: 'Space Grotesk', sans-serif; font-size: clamp(24px, 3vw, 30px); font-weight: 600; color: var(--dark); line-height: 1.2; margin-bottom: 20px; position: relative; z-index: 1;}
@@ -867,7 +866,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
   padding-top: 10rem;
   padding-bottom: 8rem;
   background-color: var(--bg-color);
-  background-image: linear-gradient(rgba(252, 249, 244, 0.85), rgba(252, 249, 244, 0.95)), url('4_A_chrome_cassette_tape_lies_on_1_20260327_123546.jpg'), url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=80');
+  background-image: linear-gradient(rgba(252, 249, 244, 0.85), rgba(252, 249, 244, 0.95)), url('4_A_chrome_cassette_tape_lies_on_1_20260327_123546.png'), url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=80');
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -1000,8 +999,9 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
 .floating-pic {
   position: absolute;
   width: 220px;
-  height: 220px;
-  object-fit: cover;
+  height: auto;
+  max-height: 280px;
+  object-fit: contain;
   border-radius: 12px;
   border: 8px solid #fff;
   box-shadow: var(--shadow-hover);
@@ -1033,7 +1033,7 @@ h1, h2, h3, .heading-font { font-family: 'Space Grotesk', sans-serif; font-weigh
   width: 350px;
   height: 350px;
   max-width: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 50%;
   border: 8px solid white;
   filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2));
@@ -1215,7 +1215,7 @@ textarea.form-control {
   
   .about-container { grid-template-columns: 1fr; gap: 2rem; }
   .about-visuals { height: 450px; }
-  .floating-pic { width: 150px; height: 150px; }
+  .floating-pic { width: 150px; height: auto; max-height: 200px; }
   .test-grid { grid-template-columns: 1fr 1fr; }
   
   .cta-container { grid-template-columns: 1fr; }
@@ -1337,9 +1337,9 @@ textarea.form-control {
 <div id="home-view" class="view active">
   <div class="hd-collage fade-in">
     <div class="hero-slideshow">
-      <div class="hero-slide active" style="background-image: url('1_A_vinyl_record_spins_on_a_turn_1_20260327_123519.jpg'), url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1600&q=80');"></div>
-      <div class="hero-slide" style="background-image: url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.jpg'), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1600&q=80');"></div>
-      <div class="hero-slide" style="background-image: url('7_A_record_player_s_tonearm_touc_1_20260327_123609.jpg'), url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1600&q=80');"></div>
+      <div class="hero-slide active" style="background-image: url('1_A_vinyl_record_spins_on_a_turn_1_20260327_123519.png'), url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1600&q=80');"></div>
+      <div class="hero-slide" style="background-image: url('10_A_wide_shot_of_a_recording_stu_1_20260327_123637.png'), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1600&q=80');"></div>
+      <div class="hero-slide" style="background-image: url('7_A_record_player_s_tonearm_touc_1_20260327_123609.png'), url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1600&q=80');"></div>
     </div>
     <div class="hero-overlay"></div>
 
@@ -1361,7 +1361,7 @@ textarea.form-control {
           <p class="hero-tagline">A framework for conscious living.</p>
         </div>
         <div class="mic-container">
-          <img src="2_A_pair_of_vintage_studio_headp_1_20260327_123529.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=600&auto=format&fit=crop';" class="mic-image" alt="Vintage Headphones">
+          <img src="2_A_pair_of_vintage_studio_headp_1_20260327_123529.png" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?q=80&w=600&auto=format&fit=crop';" class="mic-image" alt="Vintage Headphones">
         </div>
       </div>
       <div class="hero-catchphrase fade-in d2">
@@ -1395,7 +1395,7 @@ textarea.form-control {
 
     <div class="scenario-card" id="scenario-card" style="display:none; opacity:1;">
       <div class="boombox-anchor">
-        <img src="9_An_overhead_view_of_a_circle_o_1_20260327_123628.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534035659350-13f50800dc03?q=80&w=1200&auto=format&fit=crop';" alt="Cassettes in a circle">
+        <img src="9_An_overhead_view_of_a_circle_o_1_20260327_123628.png" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534035659350-13f50800dc03?q=80&w=1200&auto=format&fit=crop';" alt="Cassettes in a circle">
       </div>
 
       <div class="scenario-trigger" id="sc-trigger"></div>
@@ -1597,7 +1597,7 @@ textarea.form-control {
     
     <div class="ctx-grid fade-in d2">
       <div class="ctx-card ctx1">
-        <div class="ctx-img-wrap"><img src="8_A_Black_woman_sits_cross_legge_1_20260327_123619.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop';" alt="Personal Growth"></div>
+        <div class="ctx-img-wrap"><img src="8_A_Black_woman_sits_cross_legge_1_20260327_123619.png" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop';" alt="Personal Growth"></div>
         <p class="ctx-label">Personal</p>
         <p class="ctx-punch">Without requiring the full origin story.</p>
         <p class="ctx-body">The nervous system carries the imprint of past harm, and present triggers can activate survival responses (like an old track firing up). The R³ Model interrupts those patterns, building capacity to ground your response in current reality.</p>
@@ -1609,7 +1609,7 @@ textarea.form-control {
         <p class="ctx-body">Educators are rarely given tools to interrupt their own conditioned responses under pressure. The R³ Model restores intentional response, giving educators a process for navigating stress with clarity rather than conditioning.</p>
       </div>
       <div class="ctx-card ctx3">
-        <div class="ctx-img-wrap"><img src="IMG_2199.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop';" alt="Culture Change"></div>
+        <div class="ctx-img-wrap"><img src="IMG_2199.JPG" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop';" alt="Culture Change"></div>
         <p class="ctx-label">Culture Change</p>
         <p class="ctx-punch">This is a precision intervention.</p>
         <p class="ctx-body">Organizational culture isn't built by values statements. It's built by what people do in high-stress moments. When people develop the capacity to interrupt automatic patterns, culture shifts from the inside out.</p>
@@ -1700,7 +1700,7 @@ textarea.form-control {
         <p class="handwritten" style="color: var(--dark);">Your Signature Here</p>
       </div>
       <div class="about-visuals">
-        <img src="13_A_Black_woman_stands_behind_a_1_20260328_182847.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop';" class="floating-pic pic-1" alt="Speaking or coaching photo">
+        <img src="Resized_Resized_20220505_152015.JPEG" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop';" class="floating-pic pic-1" alt="Speaking or coaching photo">
         <img src="20211210_193049_capture(0).jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=600&auto=format&fit=crop';" class="floating-pic pic-2" alt="Consulting or candid photo">
         
         <img src="20220412_131949.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop';" class="coach-cutout" alt="Coach Portrait">
